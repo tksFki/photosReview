@@ -7,23 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73C5A3B71CB041A200049F33 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B11CB041A200049F33 /* Category+CoreDataProperties.swift */; };
+		73C5A3B81CB041A200049F33 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B21CB041A200049F33 /* Category.swift */; };
+		73C5A3B91CB041A200049F33 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B31CB041A200049F33 /* Photo+CoreDataProperties.swift */; };
+		73C5A3BA1CB041A200049F33 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B41CB041A200049F33 /* Photo.swift */; };
+		73C5A3BB1CB041A200049F33 /* Review+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */; };
+		73C5A3BC1CB041A200049F33 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B61CB041A200049F33 /* Review.swift */; };
 		73E8E6021CAFDAFD004ECE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6011CAFDAFD004ECE1B /* AppDelegate.swift */; };
-		73E8E6041CAFDAFD004ECE1B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6031CAFDAFD004ECE1B /* ViewController.swift */; };
 		73E8E6071CAFDAFD004ECE1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E8E6051CAFDAFD004ECE1B /* Main.storyboard */; };
 		73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6081CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld */; };
 		73E8E60C1CAFDAFD004ECE1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E8E60B1CAFDAFD004ECE1B /* Assets.xcassets */; };
 		73E8E60F1CAFDAFD004ECE1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */; };
+		73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */; };
+		73E8E61B1CAFDCDE004ECE1B /* SearchReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73C5A3B11CB041A200049F33 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "../Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		73C5A3B21CB041A200049F33 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
+		73C5A3B31CB041A200049F33 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "../Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		73C5A3B41CB041A200049F33 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = ../Photo.swift; sourceTree = "<group>"; };
+		73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Review+CoreDataProperties.swift"; path = "../Review+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		73C5A3B61CB041A200049F33 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Review.swift; path = ../Review.swift; sourceTree = "<group>"; };
 		73E8E5FE1CAFDAFD004ECE1B /* PhotosReview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosReview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E8E6011CAFDAFD004ECE1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		73E8E6031CAFDAFD004ECE1B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		73E8E6061CAFDAFD004ECE1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73E8E6091CAFDAFD004ECE1B /* PhotosReview.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotosReview.xcdatamodel; sourceTree = "<group>"; };
 		73E8E60B1CAFDAFD004ECE1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73E8E60E1CAFDAFD004ECE1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73E8E6101CAFDAFD004ECE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewController.swift; sourceTree = "<group>"; };
+		73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReviewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +51,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73C5A3A81CB0154100049F33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73E8E6081CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		73C5A3A91CB0155000049F33 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */,
+				73E8E6051CAFDAFD004ECE1B /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		73C5A3AA1CB0155600049F33 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */,
+				73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		73C5A3AB1CB0158C00049F33 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				73E8E60B1CAFDAFD004ECE1B /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		73C5A3AC1CB015BD00049F33 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		73C5A3AD1CB015E000049F33 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				73E8E6101CAFDAFD004ECE1B /* Info.plist */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		73C5A3AE1CB03EB400049F33 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				73C5A3B41CB041A200049F33 /* Photo.swift */,
+				73C5A3B31CB041A200049F33 /* Photo+CoreDataProperties.swift */,
+				73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */,
+				73C5A3B61CB041A200049F33 /* Review.swift */,
+				73C5A3B21CB041A200049F33 /* Category.swift */,
+				73C5A3B11CB041A200049F33 /* Category+CoreDataProperties.swift */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		73E8E5F51CAFDAFD004ECE1B = {
 			isa = PBXGroup;
 			children = (
@@ -57,12 +133,13 @@
 			isa = PBXGroup;
 			children = (
 				73E8E6011CAFDAFD004ECE1B /* AppDelegate.swift */,
-				73E8E6031CAFDAFD004ECE1B /* ViewController.swift */,
-				73E8E6051CAFDAFD004ECE1B /* Main.storyboard */,
-				73E8E60B1CAFDAFD004ECE1B /* Assets.xcassets */,
-				73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */,
-				73E8E6101CAFDAFD004ECE1B /* Info.plist */,
-				73E8E6081CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld */,
+				73C5A3AE1CB03EB400049F33 /* Entity */,
+				73C5A3AD1CB015E000049F33 /* Config */,
+				73C5A3AC1CB015BD00049F33 /* Components */,
+				73C5A3AB1CB0158C00049F33 /* Resources */,
+				73C5A3A81CB0154100049F33 /* Model */,
+				73C5A3A91CB0155000049F33 /* View */,
+				73C5A3AA1CB0155600049F33 /* Controller */,
 			);
 			path = PhotosReview;
 			sourceTree = "<group>";
@@ -99,6 +176,7 @@
 				TargetAttributes = {
 					73E8E5FD1CAFDAFD004ECE1B = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 568EA466ZS;
 					};
 				};
 			};
@@ -138,9 +216,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73E8E6041CAFDAFD004ECE1B /* ViewController.swift in Sources */,
+				73C5A3BA1CB041A200049F33 /* Photo.swift in Sources */,
+				73C5A3B91CB041A200049F33 /* Photo+CoreDataProperties.swift in Sources */,
 				73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */,
+				73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */,
+				73C5A3BB1CB041A200049F33 /* Review+CoreDataProperties.swift in Sources */,
+				73C5A3BC1CB041A200049F33 /* Review.swift in Sources */,
+				73C5A3B71CB041A200049F33 /* Category+CoreDataProperties.swift in Sources */,
 				73E8E6021CAFDAFD004ECE1B /* AppDelegate.swift in Sources */,
+				73E8E61B1CAFDCDE004ECE1B /* SearchReviewController.swift in Sources */,
+				73C5A3B81CB041A200049F33 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,10 +338,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhotosReview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateTakashi.PhotosReview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -264,10 +352,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhotosReview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.privateTakashi.PhotosReview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -290,6 +381,7 @@
 				73E8E6151CAFDAFD004ECE1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

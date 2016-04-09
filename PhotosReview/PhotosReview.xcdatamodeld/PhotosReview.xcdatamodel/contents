@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Category" representedClassName=".Category" syncable="YES">
+        <attribute name="categoryId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="categoryName" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="categoryTemplate" optional="YES" attributeType="String" maxValueString="100" syncable="YES"/>
+        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="categoryToReview" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Review" inverseName="reviewToCategory" inverseEntity="Review" syncable="YES"/>
+    </entity>
+    <entity name="Review" representedClassName=".Review" syncable="YES">
+        <attribute name="categoryId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String" maxValueString="200" syncable="YES"/>
+        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="estimation" optional="YES" attributeType="Integer 32" maxValueString="5" defaultValueString="0" syncable="YES"/>
+        <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="photoDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="photoHeight" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="photoLatitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoLongitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoName" attributeType="String" syncable="YES"/>
+        <attribute name="photoPass" attributeType="String" syncable="YES"/>
+        <attribute name="photoWidth" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="reviewName" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="reviewNo" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tag1" optional="YES" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="tag2" optional="YES" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="tag3" optional="YES" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="tag4" optional="YES" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="tag5" optional="YES" attributeType="String" maxValueString="16" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="reviewToCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="categoryToReview" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="153" positionY="-162" width="128" height="135"/>
+        <element name="Review" positionX="-45" positionY="-90" width="128" height="360"/>
+    </elements>
 </model>
