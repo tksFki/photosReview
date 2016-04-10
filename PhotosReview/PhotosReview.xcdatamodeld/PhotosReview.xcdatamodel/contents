@@ -15,12 +15,12 @@
         <attribute name="estimation" optional="YES" attributeType="Integer 32" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="photoDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="photoHeight" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="photoHeight" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="photoLatitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoLongitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="photoName" attributeType="String" syncable="YES"/>
-        <attribute name="photoPass" attributeType="String" syncable="YES"/>
-        <attribute name="photoWidth" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="photoName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoPass" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoWidth" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="reviewName" attributeType="String" maxValueString="16" syncable="YES"/>
         <attribute name="reviewNo" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="tag1" optional="YES" attributeType="String" maxValueString="16" syncable="YES"/>

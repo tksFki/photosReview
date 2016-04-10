@@ -61,12 +61,10 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         let reviewNo:NSNumber = 5
         let categoryId:NSNumber = 5
         
+        // エンティティ作成
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
-        
         let managedContext = appDelegate.managedObjectContext
-        
-        //2
         let reviewEntity =  NSEntityDescription.entityForName("Review",
             inManagedObjectContext:managedContext)
         
@@ -88,14 +86,23 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         // 写真情報
         if let image = self.selectedPhoto.image {
-            if let photoData = UIImagePNGRepresentation(image) {
-//                photoData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            let widthPer:CGFloat = 0.25  // リサイズ後幅の倍率
+            let heightPer:CGFloat = 0.25  // リサイズ後高さの倍率
+            let sz:CGSize = CGSizeMake(image.size.width * widthPer,image.size.height * heightPer)
+            
+            // 画面に表示するサイズにリサイズする。
+            UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
+            image.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
+            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            if let photoData = UIImagePNGRepresentation(resizeImage) {
+                //                photoData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
                 reviewItem.setValue(photoData, forKey: "photoData")
             }
         }
-        let exif = photoMetaData?.objectForKey("kCGImagePropertyExifDictionary")
-        print(exif)
-        
+//        let exif = photoMetaData?.objectForKey("kCGImagePropertyExifDictionary")
+//        print(exif)
         
         //4
         do {
@@ -249,23 +256,13 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     // 写真を保存した後に動く
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let width: CGFloat = 120
-        let height: CGFloat = 180
-        
         // 元のサイズのままフォトライブラリに書き込み
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
         photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
         
-        // 画面に表示するサイズにリサイズする。
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), false, 0.0)
-        image.drawInRect(CGRectMake(0, 0, width, height))
-        
-        let resizeImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        self.selectedPhoto.image = resizeImage
+        self.selectedPhoto.image = image
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
