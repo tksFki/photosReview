@@ -9,29 +9,42 @@
 import UIKit
 import CoreData
 
-class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate {
+class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate,ModalCategoryViewControllerDelegate {
     
     /*************** グローバル変数 ***************/
-     
-     // キーボードを開く前の表示位置を保持する
+    
+    // キーボードを開く前の表示位置を保持する
     var saveContentOffsetY: CGFloat?
     
     var reviewItems = [NSManagedObject]()
     var categoryID: NSNumber = 0
+    var originalImage:UIImage?
     var photoMetaData:NSMutableDictionary?
+    
+    /*************** モーダルカテゴリビュー ***************/
+    let modalCategoryView:ModalCategoryViewController = ModalCategoryViewController()
+    var modalTextStatic:String?
     
     /*************** コントロール ***************/
     @IBOutlet weak var reviewName: UITextField! // レビュー名
     @IBOutlet weak var estimation: UITextField! // 評価
-    @IBOutlet weak var categoryName: UITextField! // カテゴリ
+    
+    @IBAction func categoryName(sender: CategoryButton) {
+        self.presentViewController(self.modalCategoryView, animated: true, completion: nil)
+        sender.setTitle(modalTextStatic, forState: .Normal)
+    }
+    //    @IBAction func categoryName(sender: UIButton) {
+    //        self.presentViewController(self.testView, animated: true, completion: nil)
+    //        //sender.setTitle(modalTextStatic, forState: .Normal)
+    //    } // カテゴリ
     
     @IBOutlet weak var selectedPhoto: UIImageView! // 写真
     @IBAction func selectPhoto(sender: UIButton) { // 写真タップ時の動作
         
         // 写真の取り込み先を選択する。（フォトライブラリ or カメラ）
         let alert:UIAlertController = UIAlertController(title:"写真を選択してください",
-            message: "Library or Camera",
-            preferredStyle: UIAlertControllerStyle.Alert)
+                                                        message: "Library or Camera",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
         
         // キャンセル
         let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
@@ -63,13 +76,13 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         // エンティティ作成
         let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+            UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let reviewEntity =  NSEntityDescription.entityForName("Review",
-            inManagedObjectContext:managedContext)
+                                                              inManagedObjectContext:managedContext)
         
         let reviewItem = NSManagedObject(entity: reviewEntity!,
-            insertIntoManagedObjectContext: managedContext)
+                                         insertIntoManagedObjectContext: managedContext)
         
         
         /* レビューエンティティSave */
@@ -85,7 +98,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         reviewItem.setValue(categoryId, forKey: "categoryId")
         
         // 写真情報
-        if let image = self.selectedPhoto.image {
+        if let image = originalImage {
             let widthPer:CGFloat = 0.25  // リサイズ後幅の倍率
             let heightPer:CGFloat = 0.25  // リサイズ後高さの倍率
             let sz:CGSize = CGSizeMake(image.size.width * widthPer,image.size.height * heightPer)
@@ -101,8 +114,8 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
                 reviewItem.setValue(photoData, forKey: "photoData")
             }
         }
-//        let exif = photoMetaData?.objectForKey("kCGImagePropertyExifDictionary")
-//        print(exif)
+        //        let exif = photoMetaData?.objectForKey("kCGImagePropertyExifDictionary")
+        //        print(exif)
         
         //4
         do {
@@ -152,12 +165,12 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     @IBAction func deleteReview(sender: UIButton) {
         
         let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+            UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         
         let entity =  NSEntityDescription.entityForName("Review",
-            inManagedObjectContext:managedContext)
+                                                        inManagedObjectContext:managedContext)
         
         do
         {
@@ -190,6 +203,9 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        // モーダルカテゴリビューの設定
+        self.modalCategoryView.delegate = self
+        
         // 写真窓の設定
         selectedPhoto.layer.borderColor = UIColor.redColor().CGColor
         selectedPhoto.layer.borderWidth = 2.0
@@ -202,13 +218,39 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         // キーボードの設定
         // textField の情報を受け取るための delegate を設定
         self.reviewName.delegate = self
-        self.categoryName.delegate = self
         self.estimation.delegate = self
         
         // 「改行」を「完了」に変更
         self.reviewName.returnKeyType = UIReturnKeyType.Done
-        self.categoryName.returnKeyType = UIReturnKeyType.Done
-        self.categoryName.returnKeyType = UIReturnKeyType.Done
+        self.estimation.returnKeyType = UIReturnKeyType.Done
+        
+        //ボタンを追加するためのViewを生成します。
+        let myKeyboard = UIView(frame: CGRectMake(0, 0, 320, 40))
+        myKeyboard.backgroundColor = UIColor.whiteColor()
+        
+        //完了ボタンの生成
+        let myButton = UIButton(frame: CGRectMake(260, 5, 55, 30))
+        myButton.setTitle("完了", forState: .Normal)
+        myButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        myButton.backgroundColor = UIColor.whiteColor()
+        myButton.layer.cornerRadius = 2.0
+        myButton.addTarget(self, action: #selector(ReviewController.onClickMyButton(_:)), forControlEvents: .TouchUpInside)
+        
+        //Viewに完了ボタンを追加する。
+        myKeyboard.addSubview(myButton)
+        
+        //ViewをFieldに設定する
+        self.comments.inputAccessoryView = myKeyboard
+        self.comments.delegate = self
+        
+        //myTextFieldを追加する
+        self.view.addSubview(comments)
+        
+        //        // single swipe up
+        //        let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeLeft:")
+        //        swipeLeftGesture.numberOfTouchesRequired = 1  // number of fingers
+        //        swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.Left
+        //        self.view.addGestureRecognizer(swipeLeftGesture)
     }
     
     // キーボードをリターンで閉じた時の動作
@@ -219,6 +261,16 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         // キーボードを閉じる
         textField.resignFirstResponder()
         return true
+    }
+    
+    //ボタンを押すとキーボードが下がるメソッド
+    func onClickMyButton (sender: UIButton) {
+        self.view.endEditing(true)
+    }
+    //改行押すとキーボードが下がるメソッド
+    func textViewReturn(textView: UITextView) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     override func didReceiveMemoryWarning() {
@@ -257,17 +309,32 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         // 元のサイズのままフォトライブラリに書き込み
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let image:UIImage = originalImage!
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
         photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
         
-        self.selectedPhoto.image = image
+        let width:CGFloat = 120  // リサイズ後幅の倍率
+        let height:CGFloat = 180  // リサイズ後高さの倍率
+        let sz:CGSize = CGSizeMake(width,height)
+        
+        // 画面に表示するサイズにリサイズする。
+        UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
+        image.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
+        let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+        self.selectedPhoto.image = resizeImage
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+    func modalDidFinished(modalText:String){
+        
+//        if modalText != nil{
+            modalTextStatic = modalText
+//        }
+        self.modalCategoryView.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     
     
