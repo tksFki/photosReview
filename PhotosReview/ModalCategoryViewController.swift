@@ -8,18 +8,10 @@
 
 import UIKit
 
-protocol ModalCategoryViewControllerDelegate {
-    func modalDidFinished(modalText:String)
-}
-
 class ModalCategoryViewController: UIViewController{
     
-    var delegate: ModalCategoryViewControllerDelegate! = nil
+    var categoryName:String = "餃子"
     
-    @IBAction func categorySubmit(sender: UIButton) {
-        let category:String = "餃子"
-        self.delegate.modalDidFinished(category)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }

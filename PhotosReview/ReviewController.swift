@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate,ModalCategoryViewControllerDelegate {
+class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate {
     
     /*************** グローバル変数 ***************/
     
@@ -22,22 +22,12 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     var photoMetaData:NSMutableDictionary?
     
     /*************** モーダルカテゴリビュー ***************/
-    let modalCategoryView:ModalCategoryViewController = ModalCategoryViewController()
     var modalTextStatic:String?
     
     /*************** コントロール ***************/
     @IBOutlet weak var reviewName: UITextField! // レビュー名
     @IBOutlet weak var estimation: UITextField! // 評価
-    
-    @IBAction func categoryName(sender: CategoryButton) {
-        self.presentViewController(self.modalCategoryView, animated: true, completion: nil)
-        sender.setTitle(modalTextStatic, forState: .Normal)
-    }
-    //    @IBAction func categoryName(sender: UIButton) {
-    //        self.presentViewController(self.testView, animated: true, completion: nil)
-    //        //sender.setTitle(modalTextStatic, forState: .Normal)
-    //    } // カテゴリ
-    
+
     @IBOutlet weak var selectedPhoto: UIImageView! // 写真
     @IBAction func selectPhoto(sender: UIButton) { // 写真タップ時の動作
         
@@ -203,8 +193,6 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        // モーダルカテゴリビューの設定
-        self.modalCategoryView.delegate = self
         
         // 写真窓の設定
         selectedPhoto.layer.borderColor = UIColor.redColor().CGColor
@@ -328,16 +316,15 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func modalDidFinished(modalText:String){
+    @IBAction func backFromModalCategoryView(segue:UIStoryboardSegue){
+        var item:String = ""
+        if let vc = segue.sourceViewController as? ModalCategoryViewController{
+            item = vc.categoryName
+        }
+        NSLog("ReviewController#backFromTestView")
+        NSLog(item)
         
-//        if modalText != nil{
-            modalTextStatic = modalText
-//        }
-        self.modalCategoryView.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
-    
 }
 
 

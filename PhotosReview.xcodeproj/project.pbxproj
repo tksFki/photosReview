@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73AF2B4A1CC526B000399EF3 /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AF2B491CC526B000399EF3 /* ModalTestViewController.swift */; };
 		73C5A3B71CB041A200049F33 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B11CB041A200049F33 /* Category+CoreDataProperties.swift */; };
 		73C5A3B81CB041A200049F33 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B21CB041A200049F33 /* Category.swift */; };
 		73C5A3B91CB041A200049F33 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B31CB041A200049F33 /* Photo+CoreDataProperties.swift */; };
@@ -14,9 +15,9 @@
 		73C5A3BB1CB041A200049F33 /* Review+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */; };
 		73C5A3BC1CB041A200049F33 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B61CB041A200049F33 /* Review.swift */; };
 		73C64E251CC343A10001DC24 /* ModalCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */; };
-		73C64E271CC351AE0001DC24 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E261CC351AE0001DC24 /* CategoryButton.swift */; };
+		73C64E271CC351AE0001DC24 /* CategorySelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */; };
 		73C64E291CC38F5F0001DC24 /* CategoryCustomizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E281CC38F5F0001DC24 /* CategoryCustomizeController.swift */; };
-		73C64E2D1CC3C0610001DC24 /* CategorySelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E2C1CC3C0610001DC24 /* CategorySelectButton.swift */; };
+		73C64E2D1CC3C0610001DC24 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */; };
 		73C64E301CC3CDD60001DC24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C64E2E1CC3CDD60001DC24 /* Main.storyboard */; };
 		73E8E6021CAFDAFD004ECE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6011CAFDAFD004ECE1B /* AppDelegate.swift */; };
 		73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6081CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73AF2B491CC526B000399EF3 /* ModalTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
 		73C5A3B11CB041A200049F33 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "../Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		73C5A3B21CB041A200049F33 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
 		73C5A3B31CB041A200049F33 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "../Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -34,9 +36,9 @@
 		73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Review+CoreDataProperties.swift"; path = "../Review+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		73C5A3B61CB041A200049F33 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Review.swift; path = ../Review.swift; sourceTree = "<group>"; };
 		73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCategoryViewController.swift; sourceTree = "<group>"; };
-		73C64E261CC351AE0001DC24 /* CategoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySelectButton.swift; sourceTree = "<group>"; };
 		73C64E281CC38F5F0001DC24 /* CategoryCustomizeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCustomizeController.swift; sourceTree = "<group>"; };
-		73C64E2C1CC3C0610001DC24 /* CategorySelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySelectButton.swift; sourceTree = "<group>"; };
+		73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		73C64E2F1CC3CDD60001DC24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73E8E5FE1CAFDAFD004ECE1B /* PhotosReview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosReview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E8E6011CAFDAFD004ECE1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */,
 				73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */,
 				73C64E281CC38F5F0001DC24 /* CategoryCustomizeController.swift */,
+				73AF2B491CC526B000399EF3 /* ModalTestViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -98,8 +101,8 @@
 		73C5A3AC1CB015BD00049F33 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				73C64E261CC351AE0001DC24 /* CategoryButton.swift */,
-				73C64E2C1CC3C0610001DC24 /* CategorySelectButton.swift */,
+				73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */,
+				73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -237,10 +240,11 @@
 				73C5A3BB1CB041A200049F33 /* Review+CoreDataProperties.swift in Sources */,
 				73C5A3BC1CB041A200049F33 /* Review.swift in Sources */,
 				73C5A3B71CB041A200049F33 /* Category+CoreDataProperties.swift in Sources */,
-				73C64E2D1CC3C0610001DC24 /* CategorySelectButton.swift in Sources */,
+				73C64E2D1CC3C0610001DC24 /* CategoryButton.swift in Sources */,
 				73E8E6021CAFDAFD004ECE1B /* AppDelegate.swift in Sources */,
-				73C64E271CC351AE0001DC24 /* CategoryButton.swift in Sources */,
+				73C64E271CC351AE0001DC24 /* CategorySelectButton.swift in Sources */,
 				73E8E61B1CAFDCDE004ECE1B /* SearchReviewController.swift in Sources */,
+				73AF2B4A1CC526B000399EF3 /* ModalTestViewController.swift in Sources */,
 				73C5A3B81CB041A200049F33 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

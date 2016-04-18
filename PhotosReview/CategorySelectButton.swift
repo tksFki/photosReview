@@ -1,5 +1,5 @@
 //
-//  CategoryButton.swift
+//  CategorySelectButton.swift
 //  PhotosReview
 //
 //  Created by TechnoData on 2016/04/17.
@@ -8,20 +8,45 @@
 
 import UIKit
 
-class CategoryButton: UIButton{
+class CategorySelectButton: CategoryButton{
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        self.touchStartAnimation()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        
-        /* ここに初期化したい要素を記述する。以下は一例 */
-        layer.cornerRadius = 10;  /* ボタンの角の半径 */
-        layer.borderWidth = 1;  /* ボタンの枠線の太さ */
-        layer.borderColor = UIColor.blueColor().CGColor;  /* ボタンの枠線の色 */
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        super.touchesCancelled(touches, withEvent: event)
+        self.touchEndAnimation()
     }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+        self.touchEndAnimation()
+    }
+    
+    private func touchStartAnimation(){
+        UIView.animateWithDuration(0.1,
+                                   delay: 0.0,
+                                   options: UIViewAnimationOptions.CurveEaseIn,
+                                   animations: {() -> Void in
+                                    self.transform = CGAffineTransformMakeScale(0.95, 0.95);
+                                    self.alpha = 0.7
+            },
+                                   completion: nil
+        )
+    }
+    private func touchEndAnimation(){
+        UIView.animateWithDuration(0.1,
+                                   delay: 0.0,
+                                   options: UIViewAnimationOptions.CurveEaseIn,
+                                   animations: {() -> Void in
+                                    self.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                    self.alpha = 1
+            },
+                                   completion: nil
+        )
+    }
+
     
 }
-
