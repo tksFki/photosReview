@@ -370,6 +370,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="CategoryName" destination="Y3c-1p-tNq" id="hr3-FO-DDc"/>
                         <outlet property="comments" destination="pug-fT-eqT" id="mY6-XI-ouN"/>
                         <outlet property="estimation" destination="gnz-vU-Z0O" id="hn1-Jl-elq"/>
                         <outlet property="reviewName" destination="gV0-CL-fck" id="LeF-8A-9HM"/>

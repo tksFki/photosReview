@@ -27,7 +27,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     /*************** コントロール ***************/
     @IBOutlet weak var reviewName: UITextField! // レビュー名
     @IBOutlet weak var estimation: UITextField! // 評価
-
+    @IBOutlet weak var CategoryName: CategoryButton! // カテゴリ名
     @IBOutlet weak var selectedPhoto: UIImageView! // 写真
     @IBAction func selectPhoto(sender: UIButton) { // 写真タップ時の動作
         
@@ -323,7 +323,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         }
         NSLog("ReviewController#backFromTestView")
         NSLog(item)
-        
+        self.CategoryName.setTitle(item, forState: .Normal)
     }
 }
 
