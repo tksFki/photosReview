@@ -10,6 +10,10 @@ import UIKit
 
 class CategorySelectButton: CategoryButton{
     
+    var categoryId:NSNumber = 0
+    var categoryName:String = "カテゴリなし"
+    var categoryTemplate:String = ""
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         self.touchStartAnimation()

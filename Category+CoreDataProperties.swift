@@ -2,7 +2,7 @@
 //  Category+CoreDataProperties.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/04/03.
+//  Created by TechnoData on 2016/04/21.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,11 +14,11 @@ import CoreData
 
 extension Category {
 
-    @NSManaged var categoryID: NSNumber?
+    @NSManaged var categoryId: NSNumber?
     @NSManaged var categoryName: String?
     @NSManaged var categoryTemplate: String?
     @NSManaged var createDate: NSDate?
     @NSManaged var updateDate: NSDate?
-    @NSManaged var categoryToReview: NSManagedObject?
+    @NSManaged var categoryToReview: Review?
 
 }

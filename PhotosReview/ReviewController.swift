@@ -117,77 +117,6 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
     }
     
-    // レビューエンティティ読み出し（サンプル）
-    @IBAction func loadReview(sender: UIButton) {
-        /* Get ManagedObjectContext from AppDelegate */
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let manageContext = appDelegate.managedObjectContext
-        
-        /* Set search conditions */
-        let fetchRequest = NSFetchRequest(entityName: "Review")
-        
-        /* Get result array from ManagedObjectContext */
-        do{
-            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
-            
-            if let results: Array = fetchResults {
-                for obj:AnyObject in results {
-                    let reviewNo:NSNumber? = obj.valueForKey("reviewNo") as? NSNumber
-                    let reviewName:String? = obj.valueForKey("reviewName") as? String
-                    let categoryId:NSNumber? = obj.valueForKey("categoryId") as? NSNumber
-                    let estimation:NSNumber? = obj.valueForKey("estimation") as? NSNumber
-                    let photoData:NSData? = obj.valueForKey("photoData") as? NSData
-                    print(reviewNo!)
-                    print(reviewName!)
-                    print(categoryId!)
-                    print(estimation!)
-                    self.selectedPhoto.image = photoData.flatMap(UIImage.init)
-                }
-                print("recordCounts:" + results.count.description)
-            }
-        }catch let error as NSError{
-            fatalError("\(error)")
-        }
-        
-    }
-    
-    // 削除
-    @IBAction func deleteReview(sender: UIButton) {
-        
-        let appDelegate =
-            UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        let entity =  NSEntityDescription.entityForName("Review",
-                                                        inManagedObjectContext:managedContext)
-        
-        do
-        {
-            let fetchRequest = NSFetchRequest();
-            fetchRequest.entity = entity;
-            // NSPredicate SQLのWhere句のようなイメージ
-            let predicate = NSPredicate(format: "%K = %@", "reviewNo", "99")
-            fetchRequest.predicate = predicate
-            
-            let results = try managedContext.executeFetchRequest(fetchRequest)
-            for result in results {
-                let model = result as! Review
-                //
-                // レコード削除！
-                //
-                managedContext.deleteObject(model)
-            }
-            
-        }catch let error as NSError {
-            fatalError("\(error)")
-        }
-        
-        // 作成したオブジェクトを保存
-        appDelegate.saveContext()
-    }
-    
-    
     @IBOutlet weak var comments: UITextView!
     
     override func viewDidLoad() {
@@ -299,7 +228,9 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         // 元のサイズのままフォトライブラリに書き込み
         originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         let image:UIImage = originalImage!
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        if(picker.sourceType == UIImagePickerControllerSourceType.Camera){
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        }
         
         photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
         
@@ -317,13 +248,13 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     }
     
     @IBAction func backFromModalCategoryView(segue:UIStoryboardSegue){
-        var item:String = ""
+        let cg:ICategory = ICategory()
         if let vc = segue.sourceViewController as? ModalCategoryViewController{
-            item = vc.categoryName
+            cg.categoryId = vc.categoryId
+            cg.categoryName = vc.categoryName
+            cg.categoryTemplate = vc.categoryTemplate
         }
-        NSLog("ReviewController#backFromTestView")
-        NSLog(item)
-        self.CategoryName.setTitle(item, forState: .Normal)
+        self.CategoryName.setTitle(cg.categoryName, forState: .Normal)
     }
 }
 
