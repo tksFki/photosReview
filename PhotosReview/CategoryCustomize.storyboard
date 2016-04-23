@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--CategoryEdit Controller-->
@@ -14,13 +15,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="sQT-6G-NPS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="By5-Ce-O00">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQT-6G-NPS" id="pW0-8H-mp6">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="By5-Ce-O00" id="lhS-56-0cK">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="VZT-3q-UQ7" kind="show" identifier="goToCategoryCustomize" id="Jze-WT-qGQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -28,12 +32,53 @@
                             <outlet property="delegate" destination="UEQ-2w-gI0" id="NNl-RD-MAx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="カテゴリ編集" id="M2b-Na-bOU"/>
+                    <navigationItem key="navigationItem" title="カテゴリ編集" id="M2b-Na-bOU">
+                        <barButtonItem key="leftBarButtonItem" title="戻る" id="ITA-oA-rTm">
+                            <connections>
+                                <segue destination="DLd-K2-Srf" kind="unwind" identifier="backToModalCategory" unwindAction="backFromCategoryEditor:" id="nMF-Qw-ZoA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAQ-LL-Ikp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="DLd-K2-Srf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="216.5" y="309.5"/>
+            <point key="canvasLocation" x="200.5" y="309.5"/>
+        </scene>
+        <!--Category Customize Controller-->
+        <scene sceneID="frS-m7-uHE">
+            <objects>
+                <viewController id="VZT-3q-UQ7" customClass="CategoryCustomizeController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jzj-3Q-uaL"/>
+                        <viewControllerLayoutGuide type="bottom" id="chw-Yy-ZP7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RNr-Uj-GIm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H5A-hj-GLX">
+                                <rect key="frame" x="20" y="72" width="335" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H5A-hj-GLX" firstAttribute="top" secondItem="Jzj-3Q-uaL" secondAttribute="bottom" constant="8" symbolic="YES" id="73N-9P-fGn"/>
+                            <constraint firstItem="H5A-hj-GLX" firstAttribute="leading" secondItem="RNr-Uj-GIm" secondAttribute="leadingMargin" constant="4" id="8ag-yV-m2H"/>
+                            <constraint firstItem="H5A-hj-GLX" firstAttribute="centerX" secondItem="RNr-Uj-GIm" secondAttribute="centerX" id="SL5-pa-DrE"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="categoryCustomizeField" destination="H5A-hj-GLX" id="V0R-D9-Gzw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="art-8v-Vd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656.5" y="309.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uDd-iy-81n">

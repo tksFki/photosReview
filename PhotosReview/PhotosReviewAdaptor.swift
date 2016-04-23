@@ -100,9 +100,9 @@ class PhotosReviewAdaptor {
             if let results: Array = fetchResults {
                 for obj:AnyObject in results {
                     let category = ICategory()
-                    category.categoryId = obj.valueForKey("reviewNo") as? NSNumber
-                    category.categoryName = obj.valueForKey("reviewName") as? String
-                    category.categoryTemplate = obj.valueForKey("categoryId") as? String
+                    category.categoryId = obj.valueForKey("categoryId") as? NSNumber
+                    category.categoryName = obj.valueForKey("categoryName") as? String
+                    category.categoryTemplate = obj.valueForKey("categoryTemplate") as? String
                     categories.append(category)
                 }
             }
@@ -110,6 +110,32 @@ class PhotosReviewAdaptor {
         }catch let error as NSError{
             fatalError("\(error)")
         }
+    }
+
+    func EntryCategory(category: ICategory) {
+        
+        // エンティティ作成
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let categoryEntity =  NSEntityDescription.entityForName("Category",
+                                                              inManagedObjectContext:managedContext)
+        
+        let categoryItem = NSManagedObject(entity: categoryEntity!,
+                                         insertIntoManagedObjectContext: managedContext) as! Category
+        
+        
+        /* カテゴリエンティティSave */
+        categoryItem.categoryId = category.categoryId
+        categoryItem.categoryName = category.categoryName
+        categoryItem.createDate = category.createDate
+        categoryItem.updateDate = category.updateDate
+        do {
+            try managedContext.save()
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
     }
 
     

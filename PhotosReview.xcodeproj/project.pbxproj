@@ -26,6 +26,7 @@
 		73E8E60F1CAFDAFD004ECE1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */; };
 		73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */; };
 		73E8E61B1CAFDCDE004ECE1B /* SearchReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */; };
+		73FA87951CC92F5A00701F05 /* CategoryCustomizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FA87941CC92F5A00701F05 /* CategoryCustomizeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		73E8E6101CAFDAFD004ECE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewController.swift; sourceTree = "<group>"; };
 		73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReviewController.swift; sourceTree = "<group>"; };
+		73FA87941CC92F5A00701F05 /* CategoryCustomizeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCustomizeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */,
 				73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */,
 				73C64E281CC38F5F0001DC24 /* CategoryEditController.swift */,
+				73FA87941CC92F5A00701F05 /* CategoryCustomizeController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				73C64E251CC343A10001DC24 /* ModalCategoryViewController.swift in Sources */,
 				734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */,
 				734E7DBA1CC7D68D005E6135 /* IReview.swift in Sources */,
+				73FA87951CC92F5A00701F05 /* CategoryCustomizeController.swift in Sources */,
 				73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */,
 				73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */,
 				73C64E291CC38F5F0001DC24 /* CategoryEditController.swift in Sources */,

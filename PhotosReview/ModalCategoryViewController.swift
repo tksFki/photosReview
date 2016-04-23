@@ -12,37 +12,66 @@ import CoreData
 class ModalCategoryViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate{
     
     var categoryId:NSNumber = 0
-    var categoryName:String = "カテゴリなし"
+    var categoryName:String = ""
     var categoryTemplate:String = ""
     var categories:[ICategory] = [ICategory]()
     
+    @IBOutlet weak var categoryColletionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadCategory()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let photosReview = PhotosReviewAdaptor()
+        categories = photosReview.loadCategory()
+        self.categoryColletionView.reloadData()
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         
         // dequeueReusableCellWithReuseIdentifier の働きは
         // 再利用できるセルがあればそれを使う
         // 再利用できるセルがなければ生成する
         // Cell はストーリーボードで設定したセルのID
-        let testCell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CategoryCell", forIndexPath: indexPath)
+        let categoryCell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CategoryCell", forIndexPath: indexPath)
         
         // Tag番号を使ってbuttonのインスタンス生成
-        let button = testCell.contentView.viewWithTag(1) as! CategorySelectButton
+        let button = categoryCell.contentView.viewWithTag(1) as! CategorySelectButton
         
         if (categories.count > indexPath.row){
             button.setTitle(categories[indexPath.row].categoryName!, forState: .Normal)
-            button.categoryId = categories[indexPath.row].categoryId!
-            button.categoryName = categories[indexPath.row].categoryName!
-            button.categoryTemplate = categories[indexPath.row].categoryTemplate!
+            button.categoryId = categories[indexPath.row].categoryId
+            button.categoryName = categories[indexPath.row].categoryName
+            if let categoryTemplate = categories[indexPath.row].categoryTemplate {
+                button.categoryTemplate = categoryTemplate
+            }
+            button.setTitle(button.categoryName, forState: .Normal)
         }
-        return testCell
+        else{
+            button.categoryId = 0
+            button.categoryName = ""
+            button.categoryTemplate = ""
+            button.setTitle("", forState: .Normal)
+        }
+        return categoryCell
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+                          layout collectionViewLayout: UICollectionViewLayout,
+                                 sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    {
+        let width = (collectionView.frame.size.width-10)/3
+        let height = (collectionView.frame.size.height-10)/5
+        
+        return CGSize(width: width, height: height)
     }
     
     //section 数の設定、今回は１つにセット
@@ -52,35 +81,12 @@ class ModalCategoryViewController: UIViewController,UICollectionViewDataSource, 
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 要素数を入れる、要素以上の数字を入れると表示でエラーとなる
-        return 18;
+        return 15;
     }
     
-    // カテゴリエンティティ読み出し
-    func loadCategory() {
-        /* Get ManagedObjectContext from AppDelegate */
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let manageContext = appDelegate.managedObjectContext
-        
-        /* Set search conditions */
-        let fetchRequest = NSFetchRequest(entityName: "Category")
-        
-        /* Get result array from ManagedObjectContext */
-        do{
-            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
-            
-            if let results: Array = fetchResults {
-                for obj:AnyObject in results {
-                    let category:ICategory = ICategory()
-                    category.categoryId = obj.valueForKey("categoryId") as? NSNumber
-                    category.categoryName = obj.valueForKey("categoryName") as? String
-                    category.categoryTemplate = obj.valueForKey("categoryTemplate") as? String
-                    categories.append(category)
-                }
-            }
-        }catch let error as NSError{
-            fatalError("\(error)")
-        }
-        
-    }
+    @IBAction func backFromCategoryEditor(segue:UIStoryboardSegue){
 
+    }
+    
+    
 }
