@@ -80,38 +80,7 @@ class PhotosReviewAdaptor {
         appDelegate.saveContext()
     }
 
-    
-    // レビューを読み込む
-    func loadCategory() -> [ICategory] {
-        
-        var categories = [ICategory]()
-        
-        /* Get ManagedObjectContext from AppDelegate */
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let manageContext = appDelegate.managedObjectContext
-        
-        /* Set search conditions */
-        let fetchRequest = NSFetchRequest(entityName: "Category")
-        
-        /* Get result array from ManagedObjectContext */
-        do{
-            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
-            
-            if let results: Array = fetchResults {
-                for obj:AnyObject in results {
-                    let category = ICategory()
-                    category.categoryId = obj.valueForKey("categoryId") as? NSNumber
-                    category.categoryName = obj.valueForKey("categoryName") as? String
-                    category.categoryTemplate = obj.valueForKey("categoryTemplate") as? String
-                    categories.append(category)
-                }
-            }
-            return categories
-        }catch let error as NSError{
-            fatalError("\(error)")
-        }
-    }
-
+    // カテゴリ登録
     func EntryCategory(category: ICategory) {
         
         // エンティティ作成
@@ -119,10 +88,10 @@ class PhotosReviewAdaptor {
             UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let categoryEntity =  NSEntityDescription.entityForName("Category",
-                                                              inManagedObjectContext:managedContext)
+                                                                inManagedObjectContext:managedContext)
         
         let categoryItem = NSManagedObject(entity: categoryEntity!,
-                                         insertIntoManagedObjectContext: managedContext) as! Category
+                                           insertIntoManagedObjectContext: managedContext) as! Category
         
         
         /* カテゴリエンティティSave */
@@ -137,6 +106,76 @@ class PhotosReviewAdaptor {
         }
         
     }
+    
+    // カテゴリを読み込む
+    func loadCategory() -> [ICategory] {
+        
+        var categories = [ICategory]()
+        
+        /* Get ManagedObjectContext from AppDelegate */
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let manageContext = appDelegate.managedObjectContext
+        
+        /* Set search conditions */
+        let fetchRequest = NSFetchRequest(entityName: "Category")
+        // ソート（カテゴリIdを昇順に）
+        let sortDescriptror = NSSortDescriptor(key: "categoryId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptror]
+        
+        /* Get result array from ManagedObjectContext */
+        do{
+            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
+
+            if let results: Array = fetchResults {
+                for obj:AnyObject in results {
+                    let category = ICategory()
+                    category.categoryId = obj.valueForKey("categoryId") as? NSNumber
+                    category.categoryName = obj.valueForKey("categoryName") as? String
+                    category.categoryTemplate = obj.valueForKey("categoryTemplate") as? String
+                    categories.append(category)
+                }
+            }
+            return categories
+        }catch let error as NSError{
+            fatalError("\(error)")
+        }
+    }
+    
+    // レビューを削除する
+    func deleteCategory(categoryId: NSNumber) {
+        
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let categoryEntity =  NSEntityDescription.entityForName("Category",
+                                                        inManagedObjectContext:managedContext)
+        do
+        {
+            let fetchRequest = NSFetchRequest();
+            fetchRequest.entity = categoryEntity;
+            // NSPredicate SQLのWhere句のようなイメージ
+            let predicate = NSPredicate(format: "%K = %@", "categoryId", categoryId)
+            fetchRequest.predicate = predicate
+            
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            for result in results {
+                let model = result as! Category
+                //
+                // レコード削除！
+                //
+                managedContext.deleteObject(model)
+            }
+            
+        }catch let error as NSError {
+            fatalError("\(error)")
+        }
+        // 作成したオブジェクトを保存
+        appDelegate.saveContext()
+    }
+
+    
 
     
 

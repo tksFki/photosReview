@@ -10,8 +10,9 @@ import UIKit
 
 class CategoryCustomizeController: UIViewController {
     
-    var categoryId:NSNumber! = 0
+    var categoryId:NSNumber = 0
     var categoryName:String? = ""
+    var categoryMaxSeq:NSNumber = 0
     @IBOutlet weak var categoryCustomizeField: UITextField!
     
     var category = ICategory()
@@ -34,7 +35,7 @@ class CategoryCustomizeController: UIViewController {
         
         if categoryCustomizeField.text != "" {
             let photosReview = PhotosReviewAdaptor()
-            category.categoryId = 1
+            category.categoryId = NSNumber(int: self.categoryMaxSeq.intValue + 1)
             category.categoryName = categoryCustomizeField.text
             category.updateDate = NSDate() // GMTで保存
             categoryId = 0
