@@ -14,19 +14,40 @@ class CategorySelectButton: CategoryButton{
     var categoryName:String? = ""
     var categoryTemplate:String? = ""
     
+    var keepingButtonSelected:Bool = false
+    
+    // 画面に指を一本以上タッチしたときに実行されるメソッド
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
+        print("touchesBegan")
         self.touchStartAnimation()
+        self.selected = !self.keepingButtonSelected
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        super.touchesCancelled(touches, withEvent: event)
-        self.touchEndAnimation()
-    }
+//    // システムイベントがタッチイベントをキャンセルしたときに実行されるメソッド
+//    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+//        super.touchesCancelled(touches, withEvent: event)
+//        print("touchesCancelled")
+//        self.touchEndAnimation()
+//        self.selected = self.keepingButtonSelected;
+//    }
     
+    // 指を一本以上画面から離したときに実行されるメソッド
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
+        print("touchesEnded")
         self.touchEndAnimation()
+        for obj: AnyObject in touches{
+            let touch = obj as! UITouch
+            let touchPoint:CGPoint = touch.locationInView(self)
+            if (CGRectContainsPoint(self.bounds, touchPoint)) {
+                // UIControlEventTouchUpInside
+                self.keepingButtonSelected = !self.keepingButtonSelected
+            } else {
+                // UIControlEventTouchUpOutside
+                self.selected = self.keepingButtonSelected
+            }
+        }
     }
     
     private func touchStartAnimation(){
@@ -51,6 +72,6 @@ class CategorySelectButton: CategoryButton{
                                    completion: nil
         )
     }
-
+    
     
 }

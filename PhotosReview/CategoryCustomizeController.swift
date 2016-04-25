@@ -35,16 +35,17 @@ class CategoryCustomizeController: UIViewController {
         
         if categoryCustomizeField.text != "" {
             let photosReview = PhotosReviewAdaptor()
-            category.categoryId = NSNumber(int: self.categoryMaxSeq.intValue + 1)
             category.categoryName = categoryCustomizeField.text
             category.updateDate = NSDate() // GMTで保存
-            categoryId = 0
-            switch categoryId {
+            switch self.categoryId {
             case 0:
-                category.createDate = NSDate() // GMTで保存
+                category.categoryId = NSNumber(int: self.categoryMaxSeq.intValue + 1)
+                category.createDate = category.updateDate // GMTで保存
                 photosReview.EntryCategory(category)
                 break
             default:
+                category.categoryId = self.categoryId
+                photosReview.updateCategory(category)
                 break
             }
         }

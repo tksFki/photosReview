@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class PhotosReviewAdaptor {
-    
+
     // レビューを読み込む
     func loadReview() -> [IReview] {
         
@@ -36,14 +36,14 @@ class PhotosReviewAdaptor {
                     review.estimation = obj.valueForKey("estimation") as? NSNumber
                     review.photoData = obj.valueForKey("photoData") as? NSData
                     reviews.append(review)
-//                    self.selectedPhoto.image = photoData.flatMap(UIImage.init)
+                    //                    self.selectedPhoto.image = photoData.flatMap(UIImage.init)
                 }
-//                print("recordCounts:" + results.count.description)
+                //                print("recordCounts:" + results.count.description)
             }
-            return reviews
         }catch let error as NSError{
             fatalError("\(error)")
         }
+        return reviews
     }
     
     // レビューを削除する
@@ -58,8 +58,8 @@ class PhotosReviewAdaptor {
                                                         inManagedObjectContext:managedContext)
         do
         {
-            let fetchRequest = NSFetchRequest();
-            fetchRequest.entity = entity;
+            let fetchRequest = NSFetchRequest()
+            fetchRequest.entity = entity
             // NSPredicate SQLのWhere句のようなイメージ
             let predicate = NSPredicate(format: "%K = %@", "reviewNo", reviewNo)
             fetchRequest.predicate = predicate
@@ -79,7 +79,7 @@ class PhotosReviewAdaptor {
         // 作成したオブジェクトを保存
         appDelegate.saveContext()
     }
-
+    
     // カテゴリ登録
     func EntryCategory(category: ICategory) {
         
@@ -102,9 +102,40 @@ class PhotosReviewAdaptor {
         do {
             try managedContext.save()
         } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+            fatalError("\(error)")
         }
         
+    }
+    
+    // カテゴリ更新
+    func updateCategory(category: ICategory) {
+        
+        // エンティティ作成
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let categoryEntity =  NSEntityDescription.entityForName("Category",
+                                                                inManagedObjectContext:managedContext)
+        
+        /* Set search conditions */
+        let fetchRequest = NSFetchRequest(entityName: "Category")
+        fetchRequest.entity = categoryEntity
+        let predicate = NSPredicate(format: "%K = %@", "categoryId", category.categoryId!)
+        fetchRequest.predicate = predicate
+        do {
+            let fetchResults = try managedContext.executeFetchRequest(fetchRequest)
+            if let results: Array = fetchResults {
+                for result in results {
+                    let model = result as! Category
+                    model.categoryName = category.categoryName
+                    model.updateDate = NSDate()
+                }
+            }
+        } catch let error as NSError {
+            fatalError("\(error)")
+        }
+        // 作成したオブジェクトを保存
+        appDelegate.saveContext()
     }
     
     // カテゴリを読み込む
@@ -114,7 +145,7 @@ class PhotosReviewAdaptor {
         
         /* Get ManagedObjectContext from AppDelegate */
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let manageContext = appDelegate.managedObjectContext
+        let managedContext = appDelegate.managedObjectContext
         
         /* Set search conditions */
         let fetchRequest = NSFetchRequest(entityName: "Category")
@@ -124,14 +155,14 @@ class PhotosReviewAdaptor {
         
         /* Get result array from ManagedObjectContext */
         do{
-            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
-
+            let fetchResults = try managedContext.executeFetchRequest(fetchRequest)
+            
             if let results: Array = fetchResults {
-                for obj:AnyObject in results {
+                for result in results {
                     let category = ICategory()
-                    category.categoryId = obj.valueForKey("categoryId") as? NSNumber
-                    category.categoryName = obj.valueForKey("categoryName") as? String
-                    category.categoryTemplate = obj.valueForKey("categoryTemplate") as? String
+                    category.categoryId = result.valueForKey("categoryId") as? NSNumber
+                    category.categoryName = result.valueForKey("categoryName") as? String
+                    category.categoryTemplate = result.valueForKey("categoryTemplate") as? String
                     categories.append(category)
                 }
             }
@@ -150,21 +181,19 @@ class PhotosReviewAdaptor {
         let managedContext = appDelegate.managedObjectContext
         
         let categoryEntity =  NSEntityDescription.entityForName("Category",
-                                                        inManagedObjectContext:managedContext)
+                                                                inManagedObjectContext:managedContext)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = categoryEntity
+        // NSPredicate SQLのWhere句のようなイメージ
+        let predicate = NSPredicate(format: "%K = %@", "categoryId", categoryId)
+        fetchRequest.predicate = predicate
         do
         {
-            let fetchRequest = NSFetchRequest();
-            fetchRequest.entity = categoryEntity;
-            // NSPredicate SQLのWhere句のようなイメージ
-            let predicate = NSPredicate(format: "%K = %@", "categoryId", categoryId)
-            fetchRequest.predicate = predicate
+            
             
             let results = try managedContext.executeFetchRequest(fetchRequest)
             for result in results {
                 let model = result as! Category
-                //
-                // レコード削除！
-                //
                 managedContext.deleteObject(model)
             }
             
@@ -174,9 +203,5 @@ class PhotosReviewAdaptor {
         // 作成したオブジェクトを保存
         appDelegate.saveContext()
     }
-
     
-
-    
-
 }

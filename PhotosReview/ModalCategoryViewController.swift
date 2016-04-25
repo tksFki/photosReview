@@ -45,9 +45,12 @@ class ModalCategoryViewController: UIViewController,UICollectionViewDataSource, 
         
         // Tag番号を使ってbuttonのインスタンス生成
         let button = categoryCell.contentView.viewWithTag(1) as! CategorySelectButton
+        button.titleLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping // 複数行で表示
+        button.titleLabel!.numberOfLines = 0 // 行数指定なし
         
         if (categories.count > indexPath.row){
             button.setTitle(categories[indexPath.row].categoryName!, forState: .Normal)
+            
             button.categoryId = categories[indexPath.row].categoryId
             button.categoryName = categories[indexPath.row].categoryName
             if let categoryTemplate = categories[indexPath.row].categoryTemplate {
