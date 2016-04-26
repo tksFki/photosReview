@@ -61,60 +61,40 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     // 保存する
     @IBAction func saveReview(sender: UIButton) {
         
-        let reviewNo:NSNumber = 5
-        let categoryId:NSNumber = 5
-        
-        // エンティティ作成
-        let appDelegate =
-            UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let reviewEntity =  NSEntityDescription.entityForName("Review",
-                                                              inManagedObjectContext:managedContext)
-        
-        let reviewItem = NSManagedObject(entity: reviewEntity!,
-                                         insertIntoManagedObjectContext: managedContext)
+        let review = IReview()
+        let photosReview = PhotosReviewAdaptor()
         
         
-        /* レビューエンティティSave */
         // レビュー情報
-        reviewItem.setValue(reviewNo, forKey: "reviewNo")
-        reviewItem.setValue(self.reviewName.text, forKey: "reviewName")
-        reviewItem.setValue(categoryID, forKey: "categoryId")
-        var estValue :NSNumber = 0
-        if Int32(self.estimation.text!) != nil {
-            estValue = NSNumber(int: Int32(self.estimation.text!)!)
+//        reviewItem.setValue(reviewNo, forKey: "reviewNo")
+        review.reviewName = self.reviewName.text
+        review.categoryId = self.categoryID
+        review.estimation = NSNumber(int: Int32(self.estimation.text!)!)
+        if let photoData = originalImage {
+            review.photoData = UIImagePNGRepresentation(photoData)
         }
-        reviewItem.setValue(estValue, forKey: "estimation")
-        reviewItem.setValue(categoryId, forKey: "categoryId")
+        review.comment = self.comments.text
         
-        // 写真情報
-        if let image = originalImage {
-            let widthPer:CGFloat = 0.25  // リサイズ後幅の倍率
-            let heightPer:CGFloat = 0.25  // リサイズ後高さの倍率
-            let sz:CGSize = CGSizeMake(image.size.width * widthPer,image.size.height * heightPer)
-            
-            // 画面に表示するサイズにリサイズする。
-            UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
-            image.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
-            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            if let photoData = UIImagePNGRepresentation(resizeImage) {
-                //                photoData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-                reviewItem.setValue(photoData, forKey: "photoData")
-            }
-        }
-        //        let exif = photoMetaData?.objectForKey("kCGImagePropertyExifDictionary")
-        //        print(exif)
+        photosReview.entryReview(review)
         
-        //4
-        do {
-            try managedContext.save()
-            self.reviewItems.append(reviewItem)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-        
+//        if let image = originalImage {
+//            let widthPer:CGFloat = 0.25  // リサイズ後幅の倍率
+//            let heightPer:CGFloat = 0.25  // リサイズ後高さの倍率
+//            let sz:CGSize = CGSizeMake(image.size.width * widthPer,image.size.height * heightPer)
+//            
+//            // 画面に表示するサイズにリサイズする。
+//            UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
+//            image.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
+//            let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+//            
+//            if let photoData = UIImagePNGRepresentation(resizeImage) {
+//                //                photoData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+//                reviewItem.setValue(photoData, forKey: "photoData")
+//            }
+//        }
+//                let exif = photoMetaData?.objectForKey("kCGImagePropertyExifDictionary")
+//                print(exif)
     }
     
     @IBOutlet weak var comments: UITextView!
@@ -162,12 +142,6 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         //myTextFieldを追加する
         self.view.addSubview(comments)
-        
-        //        // single swipe up
-        //        let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeLeft:")
-        //        swipeLeftGesture.numberOfTouchesRequired = 1  // number of fingers
-        //        swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.Left
-        //        self.view.addGestureRecognizer(swipeLeftGesture)
     }
     
     // キーボードをリターンで閉じた時の動作
@@ -252,9 +226,9 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         if let vc = segue.sourceViewController as? ModalCategoryViewController{
             cg.categoryId = vc.categoryId
             cg.categoryName = vc.categoryName
-            cg.categoryTemplate = vc.categoryTemplate
         }
         self.CategoryName.setTitle(cg.categoryName, forState: .Normal)
+        self.categoryID = cg.categoryId!
     }
 }
 

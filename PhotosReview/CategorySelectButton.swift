@@ -17,12 +17,12 @@ class CategorySelectButton: CategoryButton{
     var keepingButtonSelected:Bool = false
     
     // 画面に指を一本以上タッチしたときに実行されるメソッド
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
-        print("touchesBegan")
-        self.touchStartAnimation()
-        self.selected = !self.keepingButtonSelected
-    }
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        super.touchesBegan(touches, withEvent: event)
+//        print("touchesBegan")
+//        self.touchStartAnimation()
+//        self.selected = !self.keepingButtonSelected
+//    }
     
 //    // システムイベントがタッチイベントをキャンセルしたときに実行されるメソッド
 //    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
@@ -33,22 +33,23 @@ class CategorySelectButton: CategoryButton{
 //    }
     
     // 指を一本以上画面から離したときに実行されるメソッド
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        print("touchesEnded")
-        self.touchEndAnimation()
-        for obj: AnyObject in touches{
-            let touch = obj as! UITouch
-            let touchPoint:CGPoint = touch.locationInView(self)
-            if (CGRectContainsPoint(self.bounds, touchPoint)) {
-                // UIControlEventTouchUpInside
-                self.keepingButtonSelected = !self.keepingButtonSelected
-            } else {
-                // UIControlEventTouchUpOutside
-                self.selected = self.keepingButtonSelected
-            }
-        }
-    }
+//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        super.touchesEnded(touches, withEvent: event)
+//        print("touchesEnded")
+//        self.touchEndAnimation()
+//        for obj: AnyObject in touches{
+//            let touch = obj as! UITouch
+//            let touchPoint:CGPoint = touch.locationInView(self)
+//            if (CGRectContainsPoint(self.bounds, touchPoint)) {
+//                // UIControlEventTouchUpInside
+//                self.selected = !self.keepingButtonSelected
+//                self.keepingButtonSelected = self.selected
+//            } else {
+//                // UIControlEventTouchUpOutside
+//                self.selected = self.keepingButtonSelected
+//            }
+//        }
+//    }
     
     private func touchStartAnimation(){
         UIView.animateWithDuration(0.1,

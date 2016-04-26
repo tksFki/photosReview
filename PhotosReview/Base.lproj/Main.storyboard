@@ -93,6 +93,11 @@
                                                             <real key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="categorySelectTouchesDown:" destination="SG8-8b-KqZ" eventType="touchDown" id="CIe-d8-uXT"/>
+                                                        <action selector="categorySelectTouchesUpInside:" destination="SG8-8b-KqZ" eventType="touchUpInside" id="tig-eX-yiZ"/>
+                                                        <action selector="categorySelectTouchesUpOutside:" destination="SG8-8b-KqZ" eventType="touchUpOutside" id="vH8-2G-B4h"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

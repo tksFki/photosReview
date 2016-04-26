@@ -11,6 +11,76 @@ import CoreData
 
 class PhotosReviewAdaptor {
 
+    // レビュー登録
+    func entryReview(review: IReview) {
+        
+        // エンティティ作成
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let reviewEntity =  NSEntityDescription.entityForName("Review",
+                                                                inManagedObjectContext:managedContext)
+        
+        let reviewItem = NSManagedObject(entity: reviewEntity!,
+                                           insertIntoManagedObjectContext: managedContext) as! Review
+        
+        
+        /* レビューエンティティSave */
+        reviewItem.reviewNo = getNextReviewNo()
+        reviewItem.reviewName = review.reviewName
+        reviewItem.categoryId = review.categoryId
+        reviewItem.estimation = review.estimation
+        reviewItem.photoData = review.photoData
+        reviewItem.comment = review.comment
+        reviewItem.createDate = NSDate()
+        reviewItem.updateDate = reviewItem.createDate
+        do {
+            try managedContext.save()
+        } catch let error as NSError  {
+            fatalError("\(error)")
+        }
+    }
+    
+    func getNextReviewNo() -> NSNumber {
+        
+        let expressionReviewNo = "maxReviewNo"
+        var nextReviewNo:Int = 1
+        
+        // エンティティ作成
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        /// fetchRequestの生成
+        let fetchRequest = NSFetchRequest()
+        
+        /// EntityDescriptionの生成
+        let reviewEntity = NSEntityDescription.entityForName("Review", inManagedObjectContext: managedContext)
+        fetchRequest.entity = reviewEntity
+        
+        let keyPathExpression = NSExpression(forKeyPath: "reviewNo")
+        let expression = NSExpression(forFunction: "max:", arguments: [keyPathExpression])
+        let expressionDescription = NSExpressionDescription()
+        expressionDescription.name = expressionReviewNo
+        expressionDescription.expression = expression
+        expressionDescription.expressionResultType = NSAttributeType.Integer32AttributeType
+        
+        fetchRequest.resultType = NSFetchRequestResultType.DictionaryResultType
+        fetchRequest.propertiesToFetch = [expressionDescription]
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            if let maxReviewNo = results.first?.valueForKey(expressionReviewNo) as? Int {
+                print("maxReviewNo = \(maxReviewNo)")
+                nextReviewNo = maxReviewNo + 1
+            }
+        } catch let error {
+            fatalError("\(error)")
+        }
+        return NSNumber.init(integer: nextReviewNo)
+    }
+    
+
     // レビューを読み込む
     func loadReview() -> [IReview] {
         
@@ -81,7 +151,7 @@ class PhotosReviewAdaptor {
     }
     
     // カテゴリ登録
-    func EntryCategory(category: ICategory) {
+    func entryCategory(category: ICategory) {
         
         // エンティティ作成
         let appDelegate =
@@ -97,8 +167,8 @@ class PhotosReviewAdaptor {
         /* カテゴリエンティティSave */
         categoryItem.categoryId = category.categoryId
         categoryItem.categoryName = category.categoryName
-        categoryItem.createDate = category.createDate
-        categoryItem.updateDate = category.updateDate
+        categoryItem.createDate = NSDate()
+        categoryItem.updateDate = category.createDate
         do {
             try managedContext.save()
         } catch let error as NSError  {
