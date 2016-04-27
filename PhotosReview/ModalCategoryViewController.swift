@@ -66,10 +66,6 @@ class ModalCategoryViewController: UIViewController,UICollectionViewDataSource, 
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         
-        // dequeueReusableCellWithReuseIdentifier の働きは
-        // 再利用できるセルがあればそれを使う
-        // 再利用できるセルがなければ生成する
-        // Cell はストーリーボードで設定したセルのID
         let categoryCell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CategoryCell", forIndexPath: indexPath)
         
         // Tag番号を使ってbuttonのインスタンス生成

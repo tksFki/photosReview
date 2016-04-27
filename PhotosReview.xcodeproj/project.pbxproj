@@ -26,6 +26,7 @@
 		73E8E60F1CAFDAFD004ECE1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */; };
 		73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */; };
 		73E8E61B1CAFDCDE004ECE1B /* SearchReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */; };
+		73EE32181CD11F8F00A4B8A0 /* photoReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE32171CD11F8F00A4B8A0 /* photoReviewCell.swift */; };
 		73FA87951CC92F5A00701F05 /* CategoryCustomizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FA87941CC92F5A00701F05 /* CategoryCustomizeController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		73E8E6101CAFDAFD004ECE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewController.swift; sourceTree = "<group>"; };
 		73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReviewController.swift; sourceTree = "<group>"; };
+		73EE32171CD11F8F00A4B8A0 /* photoReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = photoReviewCell.swift; sourceTree = "<group>"; };
 		73FA87941CC92F5A00701F05 /* CategoryCustomizeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCustomizeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 		73C5A3AC1CB015BD00049F33 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				73EE32171CD11F8F00A4B8A0 /* photoReviewCell.swift */,
 				73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */,
 				73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */,
 			);
@@ -260,6 +263,7 @@
 				73FA87951CC92F5A00701F05 /* CategoryCustomizeController.swift in Sources */,
 				73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */,
 				73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */,
+				73EE32181CD11F8F00A4B8A0 /* photoReviewCell.swift in Sources */,
 				73C64E291CC38F5F0001DC24 /* CategoryEditController.swift in Sources */,
 				73C5A3BB1CB041A200049F33 /* Review+CoreDataProperties.swift in Sources */,
 				734E7DC21CC7DD1C005E6135 /* Category+CoreDataProperties.swift in Sources */,
