@@ -24,6 +24,7 @@ extension Review {
     @NSManaged var photoLatitude: String?
     @NSManaged var photoLongitude: String?
     @NSManaged var photoName: String?
+    @NSManaged var photoOrientation: NSNumber?
     @NSManaged var photoPass: String?
     @NSManaged var photoWidth: NSNumber?
     @NSManaged var reviewName: String?

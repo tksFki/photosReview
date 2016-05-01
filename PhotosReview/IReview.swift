@@ -20,6 +20,7 @@ class IReview {
     var photoLatitude: String?
     var photoLongitude: String?
     var photoName: String?
+    var photoOrientation: NSNumber?
     var photoPass: String?
     var photoWidth: NSNumber?
     var reviewName: String?

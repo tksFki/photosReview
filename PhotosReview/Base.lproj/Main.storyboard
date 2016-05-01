@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,8 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-Xb-dgT">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="568"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-Xb-dgT">
+                                <rect key="frame" x="8" y="10" width="304" height="558"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FQ3-Jr-8Jk">
                                     <size key="itemSize" width="60" height="60"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -46,6 +48,9 @@
                                             <constraint firstAttribute="trailing" secondItem="FEw-nK-daY" secondAttribute="trailing" id="QR2-3P-mKj"/>
                                             <constraint firstItem="FEw-nK-daY" firstAttribute="leading" secondItem="qqw-Va-MZJ" secondAttribute="leading" id="cJq-en-O4B"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="6SZ-as-2N4" kind="show" id="rgQ-tr-XqT"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -54,12 +59,12 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.93247159840000005" blue="0.60126471589999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Mpe-Xb-dgT" secondAttribute="bottom" id="HcB-Jz-PHZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Mpe-Xb-dgT" secondAttribute="trailing" constant="-21" id="TjA-od-3tH"/>
-                            <constraint firstItem="Mpe-Xb-dgT" firstAttribute="leading" secondItem="fxd-04-jUq" secondAttribute="leading" id="jDY-RU-Dd6"/>
-                            <constraint firstItem="Mpe-Xb-dgT" firstAttribute="top" secondItem="fxd-04-jUq" secondAttribute="top" id="zJJ-Fc-ouW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mpe-Xb-dgT" secondAttribute="trailing" constant="-10" id="TjA-od-3tH"/>
+                            <constraint firstItem="Mpe-Xb-dgT" firstAttribute="leading" secondItem="fxd-04-jUq" secondAttribute="leading" constant="10" id="jDY-RU-Dd6"/>
+                            <constraint firstItem="Mpe-Xb-dgT" firstAttribute="top" secondItem="fxd-04-jUq" secondAttribute="top" constant="10" id="zJJ-Fc-ouW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jAw-dZ-F99">
@@ -73,6 +78,168 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1j-J2-Txt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-234" y="809"/>
+        </scene>
+        <!--Review Detail View Controller-->
+        <scene sceneID="nud-vJ-etC">
+            <objects>
+                <viewController id="6SZ-as-2N4" userLabel="Review Detail View Controller" customClass="ReviewDetailController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c5v-1D-9Rb"/>
+                        <viewControllerLayoutGuide type="bottom" id="PDe-H1-7JY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pEO-cV-7LX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obd-nZ-Md3" userLabel="レビュータイトル" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="320" height="31"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="D1c-td-awJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1xM-xf-gnS" userLabel="レビュー本文">
+                                <rect key="frame" x="20" y="370" width="280" height="141"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="141" id="TaQ-jC-m3i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7jf-bc-xlt" userLabel="写真">
+                                <rect key="frame" x="0.0" y="111" width="320" height="180"/>
+                                <color key="backgroundColor" red="0.7512620192307693" green="0.52182384149887506" blue="0.33952845454602554" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTx-Mb-dm3" userLabel="カテゴリラベル" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="20" y="299" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.65972521549999996" green="0.2960516004" blue="0.35269144679999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="eMS-ld-l9K"/>
+                                    <constraint firstAttribute="width" constant="100" id="pBd-XW-oX4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="評価" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OU-9f-fPE" userLabel="評価ラベル" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="20" y="332" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.65972521549999996" green="0.2960516004" blue="0.35269144679999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="A9V-D8-UYh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odd-i9-OGC" userLabel="カテゴリ" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="139" y="299" width="161" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.92117809510000004" green="0.28455858890000002" blue="0.41676393140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJD-5y-pkW" userLabel="評価" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="139" y="332" width="161" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.92117809510000004" green="0.28455858890000002" blue="0.41676393140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.64529996730000005" blue="0.19130684689999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="odd-i9-OGC" firstAttribute="leading" secondItem="iTx-Mb-dm3" secondAttribute="trailing" constant="19" id="0LB-4l-Svv"/>
+                            <constraint firstItem="obd-nZ-Md3" firstAttribute="top" secondItem="c5v-1D-9Rb" secondAttribute="bottom" constant="8" symbolic="YES" id="8ep-rk-SVe"/>
+                            <constraint firstAttribute="trailing" secondItem="obd-nZ-Md3" secondAttribute="trailing" id="9rO-ev-HhW"/>
+                            <constraint firstItem="5OU-9f-fPE" firstAttribute="firstBaseline" secondItem="dJD-5y-pkW" secondAttribute="firstBaseline" id="Aog-kX-wWX"/>
+                            <constraint firstItem="5OU-9f-fPE" firstAttribute="baseline" secondItem="dJD-5y-pkW" secondAttribute="baseline" id="BUq-3W-CAa"/>
+                            <constraint firstItem="obd-nZ-Md3" firstAttribute="leading" secondItem="7jf-bc-xlt" secondAttribute="leading" id="Jsh-NJ-1vl"/>
+                            <constraint firstItem="iTx-Mb-dm3" firstAttribute="trailing" secondItem="5OU-9f-fPE" secondAttribute="trailing" id="LrS-GH-mBR"/>
+                            <constraint firstItem="iTx-Mb-dm3" firstAttribute="leading" secondItem="pEO-cV-7LX" secondAttribute="leadingMargin" constant="4" id="Mzm-ik-Wka"/>
+                            <constraint firstItem="7jf-bc-xlt" firstAttribute="centerX" secondItem="1xM-xf-gnS" secondAttribute="centerX" id="OF1-tM-MZC"/>
+                            <constraint firstItem="obd-nZ-Md3" firstAttribute="leading" secondItem="pEO-cV-7LX" secondAttribute="leading" id="RdI-VM-pE8"/>
+                            <constraint firstItem="dJD-5y-pkW" firstAttribute="trailing" secondItem="1xM-xf-gnS" secondAttribute="trailing" id="Sd6-xH-LHJ"/>
+                            <constraint firstItem="iTx-Mb-dm3" firstAttribute="leading" secondItem="5OU-9f-fPE" secondAttribute="leading" id="Txu-yr-DMJ"/>
+                            <constraint firstItem="iTx-Mb-dm3" firstAttribute="top" secondItem="7jf-bc-xlt" secondAttribute="bottom" constant="8" symbolic="YES" id="Udu-cD-5Ok"/>
+                            <constraint firstItem="7jf-bc-xlt" firstAttribute="top" secondItem="obd-nZ-Md3" secondAttribute="bottom" constant="8" symbolic="YES" id="Y4a-0n-kWI"/>
+                            <constraint firstItem="5OU-9f-fPE" firstAttribute="top" secondItem="iTx-Mb-dm3" secondAttribute="bottom" constant="3" id="ZiC-tz-Ogf"/>
+                            <constraint firstItem="iTx-Mb-dm3" firstAttribute="baseline" secondItem="odd-i9-OGC" secondAttribute="baseline" id="d4t-fm-6Vl"/>
+                            <constraint firstItem="odd-i9-OGC" firstAttribute="leading" secondItem="dJD-5y-pkW" secondAttribute="leading" id="eZr-uI-yBD"/>
+                            <constraint firstItem="1xM-xf-gnS" firstAttribute="top" secondItem="5OU-9f-fPE" secondAttribute="bottom" constant="8" symbolic="YES" id="gN1-oO-OJr"/>
+                            <constraint firstItem="iTx-Mb-dm3" firstAttribute="firstBaseline" secondItem="odd-i9-OGC" secondAttribute="firstBaseline" id="hJs-b6-unE"/>
+                            <constraint firstItem="odd-i9-OGC" firstAttribute="trailing" secondItem="dJD-5y-pkW" secondAttribute="trailing" id="mMl-1A-l5L"/>
+                            <constraint firstItem="obd-nZ-Md3" firstAttribute="trailing" secondItem="7jf-bc-xlt" secondAttribute="trailing" id="mNe-uG-ypK"/>
+                            <constraint firstItem="5OU-9f-fPE" firstAttribute="leading" secondItem="1xM-xf-gnS" secondAttribute="leading" id="nK0-pH-Gob"/>
+                            <constraint firstItem="PDe-H1-7JY" firstAttribute="top" secondItem="1xM-xf-gnS" secondAttribute="bottom" constant="8" symbolic="YES" id="ocL-e4-SZH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="R9i-mV-p5v">
+                        <barButtonItem key="rightBarButtonItem" title="削除" id="6NB-pp-CKK"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="categoryName" destination="dJD-5y-pkW" id="Hvw-bI-AGr"/>
+                        <outlet property="estimation" destination="dJD-5y-pkW" id="PhX-kf-hsa"/>
+                        <outlet property="reviewDetailPhotoImage" destination="7jf-bc-xlt" id="Ie7-Aq-kVF"/>
+                        <outlet property="reviewTitle" destination="obd-nZ-Md3" id="hb5-cj-lAN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ogh-8b-xxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="178" y="809"/>
         </scene>
         <!--CategoryCustomize-->
         <scene sceneID="cz9-G5-oNR">

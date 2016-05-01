@@ -27,13 +27,17 @@ class PhotosReviewAdaptor {
         
         /* レビューエンティティSave */
         reviewItem.reviewNo = getNextReviewNo()
-        reviewItem.reviewName = review.reviewName
-        reviewItem.categoryId = review.categoryId
-        reviewItem.estimation = review.estimation
-        reviewItem.photoData = review.photoData
-        reviewItem.comment = review.comment
+        reviewItem.reviewName = review.reviewName!
+        reviewItem.categoryId = review.categoryId!
+        reviewItem.estimation = review.estimation!
+        reviewItem.photoData = review.photoData!
+        reviewItem.comment = review.comment!
+        reviewItem.photoOrientation = review.photoOrientation!
+        reviewItem.photoWidth = review.photoWidth!
+        reviewItem.photoHeight = review.photoHeight!
+        
         reviewItem.createDate = NSDate()
-        reviewItem.updateDate = reviewItem.createDate
+        reviewItem.updateDate = reviewItem.createDate!
         do {
             try managedContext.save()
         } catch let error as NSError  {
@@ -97,7 +101,7 @@ class PhotosReviewAdaptor {
         do{
             let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
             
-            if let results: Array = fetchResults {
+            if let results: NSArray = fetchResults {
                 for obj:AnyObject in results {
                     let review: IReview = IReview()
                     review.reviewNo = obj.valueForKey("reviewNo") as? NSNumber
@@ -105,6 +109,13 @@ class PhotosReviewAdaptor {
                     review.categoryId = obj.valueForKey("categoryId") as? NSNumber
                     review.estimation = obj.valueForKey("estimation") as? NSNumber
                     review.photoData = obj.valueForKey("photoData") as? NSData
+                    review.comment = obj.valueForKey("comment") as? String
+                    review.photoOrientation = obj.valueForKey("photoOrientation") as? NSNumber
+                    review.photoWidth = obj.valueForKey("photoWidth") as? NSNumber
+                    review.photoHeight = obj.valueForKey("photoHeight") as? NSNumber
+                    review.createDate = obj.valueForKey("createDate") as? NSDate
+                    review.updateDate = obj.valueForKey("updateDate") as? NSDate
+                    
                     reviews.append(review)
                     //                    self.selectedPhoto.image = photoData.flatMap(UIImage.init)
                 }
@@ -115,6 +126,48 @@ class PhotosReviewAdaptor {
         }
         return reviews
     }
+    
+    // レビューを読み込む
+    func loadReviewWithReviewNo(reviewNo: NSNumber) -> IReview {
+        
+        let review: IReview = IReview()
+        
+        /* Get ManagedObjectContext from AppDelegate */
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let manageContext = appDelegate.managedObjectContext
+        
+        /* Set search conditions */
+        let fetchRequest = NSFetchRequest(entityName: "Review")
+        let predicate = NSPredicate(format: "%K = %@", "reviewNo", reviewNo)
+        fetchRequest.predicate = predicate
+        
+        /* Get result array from ManagedObjectContext */
+        do{
+            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
+            
+            if let results: NSArray = fetchResults {
+                for obj:AnyObject in results {
+                    review.reviewNo = obj.valueForKey("reviewNo") as? NSNumber
+                    review.reviewName = obj.valueForKey("reviewName") as? String
+                    review.categoryId = obj.valueForKey("categoryId") as? NSNumber
+                    review.estimation = obj.valueForKey("estimation") as? NSNumber
+                    review.photoData = obj.valueForKey("photoData") as? NSData
+                    review.comment = obj.valueForKey("comment") as? String
+                    review.photoOrientation = obj.valueForKey("photoOrientation") as? NSNumber
+                    review.photoWidth = obj.valueForKey("photoWidth") as? NSNumber
+                    review.photoHeight = obj.valueForKey("photoHeight") as? NSNumber
+                    review.createDate = obj.valueForKey("createDate") as? NSDate
+                    review.updateDate = obj.valueForKey("updateDate") as? NSDate
+                    //                    self.selectedPhoto.image = photoData.flatMap(UIImage.init)
+                }
+                //                print("recordCounts:" + results.count.description)
+            }
+        }catch let error as NSError{
+            fatalError("\(error)")
+        }
+        return review
+    }
+
     
     // レビューを削除する
     func deleteReview(reviewNo: NSNumber) {
@@ -237,6 +290,37 @@ class PhotosReviewAdaptor {
                 }
             }
             return categories
+        }catch let error as NSError{
+            fatalError("\(error)")
+        }
+    }
+    
+    // カテゴリを読み込む
+    func loadCategoryWithCategoryId(categoryId: NSNumber) -> ICategory {
+        
+        let category = ICategory()
+        
+        /* Get ManagedObjectContext from AppDelegate */
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        /* Set search conditions */
+        let fetchRequest = NSFetchRequest(entityName: "Category")
+        let predicate = NSPredicate(format: "%K = %@", "categoryId",categoryId)
+        fetchRequest.predicate = predicate
+        
+        /* Get result array from ManagedObjectContext */
+        do{
+            let fetchResults = try managedContext.executeFetchRequest(fetchRequest)
+            
+            if let results: Array = fetchResults {
+                for result in results {
+                    category.categoryId = result.valueForKey("categoryId") as? NSNumber
+                    category.categoryName = result.valueForKey("categoryName") as? String
+                    category.categoryTemplate = result.valueForKey("categoryTemplate") as? String
+                }
+            }
+            return category
         }catch let error as NSError{
             fatalError("\(error)")
         }

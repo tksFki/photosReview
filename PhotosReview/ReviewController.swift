@@ -64,17 +64,18 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         let review = IReview()
         let photosReview = PhotosReviewAdaptor()
         
-        
         // レビュー情報
-//        reviewItem.setValue(reviewNo, forKey: "reviewNo")
         review.reviewName = self.reviewName.text
         review.categoryId = self.categoryID
         review.estimation = NSNumber(int: Int32(self.estimation.text!)!)
         if let photoData = originalImage {
             review.photoData = UIImagePNGRepresentation(photoData)
+            review.photoOrientation = photoData.imageOrientation.hashValue
+            review.photoWidth = photoData.size.width
+            review.photoHeight = photoData.size.height
         }
         review.comment = self.comments.text
-        
+
         photosReview.entryReview(review)
         
 //        if let image = originalImage {
@@ -121,11 +122,11 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         self.reviewName.returnKeyType = UIReturnKeyType.Done
         self.estimation.returnKeyType = UIReturnKeyType.Done
         
-        //ボタンを追加するためのViewを生成します。
+        // キーボードの上に表示するバーのインスタンス作成（ボタンを追加するためのViewを生成します。）
         let myKeyboard = UIView(frame: CGRectMake(0, 0, 320, 40))
         myKeyboard.backgroundColor = UIColor.whiteColor()
         
-        //完了ボタンの生成
+        // キーボードに完了ボタンを生成
         let myButton = UIButton(frame: CGRectMake(260, 5, 55, 30))
         myButton.setTitle("完了", forState: .Normal)
         myButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
@@ -133,7 +134,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         myButton.layer.cornerRadius = 2.0
         myButton.addTarget(self, action: #selector(ReviewController.onClickMyButton(_:)), forControlEvents: .TouchUpInside)
         
-        //Viewに完了ボタンを追加する。
+        // キーボードViewに完了ボタンを追加する。
         myKeyboard.addSubview(myButton)
         
         //ViewをFieldに設定する
@@ -201,22 +202,32 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         // 元のサイズのままフォトライブラリに書き込み
         originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        print("imagePicker前 \(originalImage!.imageOrientation.hashValue)")
         let image:UIImage = originalImage!
         if(picker.sourceType == UIImagePickerControllerSourceType.Camera){
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
+        print(originalImage?.size.width)
+        print(originalImage?.size.height)
         
         photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
         
-        let width:CGFloat = 150  // リサイズ後幅の倍率
-        let height:CGFloat = 180  // リサイズ後高さの倍率
-        let sz:CGSize = CGSizeMake(width,height)
+        let width:CGFloat = 150  // コンテキスト幅の倍率
+        let height:CGFloat = 180  // コンテキスト高さの倍率
+        let contextSize:CGSize = CGSizeMake(width,height)
         
-        // 画面に表示するサイズにリサイズする。
-        UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
-        image.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
+        // コンテキストに描画し画面に表示する。
+        UIGraphicsBeginImageContextWithOptions(contextSize, false, 0.0)
+        let contextImg:CGContextRef? = UIGraphicsGetCurrentContext()
+        CGContextSaveGState(contextImg)
+        
+        image.drawInRect(CGRectMake(0, 0, contextSize.width, contextSize.height))
         let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
         self.selectedPhoto.image = resizeImage
+        print("imagePicker前 \(resizeImage.imageOrientation.hashValue)")
+        
+        UIGraphicsEndImageContext()
+        CGContextRestoreGState(contextImg)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }

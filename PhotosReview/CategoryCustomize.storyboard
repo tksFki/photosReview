@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="200.5" y="309.5"/>
         </scene>
-        <!--Category Customize Controller-->
+        <!--カテゴリカスタマイズ-->
         <scene sceneID="frS-m7-uHE">
             <objects>
-                <viewController id="VZT-3q-UQ7" customClass="CategoryCustomizeController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="カテゴリカスタマイズ" id="VZT-3q-UQ7" customClass="CategoryCustomizeController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jzj-3Q-uaL"/>
                         <viewControllerLayoutGuide type="bottom" id="chw-Yy-ZP7"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
     <entity name="Category" representedClassName=".Category" syncable="YES">
         <attribute name="categoryId" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="categoryName" attributeType="String" maxValueString="16" syncable="YES"/>
@@ -19,6 +19,7 @@
         <attribute name="photoLatitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoLongitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoOrientation" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="photoPass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoWidth" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="reviewName" attributeType="String" maxValueString="16" syncable="YES"/>
@@ -33,6 +34,6 @@
     </entity>
     <elements>
         <element name="Category" positionX="153" positionY="-162" width="128" height="135"/>
-        <element name="Review" positionX="-45" positionY="-90" width="128" height="360"/>
+        <element name="Review" positionX="-45" positionY="-90" width="128" height="375"/>
     </elements>
 </model>
