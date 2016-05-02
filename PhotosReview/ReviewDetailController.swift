@@ -35,7 +35,26 @@ class ReviewDetailController: UIViewController {
             
             let width:CGFloat = 320 // コンテキスト幅の倍率
             let height:CGFloat = 180  // コンテキスト高さの倍率
-            let contextSize:CGSize = CGSizeMake(width,height)
+            let resizeWidth: CGFloat
+            let resizeHeight: CGFloat
+            
+            let isCompared = review.photoWidth!.compare(review.photoHeight!)
+            var resizePer: CGFloat = 0.0
+            switch isCompared {
+            case .OrderedAscending:
+                resizePer = CGFloat(review.photoHeight!.floatValue) / height
+                resizeWidth = floor(CGFloat(review.photoWidth!.floatValue) / resizePer)
+                resizeHeight = height
+            case .OrderedDescending:
+                resizePer = CGFloat(review.photoWidth!.floatValue) / width
+                resizeWidth = width
+                resizeHeight = floor(CGFloat(review.photoHeight!.floatValue) / resizePer)
+            default:
+                resizeWidth = width
+                resizeHeight = height
+            }
+            let contextSize:CGSize = CGSizeMake(resizeWidth,resizeHeight)
+            
             // コンテキスト描画
             UIGraphicsBeginImageContext(contextSize)
             let contextImg:CGContextRef? = UIGraphicsGetCurrentContext()

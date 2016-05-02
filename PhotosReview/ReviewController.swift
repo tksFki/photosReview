@@ -212,8 +212,8 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
         
-        let width:CGFloat = 150  // コンテキスト幅の倍率
-        let height:CGFloat = 180  // コンテキスト高さの倍率
+        let width:CGFloat = 150  // コンテキスト幅
+        let height:CGFloat = 180  // コンテキスト高さ
         let contextSize:CGSize = CGSizeMake(width,height)
         
         // コンテキストに描画し画面に表示する。
