@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73341B551CD7234100C004D6 /* ReviewDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73341B541CD7234100C004D6 /* ReviewDetail.storyboard */; };
 		734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB31CC684CE005E6135 /* ICategory.swift */; };
 		734E7DB81CC7D53F005E6135 /* PhotosReviewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB71CC7D53F005E6135 /* PhotosReviewAdaptor.swift */; };
 		734E7DBA1CC7D68D005E6135 /* IReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB91CC7D68D005E6135 /* IReview.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73341B541CD7234100C004D6 /* ReviewDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReviewDetail.storyboard; sourceTree = "<group>"; };
 		734E7DB31CC684CE005E6135 /* ICategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICategory.swift; sourceTree = "<group>"; };
 		734E7DB71CC7D53F005E6135 /* PhotosReviewAdaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosReviewAdaptor.swift; sourceTree = "<group>"; };
 		734E7DB91CC7D68D005E6135 /* IReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IReview.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				73C64E2E1CC3CDD60001DC24 /* Main.storyboard */,
+				73341B541CD7234100C004D6 /* ReviewDetail.storyboard */,
 				73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */,
 				734E7DC31CC7F43B005E6135 /* CategoryCustomize.storyboard */,
 			);
@@ -249,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73341B551CD7234100C004D6 /* ReviewDetail.storyboard in Resources */,
 				734E7DC41CC7F43B005E6135 /* CategoryCustomize.storyboard in Resources */,
 				73C64E301CC3CDD60001DC24 /* Main.storyboard in Resources */,
 				73E8E60F1CAFDAFD004ECE1B /* LaunchScreen.storyboard in Resources */,

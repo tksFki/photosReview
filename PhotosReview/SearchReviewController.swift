@@ -27,6 +27,9 @@ class SearchReviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let photosReview = PhotosReviewAdaptor()
+        reviews = photosReview.loadReview()
+        self.searchReviewCollectionView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,9 +39,6 @@ class SearchReviewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let photosReview = PhotosReviewAdaptor()
-        reviews = photosReview.loadReview()
-        self.searchReviewCollectionView.reloadData()
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{

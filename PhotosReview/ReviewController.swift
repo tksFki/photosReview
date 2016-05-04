@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
-class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate {
+class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate,UIGestureRecognizerDelegate {
     
     /*************** グローバル変数 ***************/
     
@@ -20,6 +21,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     var categoryID: NSNumber = 0
     var originalImage:UIImage?
     var photoMetaData:NSMutableDictionary?
+    var innerframe:CGRect?
     
     /*************** モーダルカテゴリビュー ***************/
     var modalTextStatic:String?
@@ -29,34 +31,6 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     @IBOutlet weak var estimation: UITextField! // 評価
     @IBOutlet weak var CategoryName: CategoryButton! // カテゴリ名
     @IBOutlet weak var selectedPhoto: UIImageView! // 写真
-    @IBAction func selectPhoto(sender: UIButton) { // 写真タップ時の動作
-        
-        // 写真の取り込み先を選択する。（フォトライブラリ or カメラ）
-        let alert:UIAlertController = UIAlertController(title:"写真を選択してください",
-                                                        message: "Library or Camera",
-                                                        preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // キャンセル
-        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
-        }
-        // フォトライブラリを選択
-        let fromPhotoLibraryAction:UIAlertAction = UIAlertAction(title: "フォトライブラリから選ぶ", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
-            self.selectedPhotoLibrary()
-        }
-        // カメラを選択
-        let fromPictureAction:UIAlertAction = UIAlertAction(title: "カメラで写真を撮る", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
-            self.selectedCamera()
-        }
-        
-        // アクションを追加
-        alert.addAction(cancelAction)
-        alert.addAction(fromPhotoLibraryAction)
-        alert.addAction(fromPictureAction)
-        
-        // 選択ウィンドウを表示する。
-        presentViewController(alert, animated: true, completion: nil)
-        
-    }
     
     // 保存する
     @IBAction func saveReview(sender: UIButton) {
@@ -103,6 +77,12 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // シングルタップジェスチャーを写真窓（selectedPhoto）に登録
+        let singleFingerTap = UITapGestureRecognizer(target: self, action: #selector(ReviewController.tappedSingle(_:)))
+        singleFingerTap.delegate = self
+        self.selectedPhoto.addGestureRecognizer(singleFingerTap)
+        self.selectedPhoto.userInteractionEnabled = true
         
         // 写真窓の設定
         selectedPhoto.layer.borderColor = UIColor.redColor().CGColor
@@ -202,34 +182,88 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         // 元のサイズのままフォトライブラリに書き込み
         originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        print("imagePicker前 \(originalImage!.imageOrientation.hashValue)")
+        
         let image:UIImage = originalImage!
         if(picker.sourceType == UIImagePickerControllerSourceType.Camera){
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
-        print(originalImage?.size.width)
-        print(originalImage?.size.height)
         
-        photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
+//        photoMetaData = info[UIImagePickerControllerMediaMetadata] as? NSMutableDictionary
         
-        let width:CGFloat = 150  // コンテキスト幅
-        let height:CGFloat = 180  // コンテキスト高さ
-        let contextSize:CGSize = CGSizeMake(width,height)
+        let contextWidth: CGFloat // コンテキスト幅
+        let contextHeight: CGFloat // コンテキスト高さ
+        // コンテキスト（描画領域）のサイズを設定
+        innerframe = AVMakeRectWithAspectRatioInsideRect(originalImage!.size, selectedPhoto.bounds)
+        contextWidth = innerframe!.size.width
+        contextHeight = innerframe!.size.height
+        let contextSize:CGSize = CGSizeMake(contextWidth,contextHeight)
         
-        // コンテキストに描画し画面に表示する。
+        // コンテキストのインスタンスを作成
         UIGraphicsBeginImageContextWithOptions(contextSize, false, 0.0)
         let contextImg:CGContextRef? = UIGraphicsGetCurrentContext()
         CGContextSaveGState(contextImg)
         
+        // 画像データをコンテキストに描画する
         image.drawInRect(CGRectMake(0, 0, contextSize.width, contextSize.height))
         let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
         self.selectedPhoto.image = resizeImage
-        print("imagePicker前 \(resizeImage.imageOrientation.hashValue)")
         
+        // コンテキストインスタンスの解放
         UIGraphicsEndImageContext()
         CGContextRestoreGState(contextImg)
         
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func tappedSingle(sender: UITapGestureRecognizer!) {
+        // シングルタップしたときの処理
+        let touchPoint:CGPoint = sender.locationInView(sender.view)
+        if innerframe == nil {
+            
+            let imageViewPoint = CGPoint(x: self.selectedPhoto.frame.origin.x, y: self.selectedPhoto.frame.origin.y)
+            let imageViewRect = CGRect(x: imageViewPoint.x, y: imageViewPoint.y, width: self.selectedPhoto.frame.width, height: self.selectedPhoto.frame.height)
+            // タッチポイントが画像ビュー上の時
+            if (CGRectContainsPoint(imageViewRect, touchPoint)){
+                selectLibraryOrCamera()
+            }
+        }else
+        {
+            let imageRectOrigin = CGPoint(x: innerframe!.origin.x, y: innerframe!.origin.y)
+            let imageRect = CGRect(x: imageRectOrigin.x, y: imageRectOrigin.y, width: innerframe!.size.width, height: innerframe!.size.height)
+            // タッチポイントがレビュー画像上の時
+            if (CGRectContainsPoint(imageRect, touchPoint)){
+                selectLibraryOrCamera()
+            }
+        }
+    }
+    
+    func selectLibraryOrCamera(){
+        
+        // 写真の取り込み先を選択する。（フォトライブラリ or カメラ）
+        let alert:UIAlertController = UIAlertController(title:"写真を選択してください",
+                                                        message: "Library or Camera",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // キャンセル
+        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
+        }
+        // フォトライブラリを選択
+        let fromPhotoLibraryAction:UIAlertAction = UIAlertAction(title: "フォトライブラリから選ぶ", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
+            self.selectedPhotoLibrary()
+        }
+        // カメラを選択
+        let fromPictureAction:UIAlertAction = UIAlertAction(title: "カメラで写真を撮る", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
+            self.selectedCamera()
+        }
+        
+        // アクションを追加
+        alert.addAction(cancelAction)
+        alert.addAction(fromPhotoLibraryAction)
+        alert.addAction(fromPictureAction)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func backFromModalCategoryView(segue:UIStoryboardSegue){

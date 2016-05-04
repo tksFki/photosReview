@@ -7,21 +7,37 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ReviewDetailController: UIViewController {
+class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     
     var reviewNo:NSNumber = 0
     var review = IReview()
     var category = ICategory()
     let photosReview = PhotosReviewAdaptor()
+    var innerframe:CGRect?
     
+    
+    @IBOutlet weak var reviewDetailScrollView: UIScrollView!
+    @IBOutlet weak var reviewDetailView: UIView!
     @IBOutlet weak var reviewTitle: ReviewLabel!
     @IBOutlet weak var reviewDetailPhotoImage: UIImageView!
     @IBOutlet weak var categoryName: ReviewLabel!
     @IBOutlet weak var estimation: ReviewLabel!
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // スクロールビューのcontextSizeをビューのサイズに合わせる。
+        self.reviewDetailScrollView.contentSize = self.reviewDetailView.bounds.size
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let singleFingerTap = UITapGestureRecognizer(target: self, action: #selector(ReviewDetailController.tappedSingle(_:)))
+        singleFingerTap.delegate = self
+        self.reviewDetailPhotoImage.addGestureRecognizer(singleFingerTap)
+        self.reviewDetailPhotoImage.userInteractionEnabled = true
         
         reviewNo = self.selectedReviewNo! as! NSNumber
         review = photosReview.loadReviewWithReviewNo(reviewNo)
@@ -33,27 +49,15 @@ class ReviewDetailController: UIViewController {
         
         if let photoData = review.photoData {
             
-            let width:CGFloat = 320 // コンテキスト幅の倍率
-            let height:CGFloat = 180  // コンテキスト高さの倍率
-            let resizeWidth: CGFloat
-            let resizeHeight: CGFloat
+            let contextWidth: CGFloat
+            let contextHeight: CGFloat
+            let originalImageSize = CGSizeMake(CGFloat(review.photoWidth!), CGFloat(review.photoHeight!))
             
-            let isCompared = review.photoWidth!.compare(review.photoHeight!)
-            var resizePer: CGFloat = 0.0
-            switch isCompared {
-            case .OrderedAscending:
-                resizePer = CGFloat(review.photoHeight!.floatValue) / height
-                resizeWidth = floor(CGFloat(review.photoWidth!.floatValue) / resizePer)
-                resizeHeight = height
-            case .OrderedDescending:
-                resizePer = CGFloat(review.photoWidth!.floatValue) / width
-                resizeWidth = width
-                resizeHeight = floor(CGFloat(review.photoHeight!.floatValue) / resizePer)
-            default:
-                resizeWidth = width
-                resizeHeight = height
-            }
-            let contextSize:CGSize = CGSizeMake(resizeWidth,resizeHeight)
+            // リサイズ後の画像の座標取得
+            innerframe = AVMakeRectWithAspectRatioInsideRect(originalImageSize, reviewDetailPhotoImage.bounds)
+            contextWidth = innerframe!.size.width
+            contextHeight = innerframe!.size.height
+            let contextSize:CGSize = CGSizeMake(contextWidth,contextHeight)
             
             // コンテキスト描画
             UIGraphicsBeginImageContext(contextSize)
@@ -65,6 +69,14 @@ class ReviewDetailController: UIViewController {
             uiPhotoData.drawInRect(CGRectMake(0, 0, contextSize.width, contextSize.height))
             let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
             reviewDetailPhotoImage.image = resizeImage
+            
+            print("Aspect Fit originX \(innerframe?.origin.x)")
+            print("Aspect Fit originY \(innerframe?.origin.y)")
+            print("Aspect Fit width \(innerframe?.size.width)")
+            print("Aspect Fit height \(innerframe?.size.height)")
+            print("UIImageView frame X \(reviewDetailPhotoImage.frame.origin.x)")
+            print("UIImageView frame Y \(reviewDetailPhotoImage.frame.origin.y)")
+            
         }
         // Do any additional setup after loading the view.
     }
@@ -77,6 +89,17 @@ class ReviewDetailController: UIViewController {
     var selectedReviewNo: AnyObject? {
         get {
             return NSUserDefaults.standardUserDefaults().objectForKey("selectedReviewNo")
+        }
+    }
+    
+    func tappedSingle(sender: UITapGestureRecognizer!) {
+        // シングルタップしたときの処理
+        let touchPoint:CGPoint = sender.locationInView(sender.view)
+        let imageRectOrigin = CGPoint(x: innerframe!.origin.x, y: innerframe!.origin.y)
+        let imageRect = CGRect(x: imageRectOrigin.x, y: imageRectOrigin.y, width: innerframe!.size.width, height: innerframe!.size.height)
+        // タッチポイントがレビュー画像上の時
+        if (CGRectContainsPoint(imageRect, touchPoint)){
+            print("Touch OK")
         }
     }
     
