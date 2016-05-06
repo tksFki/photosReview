@@ -116,22 +116,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-ta-Cir">
-                                        <rect key="frame" x="8" y="1113" width="304" height="30"/>
-                                        <color key="backgroundColor" red="0.92117809510000004" green="0.078424601129999993" blue="0.15713864769999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="変更する">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" red="0.92117809510000004" green="0.28455858890000002" blue="0.41676393140000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="VfC-V3-oXR" kind="show" id="MOY-6H-cpQ"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaY-j5-psA" userLabel="レビュー" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="379" width="304" height="322"/>
+                                        <rect key="frame" x="8" y="379" width="304" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="322" id="lCa-31-98W"/>
+                                            <constraint firstAttribute="height" constant="300" id="lCa-31-98W"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -155,35 +144,49 @@
                                             <constraint firstAttribute="height" constant="180" id="njz-bx-EFa"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-ta-Cir">
+                                        <rect key="frame" x="8" y="1087" width="304" height="56"/>
+                                        <color key="backgroundColor" red="0.92117809510000004" green="0.078424601129999993" blue="0.15713864769999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="rRi-iW-2wX"/>
+                                        </constraints>
+                                        <state key="normal" title="変更する">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.92117809510000004" green="0.28455858890000002" blue="0.41676393140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="VfC-V3-oXR" kind="show" identifier="goToReviewEdit" id="MOY-6H-cpQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="trailing" secondItem="Vzf-Ie-AJM" secondAttribute="trailing" id="0Bq-In-WVu"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="trailing" secondItem="iLE-ta-Cir" secondAttribute="trailing" id="1fy-d7-08Y"/>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="Vzf-Ie-AJM" secondAttribute="leading" id="5PC-89-HI3"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="leading" secondItem="iLE-ta-Cir" secondAttribute="leading" id="7sX-sy-mOC"/>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="top" secondItem="eHd-i4-bf7" secondAttribute="topMargin" constant="64" id="JZB-mk-KGS"/>
-                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="jw3-eS-gLu" secondAttribute="trailing" constant="24" id="Rlh-Bs-MSw"/>
-                                    <constraint firstAttribute="trailing" secondItem="3nR-0P-Czj" secondAttribute="trailing" id="SUn-EV-Hnn"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="trailing" secondItem="QxO-NR-THb" secondAttribute="trailing" id="VMs-kl-SoA"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="QxO-NR-THb" secondAttribute="leading" id="aTK-e6-YDo"/>
-                                    <constraint firstItem="iLE-ta-Cir" firstAttribute="bottom" secondItem="eHd-i4-bf7" secondAttribute="bottomMargin" constant="-49" id="cX8-Aq-sUm"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="baseline" secondItem="4yc-Mi-v5H" secondAttribute="baseline" id="cd5-qQ-6Z1"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="top" secondItem="QxO-NR-THb" secondAttribute="bottom" constant="8" symbolic="YES" id="fi4-6N-9nr"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="centerX" secondItem="Vzf-Ie-AJM" secondAttribute="centerX" id="h7L-e1-XBp"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="top" secondItem="eHd-i4-bf7" secondAttribute="top" constant="72" id="3lF-cP-uFa"/>
+                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="jw3-eS-gLu" secondAttribute="trailing" constant="24" id="9xj-cp-dar"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="baseline" secondItem="vG8-mE-RVO" secondAttribute="baseline" id="BwN-gV-g0k"/>
+                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="centerX" secondItem="KaY-j5-psA" secondAttribute="centerX" id="EVF-DL-xiW"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="Vzf-Ie-AJM" secondAttribute="leading" id="FLI-Ig-exx"/>
+                                    <constraint firstItem="KaY-j5-psA" firstAttribute="top" secondItem="QxO-NR-THb" secondAttribute="bottom" constant="8" symbolic="YES" id="GQl-wg-IGh"/>
+                                    <constraint firstAttribute="bottom" secondItem="iLE-ta-Cir" secondAttribute="bottom" constant="57" id="Kra-p9-fjE"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="top" secondItem="jw3-eS-gLu" secondAttribute="bottom" constant="8" symbolic="YES" id="M2c-Sp-3gi"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="top" secondItem="Vzf-Ie-AJM" secondAttribute="bottom" constant="8" symbolic="YES" id="N88-9R-hzJ"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="QxO-NR-THb" secondAttribute="leading" id="NLK-dT-l8M"/>
+                                    <constraint firstAttribute="trailing" secondItem="3nR-0P-Czj" secondAttribute="trailing" id="RWz-bV-FfB"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="leading" secondItem="KaY-j5-psA" secondAttribute="leading" id="ScK-zr-bHT"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="baseline" secondItem="4yc-Mi-v5H" secondAttribute="baseline" id="SmO-zh-l9o"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="firstBaseline" secondItem="4yc-Mi-v5H" secondAttribute="firstBaseline" id="X3E-tZ-nEN"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="trailing" secondItem="Vzf-Ie-AJM" secondAttribute="trailing" id="XDZ-kE-f3I"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leadingMargin" id="Xrj-2V-Qc8"/>
+                                    <constraint firstItem="KaY-j5-psA" firstAttribute="trailing" secondItem="iLE-ta-Cir" secondAttribute="trailing" id="apd-yY-0cv"/>
+                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="4yc-Mi-v5H" secondAttribute="leading" id="e0B-te-cKh"/>
+                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="trailing" secondItem="4yc-Mi-v5H" secondAttribute="trailing" id="gYX-aW-Tkd"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="firstBaseline" secondItem="vG8-mE-RVO" secondAttribute="firstBaseline" id="h5O-pl-a4W"/>
                                     <constraint firstAttribute="height" constant="1200" id="hZP-xY-H0v"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="leading" secondItem="QxO-NR-THb" secondAttribute="leading" id="icz-bK-UPy"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="firstBaseline" secondItem="4yc-Mi-v5H" secondAttribute="firstBaseline" id="ifp-8I-v6Z"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="top" secondItem="Vzf-Ie-AJM" secondAttribute="bottom" constant="8" symbolic="YES" id="nBa-iY-gtv"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="baseline" secondItem="vG8-mE-RVO" secondAttribute="baseline" id="nPm-WG-XrV"/>
-                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="trailing" secondItem="4yc-Mi-v5H" secondAttribute="trailing" id="q1G-Cr-b4c"/>
-                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="4yc-Mi-v5H" secondAttribute="leading" id="tRf-hO-cFY"/>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leading" id="tZN-xr-Cib"/>
-                                    <constraint firstItem="4yc-Mi-v5H" firstAttribute="trailing" secondItem="KaY-j5-psA" secondAttribute="trailing" id="v2j-ZQ-Yhq"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leadingMargin" id="vmi-rp-tnr"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="firstBaseline" secondItem="vG8-mE-RVO" secondAttribute="firstBaseline" id="vxi-Xj-3RO"/>
-                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="top" secondItem="3nR-0P-Czj" secondAttribute="bottom" constant="8" symbolic="YES" id="wTD-lS-UtM"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="top" secondItem="jw3-eS-gLu" secondAttribute="bottom" constant="8" symbolic="YES" id="xiA-Mi-61G"/>
+                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="top" secondItem="3nR-0P-Czj" secondAttribute="bottom" constant="8" symbolic="YES" id="jON-WD-A2W"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="trailing" secondItem="QxO-NR-THb" secondAttribute="trailing" id="jt3-jU-AeF"/>
+                                    <constraint firstItem="KaY-j5-psA" firstAttribute="leading" secondItem="iLE-ta-Cir" secondAttribute="leading" id="mYX-Lf-0vL"/>
+                                    <constraint firstItem="4yc-Mi-v5H" firstAttribute="trailing" secondItem="KaY-j5-psA" secondAttribute="trailing" id="nZj-uf-bAQ"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leading" id="ot6-BV-OxD"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -202,6 +205,7 @@
                     <size key="freeformSize" width="320" height="1200"/>
                     <connections>
                         <outlet property="categoryName" destination="vG8-mE-RVO" id="sDz-Aa-bzS"/>
+                        <outlet property="comment" destination="KaY-j5-psA" id="rby-bd-cDa"/>
                         <outlet property="estimation" destination="4yc-Mi-v5H" id="mSO-r2-eRX"/>
                         <outlet property="reviewDetailPhotoImage" destination="Vzf-Ie-AJM" id="iFX-wc-IKJ"/>
                         <outlet property="reviewDetailScrollView" destination="TpI-BC-Mzh" id="xJJ-ez-KPk"/>
@@ -213,10 +217,10 @@
             </objects>
             <point key="canvasLocation" x="186" y="1125"/>
         </scene>
-        <!--View Controller-->
+        <!--Review Edit Controller-->
         <scene sceneID="nex-PK-oPn">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="VfC-V3-oXR" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="VfC-V3-oXR" customClass="ReviewEditController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yMt-JO-Xqr"/>
                         <viewControllerLayoutGuide type="bottom" id="8ZY-Ic-ogu"/>
@@ -323,11 +327,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j96-aV-mh5">
-                                        <rect key="frame" x="116" y="46" width="196" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlx-UL-3ca">
                                         <rect key="frame" x="116" y="84" width="160" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -338,12 +337,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GUO-rv-iAv">
-                                        <rect key="frame" x="8" y="203" width="304" height="270"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="写真" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVh-Ol-aso" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
                                         <rect key="frame" x="8" y="481" width="100" height="30"/>
                                         <color key="backgroundColor" red="0.75126201920000002" green="0.52182384150000005" blue="0.33952845450000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -362,6 +355,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GUO-rv-iAv">
+                                        <rect key="frame" x="8" y="203" width="304" height="270"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j96-aV-mh5">
+                                        <rect key="frame" x="116" y="46" width="196" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -370,6 +374,12 @@
                     </scrollView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1200"/>
+                    <connections>
+                        <outlet property="categoryName" destination="j96-aV-mh5" id="1Ch-B8-hlp"/>
+                        <outlet property="comment" destination="GUO-rv-iAv" id="5R5-im-pz6"/>
+                        <outlet property="estimation" destination="RYk-us-4hy" id="heR-sW-OwL"/>
+                        <outlet property="reviewName" destination="YZu-gX-XuW" id="iu8-SA-vgz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgy-Xl-N0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

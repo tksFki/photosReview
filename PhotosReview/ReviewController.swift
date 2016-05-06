@@ -2,7 +2,7 @@
 //  ReviewController.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/04/02.
+//  Created by TakashiFukui on 2016/04/02.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 
@@ -117,7 +117,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         // キーボードViewに完了ボタンを追加する。
         myKeyboard.addSubview(myButton)
         
-        //ViewをFieldに設定する
+        //ViewをTextFieldに設定する
         self.comments.inputAccessoryView = myKeyboard
         self.comments.delegate = self
         

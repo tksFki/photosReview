@@ -2,7 +2,7 @@
 //  ICategory.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/04/20.
+//  Created by TakashiFukui on 2016/04/20.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 

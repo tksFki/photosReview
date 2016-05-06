@@ -2,7 +2,7 @@
 //  photoReviewCell.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/04/28.
+//  Created by TakashiFukui on 2016/04/28.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 

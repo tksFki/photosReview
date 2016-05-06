@@ -2,7 +2,7 @@
 //  CategoryCustomizeController.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/04/22.
+//  Created by TakashiFukui on 2016/04/22.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  ReviewDetailController.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/05/01.
+//  Created by TakashiFukui on 2016/05/01.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     var reviewNo:NSNumber = 0
     var review = IReview()
     var category = ICategory()
+    var originalImage:UIImage?
     let photosReview = PhotosReviewAdaptor()
     var innerframe:CGRect?
     
@@ -24,6 +25,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     @IBOutlet weak var reviewDetailPhotoImage: UIImageView!
     @IBOutlet weak var categoryName: ReviewLabel!
     @IBOutlet weak var estimation: ReviewLabel!
+    @IBOutlet weak var comment: ReviewLabel!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -66,18 +68,19 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
             
             let uiPhotoDataTmp = UIImage(data: photoData)
             let uiPhotoData = UIImage(CGImage: uiPhotoDataTmp!.CGImage!, scale: 1.0, orientation: UIImageOrientation(rawValue: review.photoOrientation! .hashValue)!)
+            originalImage = uiPhotoData
             uiPhotoData.drawInRect(CGRectMake(0, 0, contextSize.width, contextSize.height))
             let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
             reviewDetailPhotoImage.image = resizeImage
             
-            print("Aspect Fit originX \(innerframe?.origin.x)")
-            print("Aspect Fit originY \(innerframe?.origin.y)")
-            print("Aspect Fit width \(innerframe?.size.width)")
-            print("Aspect Fit height \(innerframe?.size.height)")
-            print("UIImageView frame X \(reviewDetailPhotoImage.frame.origin.x)")
-            print("UIImageView frame Y \(reviewDetailPhotoImage.frame.origin.y)")
-            
+            //            print("Aspect Fit originX \(innerframe?.origin.x)")
+            //            print("Aspect Fit originY \(innerframe?.origin.y)")
+            //            print("Aspect Fit width \(innerframe?.size.width)")
+            //            print("Aspect Fit height \(innerframe?.size.height)")
+            //            print("UIImageView frame X \(reviewDetailPhotoImage.frame.origin.x)")
+            //            print("UIImageView frame Y \(reviewDetailPhotoImage.frame.origin.y)")
         }
+        comment.text = review.comment!
         // Do any additional setup after loading the view.
     }
     
@@ -103,6 +106,23 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
         }
     }
     
+    // 画面遷移時のパラメータ受け渡し
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "goToReviewEdit"{
+            let vc = segue.destinationViewController as! ReviewEditController
+            vc.paraReviewNo = review.reviewNo!
+            vc.paraReviewName = review.reviewName!
+            vc.paraEstimation = review.estimation!
+            vc.paraComment = review.comment!
+            if originalImage != nil{
+                vc.paraPhotoImage = originalImage!
+            }
+            vc.paraCategoryId = category.categoryId!
+            vc.paraCategoryName = category.categoryName!
+        }
+    }
+    
     /*
      // MARK: - Navigation
      
@@ -112,5 +132,4 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    
 }

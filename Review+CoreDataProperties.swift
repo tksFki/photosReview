@@ -2,7 +2,7 @@
 //  Review+CoreDataProperties.swift
 //  PhotosReview
 //
-//  Created by TechnoData on 2016/04/21.
+//  Created by TakashiFukui on 2016/04/21.
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
