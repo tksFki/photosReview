@@ -38,15 +38,17 @@ class PopUpPickerView: UIView {
     }
     private func initFunc() {
         let screenSize = UIScreen.mainScreen().bounds.size
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.lightGrayColor()
         
-        pickerToolbar = UIToolbar()
+        pickerToolbar = UIToolbar(frame: CGRectMake(0, screenSize.height/6, screenSize.width, 40.0))
         pickerView = UIPickerView()
         toolbarItems = []
         
         pickerToolbar.translucent = true
+        pickerToolbar.barStyle = .BlackTranslucent
+        pickerToolbar.tintColor = UIColor.whiteColor()
+        pickerToolbar.backgroundColor = UIColor.blackColor()
         pickerView.showsSelectionIndicator = true
-        pickerView.backgroundColor = UIColor.whiteColor()
         
         self.bounds = CGRectMake(0, 0, screenSize.width, 260)
         self.frame = CGRectMake(0, screenSize.height, screenSize.width, 260)
@@ -80,5 +82,9 @@ class PopUpPickerView: UIView {
             selectedRows.append(pickerView.selectedRowInComponent(i))
         }
         return selectedRows
+    }
+    
+    func setDefaultSelectRow(row:Int, inComponent componentsNumber:Int) {
+        pickerView.selectRow(row, inComponent: componentsNumber, animated: false)
     }
 }

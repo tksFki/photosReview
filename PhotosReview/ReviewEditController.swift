@@ -20,16 +20,23 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate,UITextFiel
     var paraCategoryId:NSNumber?
     var paraCategoryName:String?
     var paraEstimation:NSNumber?
+    var paraCreateDate:NSDate?
     var paraComment:String?
     var paraPhotoImage:UIImage?
     
     var categoryPickerOption = [ICategory]()
-    var pickerView: PopUpPickerView!
+    var categoryComponentsNumber:Int = 0
     var selectedCategoryId:NSNumber?
     var selectedCategoryName:String?
+    
+    var selectedCreateDate:NSDate?
+    
+    var toolBar:UIToolbar!
+    var myDatePicker: UIDatePicker!
 
     @IBOutlet weak var reviewName: UITextField!
     @IBOutlet weak var categoryName: UITextField!
+    @IBOutlet weak var createDate: UITextField!
     @IBOutlet weak var estimation: UITextField!
     @IBOutlet weak var comment: UITextView!
     
@@ -40,33 +47,50 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate,UITextFiel
         self.estimation.text = paraEstimation!.stringValue
         self.comment.text = paraComment!
         
-        // カテゴリに値をセット
-        categoryName.tag = PickerIdentifier.CategoryName.hashValue
+        let photosReview = PhotosReviewAdaptor()
+        /*** カテゴリに値をセット ***/
         self.selectedCategoryId = paraCategoryId!
         self.categoryName.text = paraCategoryName!
 
-        let photosReview = PhotosReviewAdaptor()
+        var selectedRow:Int = 0
         let categories = photosReview.loadCategory()
         for category in categories {
             // カテゴリピッカー作成
             categoryPickerOption.append(category)
+            if category.categoryName == categoryName.text{
+                selectedRow = categories.indexOf({$0 === category})!
+            }
         }
         let categoryPickerView = PopUpPickerView()
         categoryPickerView.delegate = self
         categoryPickerView.tag = PickerIdentifier.CategoryName.hashValue
         
-        if let window = UIApplication.sharedApplication().keyWindow {
-            window.addSubview(categoryPickerView)
-        } else {
-            self.view.addSubview(categoryPickerView)
-        }
+        /*** 作成日付に値をセット ***/
+        self.selectedCreateDate = paraCreateDate!
+        self.createDate.text = dateToString(paraCreateDate!)
+        // UIDatePickerの設定
+        myDatePicker = UIDatePicker()
+        myDatePicker.addTarget(self, action: #selector(self.changedDateEvent), forControlEvents: UIControlEvents.ValueChanged)
+        myDatePicker.datePickerMode = UIDatePickerMode.Date
+        createDate.inputView = myDatePicker
         
-//        let button = UIButton(type: UIButtonType.ContactAdd)
-//        button.frame = CGRectMake(50, 100, 30, 30);
-//        button.addTarget(self, action: #selector(self.showPicker), forControlEvents: UIControlEvents.TouchDown)
-//        self.view.addSubview(button)
+        // UIToolBarの設定
+        toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
+        toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        toolBar.barStyle = .BlackTranslucent
+        toolBar.tintColor = UIColor.whiteColor()
+        toolBar.backgroundColor = UIColor.blackColor()
+        
+        let toolBarBtn = UIBarButtonItem(title: "完了", style: .Plain, target: self, action: #selector(self.tappedToolBarBtn))
+        let toolBarBtnToday = UIBarButtonItem(title: "今日", style: .Plain, target: self, action: #selector(self.tappedToolBarBtnToday))
+        
+        toolBarBtn.tag = 1
+        toolBar.items = [toolBarBtn, toolBarBtnToday]
+        
+        createDate.inputAccessoryView = toolBar
         
         categoryName.inputView = categoryPickerView
+        categoryPickerView.setDefaultSelectRow(selectedRow, inComponent: categoryComponentsNumber)
         
         // Do any additional setup after loading the view.
     }
@@ -76,25 +100,6 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate,UITextFiel
         // Dispose of any resources that can be recreated.
     }
     
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        //非表示にする。
-//        if(categoryName.isFirstResponder()){
-//            categoryName.resignFirstResponder()
-//        }
-//        
-//    }
-    
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-//
-//        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-//            self.showPicker()
-//        }
-//        return false
-//    }
-//    
-//    func showPicker() {
-//        pickerView.showPicker()
-//    }
     // ピッカー列数
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         
@@ -109,7 +114,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate,UITextFiel
     }
     // ピッカーの要素数
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //ピッカーの列数
+        // ピッカーの行数
         var rowsNumber:Int = 1
         if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
             rowsNumber = categoryPickerOption.count
@@ -151,6 +156,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate,UITextFiel
         }
     }
     
+    // ピッカーで完了を押した時の挙動
     func pickerViewCancel(pickerView: UIPickerView){
         if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
             self.categoryName.resignFirstResponder()
@@ -158,17 +164,37 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate,UITextFiel
             
         }
     }
+
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // 「完了」を押すと閉じる
+    func tappedToolBarBtn(sender: UIBarButtonItem) {
+        createDate.text = self.dateToString(selectedCreateDate!)
+        createDate.resignFirstResponder()
     }
-    */
-
+    // 「今日」を押すと今日の日付をセットする
+    func tappedToolBarBtnToday(sender: UIBarButtonItem) {
+        myDatePicker.date = NSDate()
+        changeLabelDate(NSDate())
+    }
+    func changedDateEvent(sender:AnyObject?){
+//        let dateSelecter: UIDatePicker = sender as! UIDatePicker
+        self.changeLabelDate(myDatePicker.date)
+    }
+    func changeLabelDate(date:NSDate) {
+        selectedCreateDate = date
+    }
+    func dateToString(date:NSDate) ->String {
+        let calender: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let comps: NSDateComponents = calender.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate:date)
+        
+        let date_formatter: NSDateFormatter = NSDateFormatter()
+        var weekdays: Array  = ["日", "月", "火", "水", "木", "金", "土"]
+        
+        date_formatter.locale     = NSLocale(localeIdentifier: "ja")
+        date_formatter.dateFormat = "yyyy/MM/dd HH:mm（\(weekdays[comps.weekday-1])） "
+        
+        return date_formatter.stringFromDate(date)
+    }
+    
 }

@@ -114,6 +114,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
             vc.paraReviewNo = review.reviewNo!
             vc.paraReviewName = review.reviewName!
             vc.paraEstimation = review.estimation!
+            vc.paraCreateDate = review.createDate!
             vc.paraComment = review.comment!
             if originalImage != nil{
                 vc.paraPhotoImage = originalImage!
