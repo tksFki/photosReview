@@ -83,6 +83,43 @@ class PhotosReviewAdaptor {
         }
         return NSNumber.init(integer: nextReviewNo)
     }
+    // カテゴリ更新
+    func updateReview(review: IReview) {
+        
+        // エンティティ作成
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let reviewEntity =  NSEntityDescription.entityForName("Review",
+                                                                inManagedObjectContext:managedContext)
+        
+        /* Set search conditions */
+        let fetchRequest = NSFetchRequest(entityName: "Review")
+        fetchRequest.entity = reviewEntity
+        let predicate = NSPredicate(format: "%K = %@", "reviewNo", review.reviewNo!)
+        fetchRequest.predicate = predicate
+        do {
+            let fetchResults = try managedContext.executeFetchRequest(fetchRequest)
+            if let results: Array = fetchResults {
+                for result in results {
+                    let model = result as! Review
+                    model.reviewName = review.reviewName!
+                    model.categoryId = review.categoryId!
+                    model.estimation = review.estimation!
+                    model.photoData = review.photoData!
+                    model.comment = review.comment!
+                    model.photoOrientation = review.photoOrientation!
+                    model.photoWidth = review.photoWidth!
+                    model.photoHeight = review.photoHeight!
+                    model.updateDate = NSDate()
+                }
+            }
+        } catch let error as NSError {
+            fatalError("\(error)")
+        }
+        // 作成したオブジェクトを保存
+        appDelegate.saveContext()
+    }
     
 
     // レビューを読み込む

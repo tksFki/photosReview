@@ -103,32 +103,30 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         self.estimation.returnKeyType = UIReturnKeyType.Done
         
         // キーボードの上に表示するバーのインスタンス作成（ボタンを追加するためのViewを生成します。）
-        let myKeyboard = UIView(frame: CGRectMake(0, 0, 320, 40))
-        myKeyboard.backgroundColor = UIColor.whiteColor()
+        let keyBar = UIView(frame: CGRectMake(0, 0, 320, 40))
+        keyBar.backgroundColor = UIColor.whiteColor()
         
         // キーボードに完了ボタンを生成
-        let myButton = UIButton(frame: CGRectMake(260, 5, 55, 30))
-        myButton.setTitle("完了", forState: .Normal)
-        myButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        myButton.backgroundColor = UIColor.whiteColor()
-        myButton.layer.cornerRadius = 2.0
-        myButton.addTarget(self, action: #selector(ReviewController.onClickMyButton(_:)), forControlEvents: .TouchUpInside)
+        let keyButton = UIButton(frame: CGRectMake(260, 5, 55, 30))
+        keyButton.setTitle("完了", forState: .Normal)
+        keyButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        keyButton.backgroundColor = UIColor.whiteColor()
+        keyButton.layer.cornerRadius = 2.0
+        keyButton.addTarget(self, action: #selector(ReviewController.onClickMyButton(_:)), forControlEvents: .TouchUpInside)
         
         // キーボードViewに完了ボタンを追加する。
-        myKeyboard.addSubview(myButton)
+        keyBar.addSubview(keyButton)
         
         //ViewをTextFieldに設定する
-        self.comments.inputAccessoryView = myKeyboard
+        self.comments.inputAccessoryView = keyBar
         self.comments.delegate = self
         
         //myTextFieldを追加する
-        self.view.addSubview(comments)
+        //self.view.addSubview(comments)
     }
     
     // キーボードをリターンで閉じた時の動作
     func textFieldShouldReturn(textField: UITextField) -> Bool{
-        
-        // reviewName.text = textField.text
         
         // キーボードを閉じる
         textField.resignFirstResponder()
@@ -220,7 +218,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         let touchPoint:CGPoint = sender.locationInView(sender.view)
         if innerframe == nil {
             
-            let imageViewPoint = CGPoint(x: self.selectedPhoto.frame.origin.x, y: self.selectedPhoto.frame.origin.y)
+            let imageViewPoint = CGPoint(x: self.selectedPhoto.bounds.origin.x, y: self.selectedPhoto.bounds.origin.y)
             let imageViewRect = CGRect(x: imageViewPoint.x, y: imageViewPoint.y, width: self.selectedPhoto.frame.width, height: self.selectedPhoto.frame.height)
             // タッチポイントが画像ビュー上の時
             if (CGRectContainsPoint(imageViewRect, touchPoint)){
