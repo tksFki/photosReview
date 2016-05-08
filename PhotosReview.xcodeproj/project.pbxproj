@@ -7,16 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7302D4181CDDCCF400F818E6 /* SearchReviewConditions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7302D4171CDDCCF400F818E6 /* SearchReviewConditions.storyboard */; };
+		7302D41A1CDED0A400F818E6 /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302D4191CDED0A400F818E6 /* DatePickerTextField.swift */; };
+		7302D41D1CDEDBC400F818E6 /* StingToDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302D41C1CDEDBC400F818E6 /* StingToDate.swift */; };
+		7302D4221CDEDE6F00F818E6 /* DateToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302D4211CDEDE6F00F818E6 /* DateToString.swift */; };
+		7302D4241CDEFF3900F818E6 /* ISearchConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302D4231CDEFF3900F818E6 /* ISearchConditions.swift */; };
 		73341B551CD7234100C004D6 /* ReviewDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73341B541CD7234100C004D6 /* ReviewDetail.storyboard */; };
 		734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB31CC684CE005E6135 /* ICategory.swift */; };
 		734E7DB81CC7D53F005E6135 /* PhotosReviewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB71CC7D53F005E6135 /* PhotosReviewAdaptor.swift */; };
 		734E7DBA1CC7D68D005E6135 /* IReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB91CC7D68D005E6135 /* IReview.swift */; };
 		734E7DC21CC7DD1C005E6135 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DC01CC7DD1C005E6135 /* Category+CoreDataProperties.swift */; };
 		734E7DC41CC7F43B005E6135 /* CategoryCustomize.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734E7DC31CC7F43B005E6135 /* CategoryCustomize.storyboard */; };
+		736A96001CDC9D0200127977 /* SearchReviewConditionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736A95FF1CDC9D0200127977 /* SearchReviewConditionsController.swift */; };
 		73C5A3B81CB041A200049F33 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B21CB041A200049F33 /* Category.swift */; };
 		73C5A3BB1CB041A200049F33 /* Review+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */; };
 		73C5A3BC1CB041A200049F33 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5A3B61CB041A200049F33 /* Review.swift */; };
-		73C64E251CC343A10001DC24 /* ModalCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */; };
+		73C64E251CC343A10001DC24 /* ModalCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E241CC343A10001DC24 /* ModalCategoryController.swift */; };
 		73C64E271CC351AE0001DC24 /* CategorySelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */; };
 		73C64E291CC38F5F0001DC24 /* CategoryEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E281CC38F5F0001DC24 /* CategoryEditController.swift */; };
 		73C64E2D1CC3C0610001DC24 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */; };
@@ -36,16 +42,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7302D4171CDDCCF400F818E6 /* SearchReviewConditions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchReviewConditions.storyboard; sourceTree = "<group>"; };
+		7302D4191CDED0A400F818E6 /* DatePickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
+		7302D41C1CDEDBC400F818E6 /* StingToDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingToDate.swift; sourceTree = "<group>"; };
+		7302D4211CDEDE6F00F818E6 /* DateToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateToString.swift; sourceTree = "<group>"; };
+		7302D4231CDEFF3900F818E6 /* ISearchConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISearchConditions.swift; sourceTree = "<group>"; };
 		73341B541CD7234100C004D6 /* ReviewDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReviewDetail.storyboard; sourceTree = "<group>"; };
 		734E7DB31CC684CE005E6135 /* ICategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICategory.swift; sourceTree = "<group>"; };
 		734E7DB71CC7D53F005E6135 /* PhotosReviewAdaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosReviewAdaptor.swift; sourceTree = "<group>"; };
 		734E7DB91CC7D68D005E6135 /* IReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IReview.swift; sourceTree = "<group>"; };
 		734E7DC01CC7DD1C005E6135 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "../Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		734E7DC31CC7F43B005E6135 /* CategoryCustomize.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CategoryCustomize.storyboard; sourceTree = "<group>"; };
+		736A95FF1CDC9D0200127977 /* SearchReviewConditionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReviewConditionsController.swift; sourceTree = "<group>"; };
 		73C5A3B21CB041A200049F33 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
 		73C5A3B51CB041A200049F33 /* Review+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Review+CoreDataProperties.swift"; path = "../Review+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		73C5A3B61CB041A200049F33 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Review.swift; path = ../Review.swift; sourceTree = "<group>"; };
-		73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCategoryViewController.swift; sourceTree = "<group>"; };
+		73C64E241CC343A10001DC24 /* ModalCategoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCategoryController.swift; sourceTree = "<group>"; };
 		73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySelectButton.swift; sourceTree = "<group>"; };
 		73C64E281CC38F5F0001DC24 /* CategoryEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryEditController.swift; sourceTree = "<group>"; };
 		73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
@@ -77,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7302D41B1CDEDB9100F818E6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7302D41C1CDEDBC400F818E6 /* StingToDate.swift */,
+				7302D4211CDEDE6F00F818E6 /* DateToString.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		734E7DB21CC684A2005E6135 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +111,7 @@
 			children = (
 				734E7DB31CC684CE005E6135 /* ICategory.swift */,
 				734E7DB91CC7D68D005E6135 /* IReview.swift */,
+				7302D4231CDEFF3900F818E6 /* ISearchConditions.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -106,10 +128,12 @@
 		73C5A3A91CB0155000049F33 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				73E972BF1CDB0B4C00E5F63F /* PopUpPickerView.swift */,
 				73C64E2E1CC3CDD60001DC24 /* Main.storyboard */,
 				73341B541CD7234100C004D6 /* ReviewDetail.storyboard */,
-				73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */,
 				734E7DC31CC7F43B005E6135 /* CategoryCustomize.storyboard */,
+				7302D4171CDDCCF400F818E6 /* SearchReviewConditions.storyboard */,
+				73E8E60D1CAFDAFD004ECE1B /* LaunchScreen.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -118,10 +142,11 @@
 			isa = PBXGroup;
 			children = (
 				73E8E6181CAFDC7D004ECE1B /* ReviewController.swift */,
-				73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */,
-				73C64E241CC343A10001DC24 /* ModalCategoryViewController.swift */,
+				73C64E241CC343A10001DC24 /* ModalCategoryController.swift */,
 				73C64E281CC38F5F0001DC24 /* CategoryEditController.swift */,
 				73FA87941CC92F5A00701F05 /* CategoryCustomizeController.swift */,
+				73E8E61A1CAFDCDE004ECE1B /* SearchReviewController.swift */,
+				736A95FF1CDC9D0200127977 /* SearchReviewConditionsController.swift */,
 				73E58D971CD5E7CC00D41ECF /* ReviewDetailController.swift */,
 				73EB00DF1CD9F19E002D0871 /* ReviewEditController.swift */,
 			);
@@ -143,7 +168,7 @@
 				73EE32171CD11F8F00A4B8A0 /* photoReviewCell.swift */,
 				73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */,
 				73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */,
-				73E972BF1CDB0B4C00E5F63F /* PopUpPickerView.swift */,
+				7302D4191CDED0A400F818E6 /* DatePickerTextField.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -186,6 +211,7 @@
 		73E8E6001CAFDAFD004ECE1B /* PhotosReview */ = {
 			isa = PBXGroup;
 			children = (
+				7302D41B1CDEDB9100F818E6 /* Common */,
 				73E8E6011CAFDAFD004ECE1B /* AppDelegate.swift */,
 				734E7DB21CC684A2005E6135 /* Interface */,
 				73C5A3AE1CB03EB400049F33 /* Entity */,
@@ -260,6 +286,7 @@
 			files = (
 				73341B551CD7234100C004D6 /* ReviewDetail.storyboard in Resources */,
 				734E7DC41CC7F43B005E6135 /* CategoryCustomize.storyboard in Resources */,
+				7302D4181CDDCCF400F818E6 /* SearchReviewConditions.storyboard in Resources */,
 				73C64E301CC3CDD60001DC24 /* Main.storyboard in Resources */,
 				73E8E60F1CAFDAFD004ECE1B /* LaunchScreen.storyboard in Resources */,
 				73E8E60C1CAFDAFD004ECE1B /* Assets.xcassets in Resources */,
@@ -274,11 +301,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E972C01CDB0B4C00E5F63F /* PopUpPickerView.swift in Sources */,
-				73C64E251CC343A10001DC24 /* ModalCategoryViewController.swift in Sources */,
+				73C64E251CC343A10001DC24 /* ModalCategoryController.swift in Sources */,
 				73EB00E01CD9F19E002D0871 /* ReviewEditController.swift in Sources */,
+				7302D4241CDEFF3900F818E6 /* ISearchConditions.swift in Sources */,
 				734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */,
 				734E7DBA1CC7D68D005E6135 /* IReview.swift in Sources */,
 				73FA87951CC92F5A00701F05 /* CategoryCustomizeController.swift in Sources */,
+				7302D4221CDEDE6F00F818E6 /* DateToString.swift in Sources */,
 				73E58D981CD5E7CC00D41ECF /* ReviewDetailController.swift in Sources */,
 				73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */,
 				73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */,
@@ -291,8 +320,11 @@
 				73C64E2D1CC3C0610001DC24 /* CategoryButton.swift in Sources */,
 				73E8E6021CAFDAFD004ECE1B /* AppDelegate.swift in Sources */,
 				73C64E271CC351AE0001DC24 /* CategorySelectButton.swift in Sources */,
+				7302D41D1CDEDBC400F818E6 /* StingToDate.swift in Sources */,
 				73E8E61B1CAFDCDE004ECE1B /* SearchReviewController.swift in Sources */,
+				7302D41A1CDED0A400F818E6 /* DatePickerTextField.swift in Sources */,
 				734E7DB81CC7D53F005E6135 /* PhotosReviewAdaptor.swift in Sources */,
+				736A96001CDC9D0200127977 /* SearchReviewConditionsController.swift in Sources */,
 				73C5A3B81CB041A200049F33 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

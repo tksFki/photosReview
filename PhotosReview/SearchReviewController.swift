@@ -10,6 +10,8 @@ import UIKit
 
 class SearchReviewController: UIViewController {
     
+    var conditions = ISearchConditions()
+    
     var reviews:[IReview] = [IReview]()
     var width:CGFloat = 0.0
     var height:CGFloat = 0.0
@@ -23,13 +25,55 @@ class SearchReviewController: UIViewController {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
+    var searchedReviewName: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("searchedReviewName")
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "searchedReviewName")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var isContainsReviewComment: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("isContainsReviewComment")
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "isContainsReviewComment")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var searchedCategoryId: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("searchedCategoryId")
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "searchedCategoryId")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var searchedCreateDateFrom: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("searchedCreateDateFrom")
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "searchedCreateDateFrom")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    var searchedCreateDateTo: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("searchedCreateDateTo")
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "searchedCreateDateTo")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let photosReview = PhotosReviewAdaptor()
-        reviews = photosReview.loadReview()
-        self.searchReviewCollectionView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +83,25 @@ class SearchReviewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        // 検索条件セット
+        if let str = self.searchedReviewName{
+            conditions.searchedReviewName = str as? String
+        }
+        if let isF = self.isContainsReviewComment{
+            conditions.isContainsReviewComment = isF as! Bool
+        }
+        if let str = self.searchedCategoryId{
+            conditions.searchedCategoryId = str as? NSNumber
+        }
+        if let str = self.searchedCreateDateFrom{
+            conditions.searchedCreateDateFrom = str as? NSDate
+        }
+        if let str = self.searchedCreateDateTo{
+            conditions.searchedCreateDateTo = str as? NSDate
+        }
+        let photosReview = PhotosReviewAdaptor()
+        reviews = photosReview.loadReviewWithSearchConditions(conditions)
+        self.searchReviewCollectionView.reloadData()
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
@@ -46,7 +109,7 @@ class SearchReviewController: UIViewController {
         let reviewCell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ReviewCell", forIndexPath: indexPath)
         
         // Tag番号を使ってbuttonのインスタンス生成
-        let reviewImage = reviewCell.contentView.viewWithTag(1) as! photoReviewCell
+        let reviewImage = reviewCell.contentView.viewWithTag(1) as! PhotoReviewCell
         
         if reviews.count > indexPath.row {
             if let binPhotoData = reviews[indexPath.row].photoData{

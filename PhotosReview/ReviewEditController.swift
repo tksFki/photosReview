@@ -9,13 +9,10 @@
 import UIKit
 import AVFoundation
 
-enum PickerIdentifier {
-    case CategoryName
-    case CreateDate
-}
+
 
 class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
-
+    
     var paraReviewNo:NSNumber?
     var paraReviewName:String?
     var paraCategoryId:NSNumber?
@@ -36,10 +33,13 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
     
     var originalImage:UIImage?
     var innerframe:CGRect?
-
+    
+    var dts = DateToString()
+    var std = StringToDate()
+    
     @IBOutlet weak var reviewName: UITextField!
     @IBOutlet weak var categoryName: UITextField!
-    @IBOutlet weak var createDate: UITextField!
+    @IBOutlet weak var createDate: DatePickerTextField!
     @IBOutlet weak var estimation: UITextField!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var reviewEditScrollView: UIScrollView!
@@ -62,7 +62,8 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
             review.photoWidth = photoData.size.width
             review.photoHeight = photoData.size.height
         }
-        review.comment = self.comment.text
+        review.createDate = std.stringToDateRemovedWeekday(self.createDate.text!)
+        review.comment = self.comment.text!
         
         photosReview.updateReview(review)
         
@@ -121,7 +122,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         self.selectedCategoryId = paraCategoryId!
         self.selectedCategoryName = paraCategoryName!
         self.categoryName.text = paraCategoryName!
-
+        
         var selectedRow:Int = 0
         let categories = photosReview.loadCategory()
         for category in categories {
@@ -135,32 +136,12 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         categoryPickerView.delegate = self
         categoryPickerView.tag = PickerIdentifier.CategoryName.hashValue
         
-        /*** 作成日付に値をセット ***/
-        self.selectedCreateDate = paraCreateDate!
-        self.createDate.text = dateToString(paraCreateDate!)
-        // UIDatePickerの設定
-        myDatePicker = UIDatePicker()
-        myDatePicker.addTarget(self, action: #selector(self.changedDateEvent), forControlEvents: UIControlEvents.ValueChanged)
-        myDatePicker.datePickerMode = UIDatePickerMode.Date
-        createDate.inputView = myDatePicker
-        
-        // UIToolBarの設定
-        toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
-        toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
-        toolBar.barStyle = .BlackTranslucent
-        toolBar.tintColor = UIColor.whiteColor()
-        toolBar.backgroundColor = UIColor.blackColor()
-        
-        let toolBarBtn = UIBarButtonItem(title: "完了", style: .Plain, target: self, action: #selector(self.tappedToolBarBtn))
-        let toolBarBtnToday = UIBarButtonItem(title: "今日", style: .Plain, target: self, action: #selector(self.tappedToolBarBtnToday))
-        
-        toolBarBtn.tag = 1
-        toolBar.items = [toolBarBtn, toolBarBtnToday]
-        
-        createDate.inputAccessoryView = toolBar
-        
         categoryName.inputView = categoryPickerView
         categoryPickerView.setDefaultSelectRow(selectedRow, inComponent: categoryComponentsNumber)
+        
+        /*** 作成日付に値をセット ***/
+        self.selectedCreateDate = paraCreateDate!
+        self.createDate.text = dts.dateToStringWithWeekday(paraCreateDate!)
         
         /********* 写真編集 *********/
         // シングルタップジェスチャーを写真窓（selectedPhoto）に登録
@@ -174,7 +155,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         }
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -186,22 +167,14 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         
         //ピッカーの列数
         var componentsNumber:Int = 1
-        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-            componentsNumber = 1
-        }else if(categoryName.tag == PickerIdentifier.CreateDate.hashValue){
-            componentsNumber = 1
-        }
+        componentsNumber = 1
         return componentsNumber
     }
     // ピッカーの要素数
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // ピッカーの行数
         var rowsNumber:Int = 1
-        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-            rowsNumber = categoryPickerOption.count
-        }else if(categoryName.tag == PickerIdentifier.CreateDate.hashValue){
-            rowsNumber = 1
-        }
+        rowsNumber = categoryPickerOption.count
         return rowsNumber
     }
     // ピッカーに値をセット
@@ -209,72 +182,27 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
     {
         // ピッカー表示値
         var picValue:String = "データなし"
-        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-            picValue = categoryPickerOption[row].categoryName!
-        }else if(categoryName.tag == PickerIdentifier.CreateDate.hashValue){
-            picValue = "うんこ"
-        }
+        picValue = categoryPickerOption[row].categoryName!
         return picValue
     }
     // ピッカーで選択した時の挙動
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-            selectedCategoryName = categoryPickerOption[row].categoryName!
-            selectedCategoryId = categoryPickerOption[row].categoryId!
-        }else if(categoryName.tag == PickerIdentifier.CreateDate.hashValue){
-            
-        }
+        selectedCategoryName = categoryPickerOption[row].categoryName!
+        selectedCategoryId = categoryPickerOption[row].categoryId!
         
     }
     // ピッカーで選択した値をテキストフィールドに表示
     func pickerViewComplete(pickerView: UIPickerView, didSelect numbers: [Int]) {
-        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-            categoryName.text = selectedCategoryName!
-            self.categoryName.resignFirstResponder()
-        }else if(categoryName.tag == PickerIdentifier.CreateDate.hashValue){
-            
-        }
+        categoryName.text = selectedCategoryName!
+        self.categoryName.resignFirstResponder()
     }
     
     // ピッカーで完了を押した時の挙動
     func pickerViewCancel(pickerView: UIPickerView){
-        if(categoryName.tag == PickerIdentifier.CategoryName.hashValue){
-            self.categoryName.resignFirstResponder()
-        }else if(categoryName.tag == PickerIdentifier.CreateDate.hashValue){
-            
-        }
+        self.categoryName.resignFirstResponder()
     }
     
-    // 「完了」を押すと閉じる
-    func tappedToolBarBtn(sender: UIBarButtonItem) {
-        createDate.text = self.dateToString(selectedCreateDate!)
-        createDate.resignFirstResponder()
-    }
-    // 「今日」を押すと今日の日付をセットする
-    func tappedToolBarBtnToday(sender: UIBarButtonItem) {
-        myDatePicker.date = NSDate()
-        changeLabelDate(NSDate())
-    }
-    func changedDateEvent(sender:AnyObject?){
-//        let dateSelecter: UIDatePicker = sender as! UIDatePicker
-        self.changeLabelDate(myDatePicker.date)
-    }
-    func changeLabelDate(date:NSDate) {
-        selectedCreateDate = date
-    }
-    func dateToString(date:NSDate) ->String {
-        let calender: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let comps: NSDateComponents = calender.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate:date)
-        
-        let date_formatter: NSDateFormatter = NSDateFormatter()
-        var weekdays: Array  = ["日", "月", "火", "水", "木", "金", "土"]
-        
-        date_formatter.locale     = NSLocale(localeIdentifier: "ja")
-        date_formatter.dateFormat = "yyyy/MM/dd HH:mm（\(weekdays[comps.weekday-1])） "
-        
-        return date_formatter.stringFromDate(date)
-    }
     
     /********* テキストフィールド（ビュー）用関数 *********/
     // キーボードをリターンで閉じた時の動作

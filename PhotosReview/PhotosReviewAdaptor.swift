@@ -111,6 +111,7 @@ class PhotosReviewAdaptor {
                     model.photoOrientation = review.photoOrientation!
                     model.photoWidth = review.photoWidth!
                     model.photoHeight = review.photoHeight!
+                    model.createDate = review.createDate!
                     model.updateDate = NSDate()
                 }
             }
@@ -175,7 +176,8 @@ class PhotosReviewAdaptor {
         
         /* Set search conditions */
         let fetchRequest = NSFetchRequest(entityName: "Review")
-        let predicate = NSPredicate(format: "%K = %@", "reviewNo", reviewNo)
+        let str = "\"%K = %@\", \"reviewNo\", reviewNo"
+        let predicate = NSPredicate(format: str)
         fetchRequest.predicate = predicate
         
         /* Get result array from ManagedObjectContext */
@@ -205,6 +207,115 @@ class PhotosReviewAdaptor {
         return review
     }
 
+    // レビューを読み込む
+    func loadReviewWithSearchConditions(conditions: ISearchConditions) -> [IReview] {
+        
+        var reviews:[IReview] = [IReview]()
+        
+        /* Get ManagedObjectContext from AppDelegate */
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let manageContext = appDelegate.managedObjectContext
+        
+        /* Set search conditions */
+        let fetchRequest = NSFetchRequest(entityName: "Review")
+        if makeConditionsFormat(conditions) != "" {
+            let predicate = NSPredicate(format: makeConditionsFormat(conditions))
+            fetchRequest.predicate = predicate
+        }
+        
+        /* Get result array from ManagedObjectContext */
+        do{
+            let fetchResults = try manageContext.executeFetchRequest(fetchRequest)
+            
+            if let results: NSArray = fetchResults {
+                for obj:AnyObject in results {
+                    let review: IReview = IReview()
+                    review.reviewNo = obj.valueForKey("reviewNo") as? NSNumber
+                    review.reviewName = obj.valueForKey("reviewName") as? String
+                    review.categoryId = obj.valueForKey("categoryId") as? NSNumber
+                    review.estimation = obj.valueForKey("estimation") as? NSNumber
+                    review.photoData = obj.valueForKey("photoData") as? NSData
+                    review.comment = obj.valueForKey("comment") as? String
+                    review.photoOrientation = obj.valueForKey("photoOrientation") as? NSNumber
+                    review.photoWidth = obj.valueForKey("photoWidth") as? NSNumber
+                    review.photoHeight = obj.valueForKey("photoHeight") as? NSNumber
+                    review.createDate = obj.valueForKey("createDate") as? NSDate
+                    review.updateDate = obj.valueForKey("updateDate") as? NSDate
+                    //                    self.selectedPhoto.image = photoData.flatMap(UIImage.init)
+                    reviews.append(review)
+                }
+                //                print("recordCounts:" + results.count.description)
+            }
+        }catch let error as NSError{
+            fatalError("\(error)")
+        }
+        return reviews
+    }
+    
+    func makeConditionsFormat(conditions: ISearchConditions) -> String {
+        
+        var returnStr = ""
+        var conditionsFormat:String = ""
+        var conditionsPara:String = ""
+        
+        // レビュータイトル検索条件
+        if conditions.searchedReviewName != nil {
+            // レビュー本文も含むか
+            if conditions.isContainsReviewComment {
+                conditionsFormat += "(\"%K = %@\" or \"%K = %@\") "
+                conditionsPara += "\"reviewNo\", conditions.reviewNo, \"comment\", conditions.comment "
+            }else{
+                conditionsFormat += "\"%K = %@\" "
+                conditionsPara += "\"reviewNo\", conditions.reviewNo "
+            }
+        }
+        // カテゴリ検索条件
+        if conditions.searchedCategoryId != nil {
+            if conditionsFormat != "" {
+                conditionsFormat += "and \"%K = %@\" "
+                conditionsPara += ",\"categoryId\", conditions.categoryId "
+            }else{
+                conditionsFormat += "\"%K = %@\" "
+                conditionsPara += "\"categoryId\", conditions.categoryId "
+            }
+        }
+        // 作成日付検索条件
+        if conditions.searchedCategoryId != nil {
+            if conditionsFormat != "" {
+                if (conditions.searchedCreateDateFrom != nil  && conditions.searchedCreateDateFrom != nil){
+                    conditionsFormat += "and ( \"%K >= %@\" and \"%K <= %@\") "
+                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom, \"createDate\", conditions.searchedCreateDateTo "
+                }
+                if (conditions.searchedCreateDateFrom != nil){
+                    conditionsFormat += "and \"%K >= %@\" "
+                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom "
+                }
+                if (conditions.searchedCreateDateTo != nil){
+                    conditionsFormat += "and \"%K <= %@\" "
+                    conditionsPara += ",\"createTo\", conditions.searchedCreateDateTo "
+                }
+            }else{
+                if (conditions.searchedCreateDateFrom != nil  && conditions.searchedCreateDateFrom != nil){
+                    conditionsFormat += "( \"%K >= %@\" and \"%K <= %@\") "
+                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom, \"createDate\", conditions.searchedCreateDateTo "
+                }
+                if (conditions.searchedCreateDateFrom != nil){
+                    conditionsFormat += "\"%K >= %@\" "
+                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom "
+                }
+                if (conditions.searchedCreateDateTo != nil){
+                    conditionsFormat += "\"%K <= %@\" "
+                    conditionsPara += ",\"createTo\", conditions.searchedCreateDateTo "
+                }
+            }
+        }
+        
+        if conditionsFormat != "" {
+            returnStr = conditionsFormat + ", " + conditionsPara
+        }
+        
+        return returnStr
+    }
     
     // レビューを削除する
     func deleteReview(reviewNo: NSNumber) {

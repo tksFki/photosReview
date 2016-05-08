@@ -112,7 +112,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         keyButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         keyButton.backgroundColor = UIColor.whiteColor()
         keyButton.layer.cornerRadius = 2.0
-        keyButton.addTarget(self, action: #selector(ReviewController.onClickMyButton(_:)), forControlEvents: .TouchUpInside)
+        keyButton.addTarget(self, action: #selector(self.onTapCompleteButton(_:)), forControlEvents: .TouchUpInside)
         
         // キーボードViewに完了ボタンを追加する。
         keyBar.addSubview(keyButton)
@@ -133,14 +133,9 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         return true
     }
     
-    //ボタンを押すとキーボードが下がるメソッド
-    func onClickMyButton (sender: UIButton) {
+    // 完了ボタンを押すとキーボードが下がるメソッド
+    func onTapCompleteButton (sender: UIButton) {
         self.view.endEditing(true)
-    }
-    //改行押すとキーボードが下がるメソッド
-    func textViewReturn(textView: UITextView) -> Bool {
-        self.view.endEditing(true)
-        return false
     }
     
     override func didReceiveMemoryWarning() {
@@ -266,7 +261,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     
     @IBAction func backFromModalCategoryView(segue:UIStoryboardSegue){
         let cg:ICategory = ICategory()
-        if let vc = segue.sourceViewController as? ModalCategoryViewController{
+        if let vc = segue.sourceViewController as? ModalCategoryController{
             cg.categoryId = vc.categoryId
             cg.categoryName = vc.categoryName
         }

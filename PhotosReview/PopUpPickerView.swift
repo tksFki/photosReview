@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum PickerIdentifier {
+    case CategoryName
+    case CreateDate
+    case CreateDateFrom
+    case CreateDateTo
+}
+
 @objc
 protocol PopUpPickerViewDelegate: UIPickerViewDelegate {
     optional func pickerViewComplete(pickerView: UIPickerView, didSelect numbers: [Int])

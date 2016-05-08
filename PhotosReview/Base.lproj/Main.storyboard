@@ -35,7 +35,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FEw-nK-daY" customClass="photoReviewCell" customModule="PhotosReview" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FEw-nK-daY" customClass="PhotoReviewCell" customModule="PhotosReview" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                 </imageView>
                                             </subviews>
@@ -67,7 +67,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jAw-dZ-F99">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="UDq-qP-ZfI"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="UDq-qP-ZfI">
+                            <connections>
+                                <segue destination="Jzp-44-gQL" kind="presentation" id="Mrf-PR-RKn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -77,6 +81,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1j-J2-Txt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-234" y="809"/>
+        </scene>
+        <!--SearchReviewConditions-->
+        <scene sceneID="SHB-es-hAU">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="SearchReviewConditions" storyboardName="SearchReviewConditions" id="Jzp-44-gQL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uDG-uy-Vdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.5" y="618"/>
         </scene>
         <!--CategoryCustomize-->
         <scene sceneID="cz9-G5-oNR">
@@ -191,25 +203,6 @@
                 <exit id="cIY-40-0wC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-992" y="1524"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="GUF-ez-mLg">
-            <objects>
-                <viewController id="oUB-bR-vI2" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hRz-FE-29m"/>
-                        <viewControllerLayoutGuide type="bottom" id="54D-Kb-1c7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="aNH-1Z-cu2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ny5-Vw-amQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-234" y="1524"/>
         </scene>
         <!--Review Controller-->
         <scene sceneID="8Pg-27-j6A">
@@ -396,4 +389,5 @@
             <point key="canvasLocation" x="99.5" y="987"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.52549019610000003" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
