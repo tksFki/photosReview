@@ -100,10 +100,10 @@
             </objects>
             <point key="canvasLocation" x="-992" y="2127"/>
         </scene>
-        <!--Modal Category View Controller-->
+        <!--Modal Category Controller-->
         <scene sceneID="SbT-5l-7kv">
             <objects>
-                <viewController id="SG8-8b-KqZ" customClass="ModalCategoryViewController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SG8-8b-KqZ" customClass="ModalCategoryController" customModule="PhotosReview" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fo1-ew-Wr8"/>
                         <viewControllerLayoutGuide type="bottom" id="8Ob-N5-kET"/>
