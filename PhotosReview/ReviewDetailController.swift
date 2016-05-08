@@ -72,13 +72,6 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
             uiPhotoData.drawInRect(CGRectMake(0, 0, contextSize.width, contextSize.height))
             let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
             reviewDetailPhotoImage.image = resizeImage
-            
-            //            print("Aspect Fit originX \(innerframe?.origin.x)")
-            //            print("Aspect Fit originY \(innerframe?.origin.y)")
-            //            print("Aspect Fit width \(innerframe?.size.width)")
-            //            print("Aspect Fit height \(innerframe?.size.height)")
-            //            print("UIImageView frame X \(reviewDetailPhotoImage.frame.origin.x)")
-            //            print("UIImageView frame Y \(reviewDetailPhotoImage.frame.origin.y)")
         }
         comment.text = review.comment!
         // Do any additional setup after loading the view.

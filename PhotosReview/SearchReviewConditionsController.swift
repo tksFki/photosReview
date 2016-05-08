@@ -19,6 +19,9 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
     var myDatePickerFrom: UIDatePicker!
     var myDatePickerTo: UIDatePicker!
     
+    let std = StringToDate()
+    let dts = DateToString()
+    
     // 受け渡し用検索条件パラメータ
     var searchedReviewName: AnyObject? {
         get {
@@ -75,9 +78,10 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func decide(sender: UIBarButtonItem) {
+
         // 検索条件セット
-        if let str = self.reviewName.text{
-            self.searchedReviewName = str
+        if self.reviewName.text != "" {
+            self.searchedReviewName = self.reviewName.text
         }
         
         self.isContainsReviewComment = self.containsReviewComment.on
@@ -85,17 +89,21 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
         if let nsn = self.selectedCategoryId {
             self.searchedCategoryId = nsn
         }
-        if let nsd = self.reviewCreateDateFrom{
-            self.searchedCreateDateFrom = nsd
+        if self.reviewCreateDateFrom.text != "" {
+            self.searchedCreateDateFrom = std.stringToDateRemovedWeekday(self.reviewCreateDateFrom.text!)
         }
-        if let nsd = self.reviewCreateDateTo{
-            self.searchedCreateDateFrom = nsd
+        if self.reviewCreateDateTo.text != "" {
+            self.searchedCreateDateFrom = std.stringToDateRemovedWeekday(self.reviewCreateDateTo.text!)
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let str = self.searchedReviewName{
+            self.reviewName.text = str as? String
+        }
         
         // textField の情報を受け取るための delegate を設定
         self.reviewName.delegate = self
@@ -110,6 +118,11 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
         for category in categories {
             // カテゴリピッカー作成
             categoryPickerOption.append(category)
+            if let num = self.searchedCategoryId{
+                if category.categoryId == num as? NSNumber {
+                    self.categoryName.text = category.categoryName!
+                }
+            }
         }
         let categoryPickerView = PopUpPickerView()
         categoryPickerView.delegate = self
@@ -117,7 +130,12 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
         categoryName.inputView = categoryPickerView
         
         /*** 作成日付に値をセット ***/
-        
+        if let nsd = self.searchedCreateDateFrom {
+            self.reviewCreateDateFrom.text = dts.dateToStringWithWeekday(nsd as! NSDate)
+        }
+        if let nsd = self.searchedCreateDateTo {
+            self.reviewCreateDateTo.text = dts.dateToStringWithWeekday(nsd as! NSDate)
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -168,17 +186,19 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
         selectedCategoryName = categoryPickerOption[row].categoryName!
         selectedCategoryId = categoryPickerOption[row].categoryId!
     }
-    // ピッカーで選択した値をテキストフィールドに表示
+    
+    // ピッカーで完了を押した時の挙動
     func pickerViewComplete(pickerView: UIPickerView, didSelect numbers: [Int]) {
-        categoryName.text = selectedCategoryName!
+        if let scn = selectedCategoryName {
+            categoryName.text = scn
+        }
         self.categoryName.resignFirstResponder()
         
     }
     
-    // ピッカーで完了を押した時の挙動
+    // ピッカーでキャンセルを押した時の挙動
     func pickerViewCancel(pickerView: UIPickerView){
         self.categoryName.resignFirstResponder()
-        
     }
     
     /*

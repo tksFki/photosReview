@@ -8,7 +8,7 @@
 
 import UIKit
 
-class photoReviewCell: UIImageView {
+class PhotoReviewCell: UIImageView {
     
     var reviewNo:NSNumber? = 0
     

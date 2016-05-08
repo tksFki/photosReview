@@ -10,7 +10,13 @@ import UIKit
 import CoreData
 
 class PhotosReviewAdaptor {
-
+    
+    var isReviewName:Bool = false
+    var isReviewComment:Bool = false
+    var isCategoryId:Bool = false
+    var isCreateDateFrom:Bool = false
+    var isCreateDateTo:Bool = false
+    
     // レビュー登録
     func entryReview(review: IReview) {
         
@@ -19,10 +25,10 @@ class PhotosReviewAdaptor {
             UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let reviewEntity =  NSEntityDescription.entityForName("Review",
-                                                                inManagedObjectContext:managedContext)
+                                                              inManagedObjectContext:managedContext)
         
         let reviewItem = NSManagedObject(entity: reviewEntity!,
-                                           insertIntoManagedObjectContext: managedContext) as! Review
+                                         insertIntoManagedObjectContext: managedContext) as! Review
         
         
         /* レビューエンティティSave */
@@ -91,7 +97,7 @@ class PhotosReviewAdaptor {
             UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let reviewEntity =  NSEntityDescription.entityForName("Review",
-                                                                inManagedObjectContext:managedContext)
+                                                              inManagedObjectContext:managedContext)
         
         /* Set search conditions */
         let fetchRequest = NSFetchRequest(entityName: "Review")
@@ -122,7 +128,7 @@ class PhotosReviewAdaptor {
         appDelegate.saveContext()
     }
     
-
+    
     // レビューを読み込む
     func loadReview() -> [IReview] {
         
@@ -176,8 +182,7 @@ class PhotosReviewAdaptor {
         
         /* Set search conditions */
         let fetchRequest = NSFetchRequest(entityName: "Review")
-        let str = "\"%K = %@\", \"reviewNo\", reviewNo"
-        let predicate = NSPredicate(format: str)
+        let predicate = NSPredicate(format: "%K = %@" ,"reviewNo",reviewNo)
         fetchRequest.predicate = predicate
         
         /* Get result array from ManagedObjectContext */
@@ -206,7 +211,7 @@ class PhotosReviewAdaptor {
         }
         return review
     }
-
+    
     // レビューを読み込む
     func loadReviewWithSearchConditions(conditions: ISearchConditions) -> [IReview] {
         
@@ -218,8 +223,34 @@ class PhotosReviewAdaptor {
         
         /* Set search conditions */
         let fetchRequest = NSFetchRequest(entityName: "Review")
-        if makeConditionsFormat(conditions) != "" {
-            let predicate = NSPredicate(format: makeConditionsFormat(conditions))
+        let formatStr = makeConditionsFormat(conditions)
+        if formatStr != "" {
+            let predicateTemplate = NSPredicate(format: formatStr)
+            var variables = Dictionary<String,AnyObject>()
+            if isReviewName {
+                if isReviewComment {
+                    variables["reviewName"] = conditions.searchedReviewName!
+                    variables["comment"] = conditions.searchedReviewName!
+                }else{
+                    variables["reviewName"] = conditions.searchedReviewName!
+                }
+            }
+            if isCategoryId {
+                variables["categoryId"] = conditions.searchedCategoryId!
+            }
+            if isCreateDateFrom || isCreateDateTo {
+                if isCreateDateFrom && isCreateDateTo {
+                    variables["createDateFrom"] = conditions.searchedCreateDateFrom!
+                    variables["createDateTo"] = conditions.searchedCreateDateTo!
+                }
+                else if isCreateDateFrom{
+                    variables["createDateFrom"] = conditions.searchedCreateDateFrom!
+                }
+                else if isCreateDateTo {
+                    variables["createDateTo"] = conditions.searchedCreateDateFrom!
+                }
+            }
+            let predicate = predicateTemplate.predicateWithSubstitutionVariables(variables)
             fetchRequest.predicate = predicate
         }
         
@@ -254,67 +285,62 @@ class PhotosReviewAdaptor {
     
     func makeConditionsFormat(conditions: ISearchConditions) -> String {
         
-        var returnStr = ""
         var conditionsFormat:String = ""
-        var conditionsPara:String = ""
         
         // レビュータイトル検索条件
         if conditions.searchedReviewName != nil {
             // レビュー本文も含むか
             if conditions.isContainsReviewComment {
-                conditionsFormat += "(\"%K = %@\" or \"%K = %@\") "
-                conditionsPara += "\"reviewNo\", conditions.reviewNo, \"comment\", conditions.comment "
+                conditionsFormat = "reviewName CONTAINS $reviewName or comment CONTAINS $comment "
+                self.isReviewName = true
+                self.isReviewComment = true
             }else{
-                conditionsFormat += "\"%K = %@\" "
-                conditionsPara += "\"reviewNo\", conditions.reviewNo "
+                conditionsFormat = "reviewName CONTAINS $reviewName "
+                self.isReviewName = true
             }
         }
         // カテゴリ検索条件
         if conditions.searchedCategoryId != nil {
             if conditionsFormat != "" {
-                conditionsFormat += "and \"%K = %@\" "
-                conditionsPara += ",\"categoryId\", conditions.categoryId "
+                conditionsFormat += "and categoryId = $categoryId "
             }else{
-                conditionsFormat += "\"%K = %@\" "
-                conditionsPara += "\"categoryId\", conditions.categoryId "
+                conditionsFormat += "categoryId = $categoryId "
             }
+            self.isCategoryId = true
         }
         // 作成日付検索条件
-        if conditions.searchedCategoryId != nil {
+        if conditions.searchedCreateDateFrom != nil  || conditions.searchedCreateDateFrom != nil {
             if conditionsFormat != "" {
-                if (conditions.searchedCreateDateFrom != nil  && conditions.searchedCreateDateFrom != nil){
-                    conditionsFormat += "and ( \"%K >= %@\" and \"%K <= %@\") "
-                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom, \"createDate\", conditions.searchedCreateDateTo "
+                if (conditions.searchedCreateDateFrom != nil  && conditions.searchedCreateDateTo != nil){
+                    conditionsFormat += "and ( $createDateFrom <= createDate and createDate <= $createDateTo ) "
+                    self.isCreateDateFrom = true
+                    self.isCreateDateTo = true
                 }
-                if (conditions.searchedCreateDateFrom != nil){
-                    conditionsFormat += "and \"%K >= %@\" "
-                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom "
+                else if (conditions.searchedCreateDateFrom != nil){
+                    conditionsFormat += "and $createDateFrom <= createDate "
+                    self.isCreateDateFrom = true
                 }
-                if (conditions.searchedCreateDateTo != nil){
-                    conditionsFormat += "and \"%K <= %@\" "
-                    conditionsPara += ",\"createTo\", conditions.searchedCreateDateTo "
+                else if (conditions.searchedCreateDateTo != nil){
+                    conditionsFormat += "and createDate <= $createDateTo "
+                    self.isCreateDateTo = true
                 }
             }else{
-                if (conditions.searchedCreateDateFrom != nil  && conditions.searchedCreateDateFrom != nil){
-                    conditionsFormat += "( \"%K >= %@\" and \"%K <= %@\") "
-                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom, \"createDate\", conditions.searchedCreateDateTo "
+                if (conditions.searchedCreateDateFrom != nil  && conditions.searchedCreateDateTo != nil){
+                    conditionsFormat += " ( $createDateFrom <= createDate and createDate <= $createDateTo ) "
+                    self.isCreateDateFrom = true
+                    self.isCreateDateTo = true
                 }
-                if (conditions.searchedCreateDateFrom != nil){
-                    conditionsFormat += "\"%K >= %@\" "
-                    conditionsPara += ",\"createDate\", conditions.searchedCreateDateFrom "
+                else if (conditions.searchedCreateDateFrom != nil){
+                    conditionsFormat += "$createDateFrom <= createDate "
+                    self.isCreateDateFrom = true
                 }
-                if (conditions.searchedCreateDateTo != nil){
-                    conditionsFormat += "\"%K <= %@\" "
-                    conditionsPara += ",\"createTo\", conditions.searchedCreateDateTo "
+                else if (conditions.searchedCreateDateTo != nil){
+                    conditionsFormat += "createDate <= $createDateTo "
+                    self.isCreateDateTo = true
                 }
             }
         }
-        
-        if conditionsFormat != "" {
-            returnStr = conditionsFormat + ", " + conditionsPara
-        }
-        
-        return returnStr
+        return conditionsFormat
     }
     
     // レビューを削除する

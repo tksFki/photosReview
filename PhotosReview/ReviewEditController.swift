@@ -192,13 +192,15 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         selectedCategoryId = categoryPickerOption[row].categoryId!
         
     }
-    // ピッカーで選択した値をテキストフィールドに表示
+    // ピッカーで完了を押した時の挙動
     func pickerViewComplete(pickerView: UIPickerView, didSelect numbers: [Int]) {
-        categoryName.text = selectedCategoryName!
+        if let scn = selectedCategoryName {
+            categoryName.text = scn
+        }
         self.categoryName.resignFirstResponder()
     }
     
-    // ピッカーで完了を押した時の挙動
+    // ピッカーでキャンセルを押した時の挙動
     func pickerViewCancel(pickerView: UIPickerView){
         self.categoryName.resignFirstResponder()
     }
