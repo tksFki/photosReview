@@ -517,8 +517,6 @@ class PhotosReviewAdaptor {
         fetchRequest.predicate = predicate
         do
         {
-            
-            
             let results = try managedContext.executeFetchRequest(fetchRequest)
             for result in results {
                 let model = result as! Category

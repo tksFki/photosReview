@@ -13,6 +13,7 @@
 		7302D4221CDEDE6F00F818E6 /* DateToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302D4211CDEDE6F00F818E6 /* DateToString.swift */; };
 		7302D4241CDEFF3900F818E6 /* ISearchConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302D4231CDEFF3900F818E6 /* ISearchConditions.swift */; };
 		73341B551CD7234100C004D6 /* ReviewDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73341B541CD7234100C004D6 /* ReviewDetail.storyboard */; };
+		734E32D81CE0F0A000B02188 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E32D71CE0F0A000B02188 /* CommonButton.swift */; };
 		734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB31CC684CE005E6135 /* ICategory.swift */; };
 		734E7DB81CC7D53F005E6135 /* PhotosReviewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB71CC7D53F005E6135 /* PhotosReviewAdaptor.swift */; };
 		734E7DBA1CC7D68D005E6135 /* IReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB91CC7D68D005E6135 /* IReview.swift */; };
@@ -48,6 +49,7 @@
 		7302D4211CDEDE6F00F818E6 /* DateToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateToString.swift; sourceTree = "<group>"; };
 		7302D4231CDEFF3900F818E6 /* ISearchConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISearchConditions.swift; sourceTree = "<group>"; };
 		73341B541CD7234100C004D6 /* ReviewDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReviewDetail.storyboard; sourceTree = "<group>"; };
+		734E32D71CE0F0A000B02188 /* CommonButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		734E7DB31CC684CE005E6135 /* ICategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICategory.swift; sourceTree = "<group>"; };
 		734E7DB71CC7D53F005E6135 /* PhotosReviewAdaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosReviewAdaptor.swift; sourceTree = "<group>"; };
 		734E7DB91CC7D68D005E6135 /* IReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IReview.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				73C64E261CC351AE0001DC24 /* CategorySelectButton.swift */,
 				73C64E2C1CC3C0610001DC24 /* CategoryButton.swift */,
 				7302D4191CDED0A400F818E6 /* DatePickerTextField.swift */,
+				734E32D71CE0F0A000B02188 /* CommonButton.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				7302D4221CDEDE6F00F818E6 /* DateToString.swift in Sources */,
 				73E58D981CD5E7CC00D41ECF /* ReviewDetailController.swift in Sources */,
 				73E8E60A1CAFDAFD004ECE1B /* PhotosReview.xcdatamodeld in Sources */,
+				734E32D81CE0F0A000B02188 /* CommonButton.swift in Sources */,
 				73E8E6191CAFDC7D004ECE1B /* ReviewController.swift in Sources */,
 				73EE32181CD11F8F00A4B8A0 /* photoReviewCell.swift in Sources */,
 				73C64E291CC38F5F0001DC24 /* CategoryEditController.swift in Sources */,

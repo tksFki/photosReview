@@ -10,7 +10,7 @@ import UIKit
 
 class SearchReviewController: UIViewController {
     
-    var conditions = ISearchConditions()
+    var conditions:ISearchConditions?
     
     var reviews:[IReview] = [IReview]()
     var width:CGFloat = 0.0
@@ -83,24 +83,26 @@ class SearchReviewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        conditions = ISearchConditions()
+        
         // 検索条件セット
         if let str = self.searchedReviewName{
-            conditions.searchedReviewName = str as? String
+            conditions!.searchedReviewName = str as? String
         }
         if let isF = self.isContainsReviewComment{
-            conditions.isContainsReviewComment = isF as! Bool
+            conditions!.isContainsReviewComment = isF as! Bool
         }
         if let str = self.searchedCategoryId{
-            conditions.searchedCategoryId = str as? NSNumber
+            conditions!.searchedCategoryId = str as? NSNumber
         }
         if let str = self.searchedCreateDateFrom{
-            conditions.searchedCreateDateFrom = str as? NSDate
+            conditions!.searchedCreateDateFrom = str as? NSDate
         }
         if let str = self.searchedCreateDateTo{
-            conditions.searchedCreateDateTo = str as? NSDate
+            conditions!.searchedCreateDateTo = str as? NSDate
         }
         let photosReview = PhotosReviewAdaptor()
-        reviews = photosReview.loadReviewWithSearchConditions(conditions)
+        reviews = photosReview.loadReviewWithSearchConditions(conditions!)
         self.searchReviewCollectionView.reloadData()
     }
     

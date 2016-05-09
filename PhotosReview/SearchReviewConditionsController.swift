@@ -14,7 +14,6 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
     var categoryComponentsNumber:Int = 0
     var selectedCategoryId:NSNumber?
     var selectedCategoryName:String?
-    var selectedCreateDate:NSDate?
     var toolBar:UIToolbar!
     var myDatePickerFrom: UIDatePicker!
     var myDatePickerTo: UIDatePicker!
@@ -67,13 +66,31 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
             NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "searchedCreateDateTo")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
+        
     }
     
     @IBOutlet weak var reviewName: UITextField!
     @IBOutlet weak var containsReviewComment: UISwitch!
     @IBOutlet weak var categoryName: UITextField!
-    @IBOutlet weak var reviewCreateDateFrom: UITextField!
-    @IBOutlet weak var reviewCreateDateTo: UITextField!
+    @IBOutlet weak var reviewCreateDateFrom: DatePickerTextField!
+    @IBOutlet weak var reviewCreateDateTo: DatePickerTextField!
+    @IBAction func clear(sender: CommonButton) {
+        
+        let ud = NSUserDefaults.standardUserDefaults()
+        
+        self.reviewName.text = ""
+        ud.removeObjectForKey("searchedReviewName")
+        
+        self.categoryName.text = ""
+        self.selectedCategoryId = nil
+        ud.removeObjectForKey("searchedCategoryId")
+        
+        self.reviewCreateDateFrom.text = ""
+        ud.removeObjectForKey("searchedCreateDateFrom")
+        
+        self.reviewCreateDateTo.text = ""
+        ud.removeObjectForKey("searchedCreateDateTo")
+    }
     @IBAction func cancel(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -93,15 +110,15 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
             self.searchedCreateDateFrom = std.stringToDateRemovedWeekday(self.reviewCreateDateFrom.text!)
         }
         if self.reviewCreateDateTo.text != "" {
-            self.searchedCreateDateFrom = std.stringToDateRemovedWeekday(self.reviewCreateDateTo.text!)
+            self.searchedCreateDateTo = std.stringToDateRemovedWeekday(self.reviewCreateDateTo.text!)
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if let str = self.searchedReviewName{
+        if let str = self.searchedReviewName {
             self.reviewName.text = str as? String
         }
         
@@ -114,27 +131,31 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
         let photosReview = PhotosReviewAdaptor()
         
         /*** カテゴリに値をセット ***/
+        var selectedRow:Int = 0
         let categories = photosReview.loadCategory()
         for category in categories {
             // カテゴリピッカー作成
             categoryPickerOption.append(category)
-            if let num = self.searchedCategoryId{
+            if let num = self.searchedCategoryId {
                 if category.categoryId == num as? NSNumber {
                     self.categoryName.text = category.categoryName!
+                    selectedRow = categories.indexOf({$0 === category})!
                 }
             }
         }
         let categoryPickerView = PopUpPickerView()
         categoryPickerView.delegate = self
-        categoryPickerView.tag = PickerIdentifier.CategoryName.hashValue
         categoryName.inputView = categoryPickerView
+        categoryPickerView.setDefaultSelectRow(selectedRow, inComponent: self.categoryComponentsNumber)
         
         /*** 作成日付に値をセット ***/
         if let nsd = self.searchedCreateDateFrom {
             self.reviewCreateDateFrom.text = dts.dateToStringWithWeekday(nsd as! NSDate)
+            self.reviewCreateDateFrom.datePickerView.setDate(nsd as! NSDate, animated: false)
         }
         if let nsd = self.searchedCreateDateTo {
             self.reviewCreateDateTo.text = dts.dateToStringWithWeekday(nsd as! NSDate)
+            self.reviewCreateDateTo.datePickerView.setDate(nsd as! NSDate, animated: false)
         }
         // Do any additional setup after loading the view.
     }

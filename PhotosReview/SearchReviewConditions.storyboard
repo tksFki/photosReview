@@ -124,6 +124,16 @@
                                     <constraint firstItem="HLn-Qz-7At" firstAttribute="trailing" secondItem="5rE-vE-6Gd" secondAttribute="trailingMargin" id="yJz-ut-1y2"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNc-gA-Qhe" customClass="CommonButton" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="20" y="414" width="280" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="クリア">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clear:" destination="92E-ay-MoR" eventType="touchUpInside" id="b9C-3H-QXM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="0.5794989224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -131,7 +141,11 @@
                             <constraint firstItem="E1K-oC-wej" firstAttribute="centerX" secondItem="SmX-YO-JKe" secondAttribute="centerX" id="4B2-V4-8JU"/>
                             <constraint firstAttribute="trailing" secondItem="E1K-oC-wej" secondAttribute="trailing" id="8tB-xT-3Zj"/>
                             <constraint firstItem="E1K-oC-wej" firstAttribute="leading" secondItem="kMO-ve-d0t" secondAttribute="leading" id="BZS-hX-3ae"/>
+                            <constraint firstItem="kNc-gA-Qhe" firstAttribute="centerX" secondItem="5rE-vE-6Gd" secondAttribute="centerX" id="D7Y-uT-fTH"/>
+                            <constraint firstItem="kNc-gA-Qhe" firstAttribute="leading" secondItem="kMO-ve-d0t" secondAttribute="leadingMargin" constant="4" id="NuC-eG-tpB"/>
+                            <constraint firstItem="Vgc-Ma-Wab" firstAttribute="top" secondItem="kNc-gA-Qhe" secondAttribute="bottom" constant="60" id="chD-aw-aog"/>
                             <constraint firstItem="Vgc-Ma-Wab" firstAttribute="top" secondItem="5rE-vE-6Gd" secondAttribute="bottom" constant="142" id="ek1-zB-Nhl"/>
+                            <constraint firstItem="kNc-gA-Qhe" firstAttribute="top" secondItem="5rE-vE-6Gd" secondAttribute="bottom" constant="32" id="hxz-2E-ezz"/>
                             <constraint firstItem="E1K-oC-wej" firstAttribute="top" secondItem="kMO-ve-d0t" secondAttribute="top" id="mWC-be-zwe"/>
                             <constraint firstItem="SmX-YO-JKe" firstAttribute="trailing" secondItem="5rE-vE-6Gd" secondAttribute="trailing" id="oLo-IE-aqa"/>
                             <constraint firstItem="SmX-YO-JKe" firstAttribute="top" secondItem="E1K-oC-wej" secondAttribute="bottom" constant="18" id="sTb-E5-r48"/>

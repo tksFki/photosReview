@@ -137,7 +137,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         categoryPickerView.tag = PickerIdentifier.CategoryName.hashValue
         
         categoryName.inputView = categoryPickerView
-        categoryPickerView.setDefaultSelectRow(selectedRow, inComponent: categoryComponentsNumber)
+        categoryPickerView.setDefaultSelectRow(selectedRow, inComponent: self.categoryComponentsNumber)
         
         /*** 作成日付に値をセット ***/
         self.selectedCreateDate = paraCreateDate!
