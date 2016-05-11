@@ -16,6 +16,7 @@
 		7333D9E71CE378DA00EC461C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333D9E61CE378D900EC461C /* MainTabBarController.swift */; };
 		7333D9E91CE37B8900EC461C /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333D9E81CE37B8900EC461C /* CommonTextField.swift */; };
 		7333D9EB1CE37EFC00EC461C /* apple_icon_Photosreview.png in Resources */ = {isa = PBXBuildFile; fileRef = 7333D9EA1CE37EFC00EC461C /* apple_icon_Photosreview.png */; };
+		7333D9ED1CE3B2DC00EC461C /* CommonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333D9EC1CE3B2DC00EC461C /* CommonLabel.swift */; };
 		73341B551CD7234100C004D6 /* ReviewDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73341B541CD7234100C004D6 /* ReviewDetail.storyboard */; };
 		734E32D81CE0F0A000B02188 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E32D71CE0F0A000B02188 /* CommonButton.swift */; };
 		734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734E7DB31CC684CE005E6135 /* ICategory.swift */; };
@@ -58,6 +59,7 @@
 		7333D9E61CE378D900EC461C /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7333D9E81CE37B8900EC461C /* CommonTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		7333D9EA1CE37EFC00EC461C /* apple_icon_Photosreview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple_icon_Photosreview.png; sourceTree = "<group>"; };
+		7333D9EC1CE3B2DC00EC461C /* CommonLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonLabel.swift; sourceTree = "<group>"; };
 		73341B541CD7234100C004D6 /* ReviewDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReviewDetail.storyboard; sourceTree = "<group>"; };
 		734E32D71CE0F0A000B02188 /* CommonButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		734E7DB31CC684CE005E6135 /* ICategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICategory.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				734E32D71CE0F0A000B02188 /* CommonButton.swift */,
 				7333D9E61CE378D900EC461C /* MainTabBarController.swift */,
 				7333D9E81CE37B8900EC461C /* CommonTextField.swift */,
+				7333D9EC1CE3B2DC00EC461C /* CommonLabel.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				73EB00E01CD9F19E002D0871 /* ReviewEditController.swift in Sources */,
 				7302D4241CDEFF3900F818E6 /* ISearchConditions.swift in Sources */,
 				734E7DB41CC684CE005E6135 /* ICategory.swift in Sources */,
+				7333D9ED1CE3B2DC00EC461C /* CommonLabel.swift in Sources */,
 				734E7DBA1CC7D68D005E6135 /* IReview.swift in Sources */,
 				73FA87951CC92F5A00701F05 /* CategoryCustomizeController.swift in Sources */,
 				7302D4221CDEDE6F00F818E6 /* DateToString.swift in Sources */,

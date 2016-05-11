@@ -36,22 +36,24 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     // 保存する
     @IBAction func saveReview(sender: UIButton) {
         
-        let review = IReview()
-        let photosReview = PhotosReviewAdaptor()
+        // 登録前確認ダイアログ
+        let alert:UIAlertController = UIAlertController(title:"レビューを登録しますか",
+                                                        message: "Entry your review",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
         
-        // レビュー情報
-        review.reviewName = self.reviewName.text
-        review.categoryId = self.categoryID
-        review.estimation = NSNumber(int: Int32(self.estimation.text!)!)
-        if let photoData = originalImage {
-            review.photoData = UIImagePNGRepresentation(photoData)
-            review.photoOrientation = photoData.imageOrientation.hashValue
-            review.photoWidth = photoData.size.width
-            review.photoHeight = photoData.size.height
+        // キャンセルを選択
+        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
         }
-        review.comment = self.comments.text
-
-        photosReview.entryReview(review)
+        // OKを選択
+        let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction!) -> Void in
+            self.entryReview()
+        }
+        // アクションを追加
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
         
 //        if let image = originalImage {
 //            let widthPer:CGFloat = 0.25  // リサイズ後幅の倍率
@@ -75,6 +77,43 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     
     @IBOutlet weak var comments: UITextView!
     
+    func entryReview() {
+        
+        let review = IReview()
+        let photosReview = PhotosReviewAdaptor()
+        
+        // レビュー情報
+        review.reviewName = self.reviewName.text
+        review.categoryId = self.categoryID
+        review.estimation = NSNumber(int: Int32(self.estimation.text!)!)
+        if let photoData = originalImage {
+            review.photoData = UIImagePNGRepresentation(photoData)
+            review.photoOrientation = photoData.imageOrientation.hashValue
+            review.photoWidth = photoData.size.width
+            review.photoHeight = photoData.size.height
+        }
+        review.comment = self.comments.text
+        
+        photosReview.entryReview(review)
+        
+        // 登録後確認ダイアログ
+        let alert:UIAlertController = UIAlertController(title:"レビューの登録を完了しました！",
+                                                        message: "Entried Success!!",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // OKを選択
+        let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction!) -> Void in
+            return
+        }
+        // アクションを追加
+        alert.addAction(okAction)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    // 画面表示前処理
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -89,6 +128,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
                                                          object: nil)
     }
     
+    // 画面終了前処理
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -147,6 +187,11 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         //self.view.addSubview(comments)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     // キーボードをリターンで閉じた時の動作
     func textFieldShouldReturn(textField: UITextField) -> Bool{
         
@@ -160,9 +205,35 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         self.view.endEditing(true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    /************* 写真取り込み用関数 *************/
+    // 写真の取り込み先をフォトライブラリ、もしくはカメラから選択する。
+    func selectLibraryOrCamera(){
+        
+        // 写真の取り込み先を選択する。（フォトライブラリ or カメラ）
+        let alert:UIAlertController = UIAlertController(title:"写真を選択してください",
+                                                        message: "Library or Camera",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // キャンセル
+        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
+        }
+        // フォトライブラリを選択
+        let fromPhotoLibraryAction:UIAlertAction = UIAlertAction(title: "フォトライブラリから選ぶ", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
+            self.selectedPhotoLibrary()
+        }
+        // カメラを選択
+        let fromPictureAction:UIAlertAction = UIAlertAction(title: "カメラで写真を撮る", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
+            self.selectedCamera()
+        }
+        
+        // アクションを追加
+        alert.addAction(cancelAction)
+        alert.addAction(fromPhotoLibraryAction)
+        alert.addAction(fromPictureAction)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+        
     }
     
     // 取り込み先に「カメラ」を選択
@@ -252,35 +323,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         }
     }
     
-    func selectLibraryOrCamera(){
-        
-        // 写真の取り込み先を選択する。（フォトライブラリ or カメラ）
-        let alert:UIAlertController = UIAlertController(title:"写真を選択してください",
-                                                        message: "Library or Camera",
-                                                        preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // キャンセル
-        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
-        }
-        // フォトライブラリを選択
-        let fromPhotoLibraryAction:UIAlertAction = UIAlertAction(title: "フォトライブラリから選ぶ", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
-            self.selectedPhotoLibrary()
-        }
-        // カメラを選択
-        let fromPictureAction:UIAlertAction = UIAlertAction(title: "カメラで写真を撮る", style: UIAlertActionStyle.Destructive) { (action:UIAlertAction!) -> Void in
-            self.selectedCamera()
-        }
-        
-        // アクションを追加
-        alert.addAction(cancelAction)
-        alert.addAction(fromPhotoLibraryAction)
-        alert.addAction(fromPictureAction)
-        
-        // 選択ウィンドウを表示する。
-        presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
+    /********** テキストビューを表示した際のスクロール ***********/
     func keyboardWillBeShown(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue, animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue {

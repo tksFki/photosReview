@@ -13,6 +13,12 @@ class CategoryEditController: UITableViewController {
     var categories = [ICategory]()
     var categoryMaxSeq: NSNumber = 0
     
+    var searchedCategoryId: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("searchedCategoryId")
+        }
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count+1
     }
@@ -31,13 +37,21 @@ class CategoryEditController: UITableViewController {
         return true
     }
     
+    // 編集モードの挙動
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
+        // 編集モードを削除を選択した時の挙動
         case .Delete:
+            // レビュー検索条件に削除対象のカテゴリIdがあった場合、削除する。
+            if self.searchedCategoryId as? NSNumber == categories[indexPath.row].categoryId {
+                let ud = NSUserDefaults.standardUserDefaults()
+                ud.removeObjectForKey("searchedCategoryId")
+            }
             let photosReview = PhotosReviewAdaptor()
             photosReview.deleteCategory(categories[indexPath.row].categoryId!)
             self.categories.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            
         default:
             return
         }
@@ -94,4 +108,6 @@ class CategoryEditController: UITableViewController {
         super.setEditing(editing, animated: animated)
         self.tableView.setEditing(editing, animated: animated)
     }
+    
+
 }

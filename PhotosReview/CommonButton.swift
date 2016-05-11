@@ -17,10 +17,10 @@ class CommonButton: UIButton {
         required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)!
     
-            /* ここに初期化したい要素を記述する。以下は一例 */
-            layer.cornerRadius = 4  /* ボタンの角の半径 */
-            layer.borderWidth = 2  /* ボタンの枠線の太さ */
-            layer.borderColor = UIColor.yellowColor().CGColor  /* ボタンの枠線の色 */
+            /* ここに初期化したい要素を記述する */
+            layer.cornerRadius = 4  /* 角の半径 */
+            layer.borderWidth = 2  /* 枠線の太さ */
+            layer.borderColor = UIColor.yellowColor().CGColor  /* 枠線の色 */
             layer.backgroundColor = UIColor.orangeColor().CGColor
         }
 

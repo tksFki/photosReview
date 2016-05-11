@@ -48,6 +48,30 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
     // 更新する
     @IBAction func updateReview(sender: UIButton) {
         
+        // 登録前確認ダイアログ
+        let alert:UIAlertController = UIAlertController(title:"レビューを更新しますか",
+                                                        message: "Update your review",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // キャンセルを選択
+        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action:UIAlertAction!) -> Void in
+        }
+        // OKを選択
+        let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction!) -> Void in
+            self.entryReview()
+        }
+        // アクションを追加
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    @IBOutlet weak var selectedPhoto: UIImageView!
+    
+    func entryReview(){
+        
         let review = IReview()
         let photosReview = PhotosReviewAdaptor()
         
@@ -67,8 +91,22 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         
         photosReview.updateReview(review)
         
+        // 登録後確認ダイアログ
+        let alert:UIAlertController = UIAlertController(title:"レビューの更新を完了しました！",
+                                                        message: "Updated Success!!",
+                                                        preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // OKを選択
+        let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction!) -> Void in
+            return
+        }
+        // アクションを追加
+        alert.addAction(okAction)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+        
     }
-    @IBOutlet weak var selectedPhoto: UIImageView!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("初回起動")
             
             defaults.setBool(true, forKey: "firstStart")
+            defaults.setObject(0, forKey: "maxCategoryId")
             defaults.synchronize()
         }
         return true

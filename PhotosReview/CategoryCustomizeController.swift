@@ -10,12 +10,21 @@ import UIKit
 
 class CategoryCustomizeController: UIViewController {
     
+    var category = ICategory()
     var categoryId:NSNumber = 0
     var categoryName:String? = ""
     var categoryMaxSeq:NSNumber = 0
     @IBOutlet weak var categoryCustomizeField: UITextField!
     
-    var category = ICategory()
+    var maxCategoryId: AnyObject? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("maxCategoryId")
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: "maxCategoryId")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +47,10 @@ class CategoryCustomizeController: UIViewController {
             category.categoryName = categoryCustomizeField.text
             switch self.categoryId {
             case 0:
-                category.categoryId = NSNumber(int: self.categoryMaxSeq.intValue + 1)
+//                category.categoryId = NSNumber(int: self.categoryMaxSeq.intValue + 1)
+                let maxCategoryId = NSNumber(int: self.maxCategoryId!.intValue + 1)
+                self.maxCategoryId = maxCategoryId // NSUserDefaultsにも最大のカテゴリIdを保存
+                category.categoryId = maxCategoryId
                 photosReview.entryCategory(category)
                 break
             default:
