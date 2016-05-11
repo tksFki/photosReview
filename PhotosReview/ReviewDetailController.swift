@@ -35,18 +35,18 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let singleFingerTap = UITapGestureRecognizer(target: self, action: #selector(ReviewDetailController.tappedSingle(_:)))
-        singleFingerTap.delegate = self
-        self.reviewDetailPhotoImage.addGestureRecognizer(singleFingerTap)
-        self.reviewDetailPhotoImage.userInteractionEnabled = true
-        
+    
         reviewNo = self.selectedReviewNo! as! NSNumber
         review = photosReview.loadReviewWithReviewNo(reviewNo)
         category = photosReview.loadCategoryWithCategoryId(review.categoryId!)
         
         reviewTitle.text = review.reviewName!
-        categoryName.text = category.categoryName!
+        if let tmpCategoryName = category.categoryName {
+            categoryName.text = tmpCategoryName
+        // CoreDataにcategoryIdに該当するcategoryNameが存在しなかった場合
+        }else{
+            categoryName.text = "カテゴリなし"
+        }
         estimation.text = review.estimation!.stringValue
         
         if let photoData = review.photoData {
@@ -101,17 +101,6 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
         }
     }
     
-    func tappedSingle(sender: UITapGestureRecognizer!) {
-        // シングルタップしたときの処理
-        let touchPoint:CGPoint = sender.locationInView(sender.view)
-        let imageRectOrigin = CGPoint(x: innerframe!.origin.x, y: innerframe!.origin.y)
-        let imageRect = CGRect(x: imageRectOrigin.x, y: imageRectOrigin.y, width: innerframe!.size.width, height: innerframe!.size.height)
-        // タッチポイントがレビュー画像上の時
-        if (CGRectContainsPoint(imageRect, touchPoint)){
-            print("Touch OK")
-        }
-    }
-    
     // 画面遷移時のパラメータ受け渡し
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -125,8 +114,13 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
             if originalImage != nil{
                 vc.paraPhotoImage = originalImage!
             }
-            vc.paraCategoryId = category.categoryId!
-            vc.paraCategoryName = category.categoryName!
+            if let tmpCategoryName = category.categoryName{
+                vc.paraCategoryId = category.categoryId!
+                vc.paraCategoryName = tmpCategoryName
+            }else{
+                vc.paraCategoryId = 0
+                vc.paraCategoryName = self.categoryName.text!
+            }
         }
     }
     

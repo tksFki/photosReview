@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DatePickerTextField: UITextField {
+class DatePickerTextField: CommonTextField {
     
     /*
      // Only override drawRect: if you perform custom drawing.

@@ -35,15 +35,14 @@ class PhotosReviewAdaptor {
         reviewItem.reviewNo = getNextReviewNo()
         reviewItem.reviewName = review.reviewName!
         reviewItem.categoryId = review.categoryId!
-        reviewItem.estimation = review.estimation!
-        reviewItem.photoData = review.photoData!
-        reviewItem.comment = review.comment!
-        reviewItem.photoOrientation = review.photoOrientation!
-        reviewItem.photoWidth = review.photoWidth!
-        reviewItem.photoHeight = review.photoHeight!
-        
+        reviewItem.estimation = review.estimation
+        reviewItem.photoData = review.photoData
+        reviewItem.comment = review.comment
+        reviewItem.photoOrientation = review.photoOrientation
+        reviewItem.photoWidth = review.photoWidth
+        reviewItem.photoHeight = review.photoHeight
         reviewItem.createDate = NSDate()
-        reviewItem.updateDate = reviewItem.createDate!
+        reviewItem.updateDate = reviewItem.createDate
         do {
             try managedContext.save()
         } catch let error as NSError  {
@@ -111,13 +110,13 @@ class PhotosReviewAdaptor {
                     let model = result as! Review
                     model.reviewName = review.reviewName!
                     model.categoryId = review.categoryId!
-                    model.estimation = review.estimation!
-                    model.photoData = review.photoData!
-                    model.comment = review.comment!
-                    model.photoOrientation = review.photoOrientation!
-                    model.photoWidth = review.photoWidth!
-                    model.photoHeight = review.photoHeight!
-                    model.createDate = review.createDate!
+                    model.estimation = review.estimation
+                    model.photoData = review.photoData
+                    model.comment = review.comment
+                    model.photoOrientation = review.photoOrientation
+                    model.photoWidth = review.photoWidth
+                    model.photoHeight = review.photoHeight
+                    model.createDate = review.createDate
                     model.updateDate = NSDate()
                 }
             }

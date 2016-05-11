@@ -114,31 +114,39 @@ class SearchReviewController: UIViewController {
         let reviewImage = reviewCell.contentView.viewWithTag(1) as! PhotoReviewCell
         
         if reviews.count > indexPath.row {
+            
+            // 1.コンテキスト作成
+            let contextImg:CGContextRef? = UIGraphicsGetCurrentContext()
+            CGContextSaveGState(contextImg)
+            let sz:CGSize = CGSizeMake(width,height)
+            UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
+            var resizeImage:UIImage!
+            
             if let binPhotoData = reviews[indexPath.row].photoData{
-                // リサイズしてサムネイルに格納
-                // 1.コンテキスト作成
-                let contextImg:CGContextRef? = UIGraphicsGetCurrentContext()
-                CGContextSaveGState(contextImg)
-                // 2.画像取り出し
-                let sz:CGSize = CGSizeMake(width,height)
-                UIGraphicsBeginImageContextWithOptions(sz, false, 0.0)
+                // --リサイズしてサムネイルに格納
+                // 2-1.画像取り出し
                 // -- NSData → UIImage
                 let uiPhotoDataTmp = UIImage(data: binPhotoData)
                 let photoOrientationTmp = reviews[indexPath.row].photoOrientation
                 let photoOrientation = photoOrientationTmp!.intValue.hashValue
                 // -- 取り出した画像の回転を調整
                 let uiPhotoData = UIImage(CGImage: uiPhotoDataTmp!.CGImage!, scale: 1.0, orientation: UIImageOrientation(rawValue: photoOrientation)!)
-                // 3.画像をコンテキストに描画
+                // 3-1.画像をコンテキストに描画
                 uiPhotoData.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
-                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
-                // 4.コンテキストを解放
-                UIGraphicsEndImageContext()
-                CGContextRestoreGState(contextImg)
-                
-                // 画像の情報をセルに登録
-                reviewImage.reviewNo = reviews[indexPath.row].reviewNo
-                reviewImage.image = resizeImage
+                resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+            }else{
+                // 2-2.画像取り出し
+                // -- NSData → UIImage
+                let uiPhotoData = UIImage(named: "Noimage.gif")
+                // 3-2.画像をコンテキストに描画
+                uiPhotoData!.drawInRect(CGRectMake(0, 0, sz.width, sz.height))
+                resizeImage = UIGraphicsGetImageFromCurrentImageContext()
             }
+            // 4.コンテキストを解放
+            UIGraphicsEndImageContext()
+            CGContextRestoreGState(contextImg)
+            // 5.画像の情報をセルに登録
+            reviewImage.image = resizeImage
         }
         return reviewCell
     }
@@ -151,8 +159,8 @@ class SearchReviewController: UIViewController {
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        width = (collectionView.frame.size.width-20)/3
-        height = (collectionView.frame.size.height-20)/5
+        width = (collectionView.frame.size.width-3)/3
+        height = (collectionView.frame.size.height-5)/5
         
         return CGSize(width: width, height: height)
     }

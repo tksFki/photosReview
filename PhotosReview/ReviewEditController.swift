@@ -76,6 +76,31 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         self.reviewEditScrollView.contentSize = self.reviewEditView.bounds.size
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // キーボードとテキストビューの判定に使用
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(self.keyboardWillBeShown(_:)),
+                                                         name: UIKeyboardWillShowNotification,
+                                                         object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(self.keyboardWillBeHidden(_:)),
+                                                         name: UIKeyboardWillHideNotification,
+                                                         object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillShowNotification,
+                                                            object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillHideNotification,
+                                                            object: nil)
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -86,7 +111,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         self.comment.text = paraComment!
         
         comment.layer.borderWidth = 1
-        comment.layer.borderColor = UIColor.blackColor().CGColor
+        comment.layer.borderColor = UIColor.orangeColor().CGColor
         comment.layer.cornerRadius = 8
         
         // textField の情報を受け取るための delegate を設定
@@ -150,8 +175,9 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         self.selectedPhoto.addGestureRecognizer(singleFingerTap)
         self.selectedPhoto.userInteractionEnabled = true
         
-        if (paraPhotoImage != nil){
-            self.selectedPhoto.image = paraPhotoImage
+        if (self.paraPhotoImage != nil){
+            self.selectedPhoto.image = self.paraPhotoImage
+            self.originalImage = paraPhotoImage
         }
         // Do any additional setup after loading the view.
     }
@@ -335,6 +361,46 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         
     }
     
+    func keyboardWillBeShown(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue, animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue {
+                restoreScrollViewSize()
+                
+                let convertedKeyboardFrame = reviewEditScrollView.convertRect(keyboardFrame, fromView: nil)
+                let mainBoundSize: CGSize = UIScreen.mainScreen().bounds.size
+                let txtLimit = self.comment.frame.origin.y + self.comment.frame.height + 8.0
+                let kbdLimit = mainBoundSize.height - convertedKeyboardFrame.size.height - 40.0
+                
+                let offsetY: CGFloat
+                if txtLimit >= kbdLimit {
+                    offsetY = txtLimit - kbdLimit
+                }else{
+                    return
+                }
+                updateScrollViewSize(offsetY, duration: animationDuration)
+            }
+        }
+    }
     
+    func keyboardWillBeHidden(notification: NSNotification) {
+        restoreScrollViewSize()
+    }
+    
+    func updateScrollViewSize(moveSize: CGFloat, duration: NSTimeInterval) {
+        UIView.beginAnimations("ResizeForKeyboard", context: nil)
+        UIView.setAnimationDuration(duration)
+        
+        let contentInsets = UIEdgeInsetsMake(0, 0, moveSize, 0)
+        reviewEditScrollView.contentInset = contentInsets
+        reviewEditScrollView.scrollIndicatorInsets = contentInsets
+        reviewEditScrollView.contentOffset = CGPointMake(0, moveSize)
+        
+        UIView.commitAnimations()
+    }
+    
+    func restoreScrollViewSize() {
+        reviewEditScrollView.contentInset = UIEdgeInsetsZero
+        reviewEditScrollView.scrollIndicatorInsets = UIEdgeInsetsZero
+    }
     
 }

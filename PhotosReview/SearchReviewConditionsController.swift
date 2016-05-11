@@ -96,25 +96,39 @@ class SearchReviewConditionsController: UIViewController,UITextFieldDelegate, Po
     }
     @IBAction func decide(sender: UIBarButtonItem) {
 
+        let ud = NSUserDefaults.standardUserDefaults()
         // 検索条件セット
         if self.reviewName.text != "" {
             self.searchedReviewName = self.reviewName.text
+        }else{
+            ud.removeObjectForKey("searchedReviewName")
         }
         
         self.isContainsReviewComment = self.containsReviewComment.on
         
         if let nsn = self.selectedCategoryId {
             self.searchedCategoryId = nsn
+        }else{
+            ud.removeObjectForKey("searchedCategoryId")
         }
         if self.reviewCreateDateFrom.text != "" {
             self.searchedCreateDateFrom = std.stringToDateRemovedWeekday(self.reviewCreateDateFrom.text!)
+        }else{
+            ud.removeObjectForKey("searchedCreateDateFrom")
         }
         if self.reviewCreateDateTo.text != "" {
             self.searchedCreateDateTo = std.stringToDateRemovedWeekday(self.reviewCreateDateTo.text!)
+        }else{
+            ud.removeObjectForKey("searchedCreateDateTo")
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

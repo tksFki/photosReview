@@ -27,6 +27,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     var modalTextStatic:String?
     
     /*************** コントロール ***************/
+    @IBOutlet weak var reviewScrollView: UIScrollView!
     @IBOutlet weak var reviewName: UITextField! // レビュー名
     @IBOutlet weak var estimation: UITextField! // 評価
     @IBOutlet weak var CategoryName: CategoryButton! // カテゴリ名
@@ -74,6 +75,31 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     
     @IBOutlet weak var comments: UITextView!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // キーボードとテキストビューの判定に使用
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(self.keyboardWillBeShown(_:)),
+                                                         name: UIKeyboardWillShowNotification,
+                                                         object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(self.keyboardWillBeHidden(_:)),
+                                                         name: UIKeyboardWillHideNotification,
+                                                         object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillShowNotification,
+                                                            object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillHideNotification,
+                                                            object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -84,14 +110,10 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         self.selectedPhoto.addGestureRecognizer(singleFingerTap)
         self.selectedPhoto.userInteractionEnabled = true
         
-        // 写真窓の設定
-        selectedPhoto.layer.borderColor = UIColor.redColor().CGColor
-        selectedPhoto.layer.borderWidth = 2.0
-        
         // コメントの設定
-        comments.layer.borderWidth = 1
-        comments.layer.borderColor = UIColor.blackColor().CGColor
-        comments.layer.cornerRadius = 8
+        self.comments.layer.borderWidth = 2.0
+        self.comments.layer.borderColor = UIColor.orangeColor().CGColor
+        self.comments.layer.cornerRadius = 8
         
         // キーボードの設定
         // textField の情報を受け取るための delegate を設定
@@ -258,6 +280,49 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+    func keyboardWillBeShown(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue, animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue {
+                restoreScrollViewSize()
+                
+                let convertedKeyboardFrame = reviewScrollView.convertRect(keyboardFrame, fromView: nil)
+                let mainBoundSize: CGSize = UIScreen.mainScreen().bounds.size
+                let txtLimit = self.comments.frame.origin.y + self.comments.frame.height + 8.0
+                let kbdLimit = mainBoundSize.height - convertedKeyboardFrame.size.height - 40.0
+                
+                let offsetY: CGFloat
+                if txtLimit >= kbdLimit {
+                    offsetY = txtLimit - kbdLimit
+                }else{
+                    return
+                }
+                updateScrollViewSize(offsetY, duration: animationDuration)
+            }
+        }
+    }
+    
+    func keyboardWillBeHidden(notification: NSNotification) {
+        restoreScrollViewSize()
+    }
+    
+    func updateScrollViewSize(moveSize: CGFloat, duration: NSTimeInterval) {
+        UIView.beginAnimations("ResizeForKeyboard", context: nil)
+        UIView.setAnimationDuration(duration)
+        
+        let contentInsets = UIEdgeInsetsMake(0, 0, moveSize, 0)
+        reviewScrollView.contentInset = contentInsets
+        reviewScrollView.scrollIndicatorInsets = contentInsets
+        reviewScrollView.contentOffset = CGPointMake(0, moveSize)
+        
+        UIView.commitAnimations()
+    }
+    
+    func restoreScrollViewSize() {
+        reviewScrollView.contentInset = UIEdgeInsetsZero
+        reviewScrollView.scrollIndicatorInsets = UIEdgeInsetsZero
+    }
+    
     
     @IBAction func backFromModalCategoryView(segue:UIStoryboardSegue){
         let cg:ICategory = ICategory()
