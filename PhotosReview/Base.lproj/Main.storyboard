@@ -115,23 +115,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geK-cT-cxE">
-                                <rect key="frame" x="20" y="478" width="280" height="30"/>
-                                <state key="normal" title="カスタマイズ"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geK-cT-cxE" customClass="CommonButton" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="20" y="449" width="280" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="mrn-XG-So7"/>
+                                </constraints>
+                                <state key="normal" title="カスタマイズ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <segue destination="h5S-dx-htj" kind="show" id="8jQ-Ke-Hrh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CN5-rr-8HX">
-                                <rect key="frame" x="20" y="518" width="280" height="30"/>
-                                <state key="normal" title="決定"/>
-                                <connections>
-                                    <segue destination="cIY-40-0wC" kind="unwind" unwindAction="backFromModalCategoryView:" id="ejk-6Z-VPh"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1wK-1o-Ed3">
                                 <rect key="frame" x="20" y="28" width="280" height="413"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.75126201920000002" green="0.52182384150000005" blue="0.33952845450000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="Zc0-N4-22h">
                                     <size key="itemSize" width="84" height="52"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -182,18 +180,30 @@
                                     <outlet property="delegate" destination="SG8-8b-KqZ" id="ZZF-gs-suo"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CN5-rr-8HX" customClass="CommonButton" customModule="PhotosReview" customModuleProvider="target">
+                                <rect key="frame" x="20" y="503" width="280" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="CF5-cz-eDW"/>
+                                </constraints>
+                                <state key="normal" title="決定">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cIY-40-0wC" kind="unwind" unwindAction="backFromModalCategoryView:" id="ejk-6Z-VPh"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.69469101899999997" blue="0.44332619099999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="CN5-rr-8HX" secondAttribute="bottom" constant="20" symbolic="YES" id="85P-Hr-HV5"/>
+                            <constraint firstAttribute="bottom" secondItem="CN5-rr-8HX" secondAttribute="bottom" constant="20" symbolic="YES" id="6vn-KC-bYE"/>
+                            <constraint firstItem="geK-cT-cxE" firstAttribute="trailing" secondItem="CN5-rr-8HX" secondAttribute="trailing" id="CFf-YY-PrP"/>
+                            <constraint firstItem="geK-cT-cxE" firstAttribute="top" secondItem="1wK-1o-Ed3" secondAttribute="bottom" constant="8" symbolic="YES" id="Gqv-NS-3xJ"/>
                             <constraint firstItem="1wK-1o-Ed3" firstAttribute="top" secondItem="Fo1-ew-Wr8" secondAttribute="bottom" constant="8" symbolic="YES" id="NUX-bT-QhS"/>
+                            <constraint firstItem="CN5-rr-8HX" firstAttribute="top" secondItem="geK-cT-cxE" secondAttribute="bottom" constant="9" id="Syj-vf-J69"/>
                             <constraint firstItem="1wK-1o-Ed3" firstAttribute="leading" secondItem="a8J-71-8d5" secondAttribute="leadingMargin" constant="4" id="TdC-sd-VBv"/>
-                            <constraint firstItem="geK-cT-cxE" firstAttribute="top" secondItem="1wK-1o-Ed3" secondAttribute="bottom" constant="37" id="V1t-xq-Xwo"/>
-                            <constraint firstItem="geK-cT-cxE" firstAttribute="trailing" secondItem="CN5-rr-8HX" secondAttribute="trailing" id="Zzh-db-mEn"/>
                             <constraint firstItem="1wK-1o-Ed3" firstAttribute="centerX" secondItem="a8J-71-8d5" secondAttribute="centerX" id="asP-st-MJm"/>
+                            <constraint firstItem="geK-cT-cxE" firstAttribute="leading" secondItem="CN5-rr-8HX" secondAttribute="leading" id="f5e-c4-OkA"/>
                             <constraint firstItem="1wK-1o-Ed3" firstAttribute="leading" secondItem="geK-cT-cxE" secondAttribute="leading" id="hgk-Wd-oCd"/>
-                            <constraint firstItem="CN5-rr-8HX" firstAttribute="top" secondItem="geK-cT-cxE" secondAttribute="bottom" constant="10" id="ulI-Fq-zlR"/>
-                            <constraint firstItem="geK-cT-cxE" firstAttribute="leading" secondItem="CN5-rr-8HX" secondAttribute="leading" id="wkz-K5-AdZ"/>
                             <constraint firstItem="1wK-1o-Ed3" firstAttribute="trailing" secondItem="geK-cT-cxE" secondAttribute="trailing" id="zv3-O4-ofx"/>
                         </constraints>
                     </view>
