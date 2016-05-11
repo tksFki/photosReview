@@ -377,7 +377,7 @@ class PhotosReviewAdaptor {
         appDelegate.saveContext()
     }
     
-    // カテゴリ登録
+    // カテゴリ登録（カテゴリ番号は最大 categoryId + 1 で採番されているものとする。）
     func entryCategory(category: ICategory) {
         
         // エンティティ作成

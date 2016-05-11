@@ -73,7 +73,20 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
             let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
             reviewDetailPhotoImage.image = resizeImage
         }
-        comment.text = review.comment!
+        
+        // レビュー内容は行数によって大きさを変える
+        self.comment.numberOfLines = 0
+        self.comment.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.comment.sizeToFit()
+        self.comment.text = review.comment!
+//        var rect:CGRect  = comment.frame
+//        rect.size.height = CGRectGetHeight(comment.frame)
+//        self.comment.frame = rect
+//        if rect.size.height <= 200{ // ラベルサイズが200に満たない場合は、一律高さを200にする。
+//            rect.size.height = 200
+//        } // -> 正しく動かないので、方法を模索
+        
+        
         // Do any additional setup after loading the view.
     }
     

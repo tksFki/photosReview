@@ -328,7 +328,9 @@
                             <constraint firstItem="pug-fT-eqT" firstAttribute="leading" secondItem="sIA-qg-fTU" secondAttribute="leading" id="zzX-Ut-9ad"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="yaB-Mc-LSk"/>
+                    <tabBarItem key="tabBarItem" title="レビュー" image="Camera@2x" selectedImage="Camera@2x" id="yaB-Mc-LSk">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="CategoryName" destination="Y3c-1p-tNq" id="hr3-FO-DDc"/>
@@ -360,11 +362,11 @@
             </objects>
             <point key="canvasLocation" x="-703" y="45"/>
         </scene>
-        <!--Item 2-->
+        <!--検索-->
         <scene sceneID="G5Q-hV-c5j">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GIr-Ua-vvJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="bNJ-Tv-xNX"/>
+                    <tabBarItem key="tabBarItem" title="検索" image="Search@2x" selectedImage="Search@2x" id="bNJ-Tv-xNX"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bXw-P7-8vs">
@@ -389,5 +391,9 @@
             <point key="canvasLocation" x="99.5" y="987"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Camera@2x" width="30" height="30"/>
+        <image name="Search@2x" width="30" height="30"/>
+    </resources>
     <color key="tintColor" red="1" green="0.52549019610000003" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

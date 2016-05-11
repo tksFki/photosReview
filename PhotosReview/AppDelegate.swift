@@ -17,6 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("firstStart") {
+            
+            print("2回目以降")
+            
+        } else {
+            
+            print("初回起動")
+            
+            defaults.setBool(true, forKey: "firstStart")
+            defaults.synchronize()
+        }
         return true
     }
 

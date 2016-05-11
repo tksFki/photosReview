@@ -12,35 +12,45 @@ import CoreData
 class ModalCategoryController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate{
     
     let queue:dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-//    let group:dispatch_group_t = dispatch_group_create();
+    //    let group:dispatch_group_t = dispatch_group_create();
     let semaphore:dispatch_semaphore_t = dispatch_semaphore_create(1)
     
     var categoryId:NSNumber = 0
-    var categoryName:String = ""
+    var categoryName:String = "カテゴリなし"
     var categoryTemplate:String = ""
     var categories:[ICategory] = [ICategory]()
     
+    // ボタンをタップした時に、現在のボタンの選択状態のON/OFFを切り替える（見た目のON/OFF表示を変えるための処理）
     @IBAction func categorySelectTouchesDown(sender: CategorySelectButton) {
         sender.selected = !sender.keepingButtonSelected
     }
+    // ボタンをフォーカス内で外した時は、ボタンの選択状態を確定させる。
     @IBAction func categorySelectTouchesUpInside(sender: CategorySelectButton) {
         
-//        dispatch_async(queue) { () -> Void in
-//            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER)
-            for subview in self.categoryColletionView.subviews {
-                if subview.isKindOfClass(UICollectionViewCell){
-                    let cell = subview as! UICollectionViewCell
-                    let button = cell.contentView.viewWithTag(1) as! CategorySelectButton
-                    button.selected = false
-                }
+        //        dispatch_async(queue) { () -> Void in
+        //            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER)
+        for subview in self.categoryColletionView.subviews {
+            if subview.isKindOfClass(UICollectionViewCell){
+                let cell = subview as! UICollectionViewCell
+                let button = cell.contentView.viewWithTag(1) as! CategorySelectButton
+                button.selected = false
             }
-            sender.selected = !sender.keepingButtonSelected
-            sender.keepingButtonSelected = sender.selected
+        }
+        sender.selected = !sender.keepingButtonSelected
+        sender.keepingButtonSelected = sender.selected
+        // ボタンが選択状態にない時は、選択中カテゴリのcategoryIdを「0」に設定する。
+        if sender.keepingButtonSelected {
             self.categoryId = sender.categoryId!
             self.categoryName = sender.categoryName!
-//            dispatch_semaphore_signal(self.semaphore)
-//        }
+        }else{
+            self.categoryId = 0
+            self.categoryName = "カテゴリなし"
+        }
+        
+        //            dispatch_semaphore_signal(self.semaphore)
+        //        }
     }
+    // ボタンのフォーカス外でタップを外した時は、切り替えたボタンの選択状態を元に戻す
     @IBAction func categorySelectTouchesUpOutside(sender: CategorySelectButton) {
         sender.selected = sender.keepingButtonSelected
     }
@@ -84,9 +94,10 @@ class ModalCategoryController: UIViewController,UICollectionViewDataSource, UICo
         }
         else{
             button.categoryId = 0
-            button.categoryName = ""
+            button.categoryName = "カテゴリなし"
             button.categoryTemplate = ""
             button.setTitle("", forState: .Normal)
+            button.enabled = false
         }
         return categoryCell
     }
