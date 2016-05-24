@@ -19,6 +19,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     var innerframe:CGRect?
     
     
+    @IBOutlet weak var reviewDetailNavigation: UINavigationItem!
     @IBOutlet weak var reviewDetailScrollView: UIScrollView!
     @IBOutlet weak var reviewDetailView: UIView!
     @IBOutlet weak var reviewTitle: ReviewLabel!
@@ -26,6 +27,38 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     @IBOutlet weak var categoryName: ReviewLabel!
     @IBOutlet weak var estimation: ReviewLabel!
     @IBOutlet weak var comment: ReviewLabel!
+    @IBAction func deleteReview(sender: UIBarButtonItem) {
+        
+        // レビュー削除　確認ダイアログ
+        let alert:UIAlertController = UIAlertController(title: "このレビューを削除しますか", message: "Do you delete this review ?", preferredStyle: UIAlertControllerStyle.Alert)
+        let cancel:UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.Cancel) { (action: UIAlertAction!) -> Void in
+        }
+        let ok:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
+            // レビューの削除
+            self.deleteReviewWithReviewNo(self.reviewNo)
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func deleteReviewWithReviewNo(reviewNo: NSNumber){
+        
+        self.photosReview.deleteReview(reviewNo)
+        
+        // レビュー削除　確認ダイアログ
+        let alert:UIAlertController = UIAlertController(title: "削除しました", message: "Delete Completed!", preferredStyle: UIAlertControllerStyle.Alert)
+        let ok:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action: UIAlertAction!) -> Void in
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        alert.addAction(ok)
+        
+        // 選択ウィンドウを表示する。
+        presentViewController(alert, animated: true, completion: nil)
+        
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -35,7 +68,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         reviewNo = self.selectedReviewNo! as! NSNumber
         review = photosReview.loadReviewWithReviewNo(reviewNo)
         category = photosReview.loadCategoryWithCategoryId(review.categoryId!)
@@ -43,7 +76,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
         reviewTitle.text = review.reviewName!
         if let tmpCategoryName = category.categoryName {
             categoryName.text = tmpCategoryName
-        // CoreDataにcategoryIdに該当するcategoryNameが存在しなかった場合
+            // CoreDataにcategoryIdに該当するcategoryNameが存在しなかった場合
         }else{
             categoryName.text = "カテゴリなし"
         }
@@ -79,12 +112,12 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
         self.comment.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.comment.sizeToFit()
         self.comment.text = review.comment!
-//        var rect:CGRect  = comment.frame
-//        rect.size.height = CGRectGetHeight(comment.frame)
-//        self.comment.frame = rect
-//        if rect.size.height <= 200{ // ラベルサイズが200に満たない場合は、一律高さを200にする。
-//            rect.size.height = 200
-//        } // -> 正しく動かないので、方法を模索
+        //        var rect:CGRect  = comment.frame
+        //        rect.size.height = CGRectGetHeight(comment.frame)
+        //        self.comment.frame = rect
+        //        if rect.size.height <= 200{ // ラベルサイズが200に満たない場合は、一律高さを200にする。
+        //            rect.size.height = 200
+        //        } // -> 正しく動かないので、方法を模索
         
         
         // Do any additional setup after loading the view.

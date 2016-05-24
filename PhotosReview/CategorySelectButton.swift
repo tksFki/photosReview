@@ -16,6 +16,20 @@ class CategorySelectButton: CategoryButton{
     
     var keepingButtonSelected:Bool = false
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        /* ここに初期化したい要素を記述する */
+        layer.borderWidth = 1.0  /* 枠線の太さ */
+        layer.cornerRadius = 4.0
+        layer.borderColor = UIColor.yellowColor().CGColor  /* 枠線の色 */
+        layer.backgroundColor = UIColor.orangeColor().CGColor /* 背景の色 */
+    }
+    
     // 画面に指を一本以上タッチしたときに実行されるメソッド
 //    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 //        super.touchesBegan(touches, withEvent: event)

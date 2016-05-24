@@ -106,8 +106,8 @@ class ModalCategoryController: UIViewController,UICollectionViewDataSource, UICo
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        let width = (collectionView.frame.size.width-10)/3
-        let height = (collectionView.frame.size.height-10)/5
+        let width = (collectionView.frame.size.width-3)/3
+        let height = (collectionView.frame.size.height-5)/5
         
         return CGSize(width: width, height: height)
     }
