@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Cosmos
 
 class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     
@@ -25,7 +26,7 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
     @IBOutlet weak var reviewTitle: ReviewLabel!
     @IBOutlet weak var reviewDetailPhotoImage: UIImageView!
     @IBOutlet weak var categoryName: ReviewLabel!
-    @IBOutlet weak var estimation: ReviewLabel!
+    @IBOutlet weak var estimation: CosmosView!
     @IBOutlet weak var comment: ReviewLabel!
     @IBAction func deleteReview(sender: UIBarButtonItem) {
         
@@ -80,7 +81,10 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
         }else{
             categoryName.text = "カテゴリなし"
         }
-        estimation.text = review.estimation!.stringValue
+        
+        // 評価レート
+        estimation.rating = Double(review.estimation!)
+        estimation.userInteractionEnabled = false
         
         if let photoData = review.photoData {
             
@@ -108,10 +112,10 @@ class ReviewDetailController: UIViewController,UIGestureRecognizerDelegate {
         }
         
         // レビュー内容は行数によって大きさを変える
+        self.comment.text = review.comment!
         self.comment.numberOfLines = 0
         self.comment.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.comment.sizeToFit()
-        self.comment.text = review.comment!
         //        var rect:CGRect  = comment.frame
         //        rect.size.height = CGRectGetHeight(comment.frame)
         //        self.comment.frame = rect

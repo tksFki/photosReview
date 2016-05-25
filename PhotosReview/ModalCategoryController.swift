@@ -91,6 +91,7 @@ class ModalCategoryController: UIViewController,UICollectionViewDataSource, UICo
                 button.categoryTemplate = categoryTemplate
             }
             button.setTitle(button.categoryName, forState: .Normal)
+            button.enabled = true
         }
         else{
             button.categoryId = 0

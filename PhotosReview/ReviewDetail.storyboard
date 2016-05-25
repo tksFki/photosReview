@@ -22,26 +22,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHd-i4-bf7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1200"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="評価" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxO-NR-THb" userLabel="評価ラベル" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="341" width="100" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="IF0-Jj-1uS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jw3-eS-gLu" userLabel="カテゴリラベル" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
                                         <rect key="frame" x="8" y="303" width="100" height="30"/>
                                         <constraints>
@@ -60,21 +40,6 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yc-Mi-v5H" userLabel="評価" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
-                                        <rect key="frame" x="132" y="341" width="180" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="0.75126201920000002" green="0.52182384150000005" blue="0.33952845450000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
@@ -99,9 +64,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaY-j5-psA" userLabel="レビュー" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="379" width="304" height="200"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaY-j5-psA" userLabel="レビュー" customClass="CommentLabel" customModule="PhotosReview" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="421" width="304" height="189"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="pGr-eg-QXz"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -138,7 +106,7 @@
                                             <segue destination="VfC-V3-oXR" kind="show" identifier="goToReviewEdit" id="MOY-6H-cpQ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vG8-mE-RVO" userLabel="カテゴリ" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vG8-mE-RVO" userLabel="カテゴリ" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
                                         <rect key="frame" x="132" y="303" width="180" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -153,35 +121,96 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2e1-Zt-f7B" customClass="CosmosView" customModule="Cosmos">
+                                        <rect key="frame" x="132" y="346" width="180" height="25"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                                <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レビュー" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcq-Gh-928" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="387" width="304" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="wOX-c2-XbD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="評価" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxO-NR-THb" userLabel="評価ラベル" customClass="CommonLabel" customModule="PhotosReview" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="341" width="100" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="IF0-Jj-1uS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.75126201920000002" green="0.52182384150000005" blue="0.33952845450000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="top" secondItem="eHd-i4-bf7" secondAttribute="top" constant="72" id="3lF-cP-uFa"/>
-                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="jw3-eS-gLu" secondAttribute="trailing" constant="24" id="9xj-cp-dar"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="baseline" secondItem="vG8-mE-RVO" secondAttribute="baseline" id="BwN-gV-g0k"/>
-                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="centerX" secondItem="KaY-j5-psA" secondAttribute="centerX" id="EVF-DL-xiW"/>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="Vzf-Ie-AJM" secondAttribute="leading" id="FLI-Ig-exx"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="top" secondItem="QxO-NR-THb" secondAttribute="bottom" constant="8" symbolic="YES" id="GQl-wg-IGh"/>
-                                    <constraint firstAttribute="bottom" secondItem="iLE-ta-Cir" secondAttribute="bottom" constant="57" id="Kra-p9-fjE"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="top" secondItem="jw3-eS-gLu" secondAttribute="bottom" constant="8" symbolic="YES" id="M2c-Sp-3gi"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="top" secondItem="Vzf-Ie-AJM" secondAttribute="bottom" constant="8" symbolic="YES" id="N88-9R-hzJ"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="QxO-NR-THb" secondAttribute="leading" id="NLK-dT-l8M"/>
-                                    <constraint firstAttribute="trailing" secondItem="3nR-0P-Czj" secondAttribute="trailing" id="RWz-bV-FfB"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="leading" secondItem="KaY-j5-psA" secondAttribute="leading" id="ScK-zr-bHT"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="baseline" secondItem="4yc-Mi-v5H" secondAttribute="baseline" id="SmO-zh-l9o"/>
-                                    <constraint firstItem="QxO-NR-THb" firstAttribute="firstBaseline" secondItem="4yc-Mi-v5H" secondAttribute="firstBaseline" id="X3E-tZ-nEN"/>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="trailing" secondItem="Vzf-Ie-AJM" secondAttribute="trailing" id="XDZ-kE-f3I"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leadingMargin" id="Xrj-2V-Qc8"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="trailing" secondItem="iLE-ta-Cir" secondAttribute="trailing" id="apd-yY-0cv"/>
-                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="4yc-Mi-v5H" secondAttribute="leading" id="e0B-te-cKh"/>
-                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="trailing" secondItem="4yc-Mi-v5H" secondAttribute="trailing" id="gYX-aW-Tkd"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="firstBaseline" secondItem="vG8-mE-RVO" secondAttribute="firstBaseline" id="h5O-pl-a4W"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="trailing" secondItem="QxO-NR-THb" secondAttribute="trailing" id="10a-87-09x"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="trailing" secondItem="Vzf-Ie-AJM" secondAttribute="trailing" id="6KY-zH-yfV"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="firstBaseline" secondItem="vG8-mE-RVO" secondAttribute="firstBaseline" id="8z7-63-C4U"/>
+                                    <constraint firstItem="KaY-j5-psA" firstAttribute="trailing" secondItem="iLE-ta-Cir" secondAttribute="trailing" id="9Qk-v2-StC"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="QxO-NR-THb" secondAttribute="leading" id="AYH-8K-zLs"/>
+                                    <constraint firstAttribute="trailing" secondItem="3nR-0P-Czj" secondAttribute="trailing" id="Asd-Zt-Nk6"/>
+                                    <constraint firstItem="Mcq-Gh-928" firstAttribute="leading" secondItem="KaY-j5-psA" secondAttribute="leading" id="Bdd-ez-X4H"/>
+                                    <constraint firstItem="Mcq-Gh-928" firstAttribute="trailing" secondItem="KaY-j5-psA" secondAttribute="trailing" id="DtC-XV-8DV"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="top" secondItem="jw3-eS-gLu" secondAttribute="bottom" constant="8" symbolic="YES" id="Enp-Dq-85t"/>
+                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="centerX" secondItem="Mcq-Gh-928" secondAttribute="centerX" id="JAh-Zr-hZn"/>
+                                    <constraint firstItem="Mcq-Gh-928" firstAttribute="top" secondItem="QxO-NR-THb" secondAttribute="bottom" constant="16" id="P7x-OA-oOq"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leading" id="SgI-Dm-bK1"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="Vzf-Ie-AJM" secondAttribute="leading" id="Ux4-RG-HZq"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="leading" secondItem="Mcq-Gh-928" secondAttribute="leading" id="WXU-i4-58b"/>
+                                    <constraint firstItem="2e1-Zt-f7B" firstAttribute="trailing" secondItem="Mcq-Gh-928" secondAttribute="trailing" id="Wav-9F-KoW"/>
+                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="top" secondItem="3nR-0P-Czj" secondAttribute="bottom" constant="8" symbolic="YES" id="XGi-qk-DnX"/>
+                                    <constraint firstAttribute="bottom" secondItem="iLE-ta-Cir" secondAttribute="bottom" constant="57" id="Xod-Ha-8Kc"/>
+                                    <constraint firstItem="2e1-Zt-f7B" firstAttribute="top" secondItem="vG8-mE-RVO" secondAttribute="bottom" constant="13" id="Yn0-gp-Qrq"/>
+                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="jw3-eS-gLu" secondAttribute="trailing" constant="24" id="buJ-GG-tbb"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leadingMargin" id="d4p-tR-DX4"/>
                                     <constraint firstAttribute="height" constant="1200" id="hZP-xY-H0v"/>
-                                    <constraint firstItem="Vzf-Ie-AJM" firstAttribute="top" secondItem="3nR-0P-Czj" secondAttribute="bottom" constant="8" symbolic="YES" id="jON-WD-A2W"/>
-                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="trailing" secondItem="QxO-NR-THb" secondAttribute="trailing" id="jt3-jU-AeF"/>
-                                    <constraint firstItem="KaY-j5-psA" firstAttribute="leading" secondItem="iLE-ta-Cir" secondAttribute="leading" id="mYX-Lf-0vL"/>
-                                    <constraint firstItem="4yc-Mi-v5H" firstAttribute="trailing" secondItem="KaY-j5-psA" secondAttribute="trailing" id="nZj-uf-bAQ"/>
-                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="leading" secondItem="eHd-i4-bf7" secondAttribute="leading" id="ot6-BV-OxD"/>
+                                    <constraint firstItem="KaY-j5-psA" firstAttribute="top" secondItem="Mcq-Gh-928" secondAttribute="bottom" id="jmR-OE-Hwt"/>
+                                    <constraint firstItem="KaY-j5-psA" firstAttribute="leading" secondItem="iLE-ta-Cir" secondAttribute="leading" id="maO-mJ-FIb"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="baseline" secondItem="vG8-mE-RVO" secondAttribute="baseline" id="oWX-PF-BYX"/>
+                                    <constraint firstItem="3nR-0P-Czj" firstAttribute="top" secondItem="eHd-i4-bf7" secondAttribute="top" constant="72" id="p7E-B7-fln"/>
+                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="leading" secondItem="2e1-Zt-f7B" secondAttribute="leading" id="qe7-Wg-0z9"/>
+                                    <constraint firstItem="vG8-mE-RVO" firstAttribute="trailing" secondItem="2e1-Zt-f7B" secondAttribute="trailing" id="rtd-Hq-ms5"/>
+                                    <constraint firstItem="QxO-NR-THb" firstAttribute="bottom" secondItem="2e1-Zt-f7B" secondAttribute="bottom" id="uLr-Y6-WUU"/>
+                                    <constraint firstItem="jw3-eS-gLu" firstAttribute="top" secondItem="Vzf-Ie-AJM" secondAttribute="bottom" constant="8" symbolic="YES" id="w9L-I7-TS2"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -209,7 +238,7 @@
                     <connections>
                         <outlet property="categoryName" destination="vG8-mE-RVO" id="sDz-Aa-bzS"/>
                         <outlet property="comment" destination="KaY-j5-psA" id="rby-bd-cDa"/>
-                        <outlet property="estimation" destination="4yc-Mi-v5H" id="mSO-r2-eRX"/>
+                        <outlet property="estimation" destination="2e1-Zt-f7B" id="2HU-O5-ueN"/>
                         <outlet property="reviewDetailNavigation" destination="c00-Ne-zGH" id="1oa-8C-m5B"/>
                         <outlet property="reviewDetailPhotoImage" destination="Vzf-Ie-AJM" id="iFX-wc-IKJ"/>
                         <outlet property="reviewDetailScrollView" destination="TpI-BC-Mzh" id="xJJ-ez-KPk"/>
@@ -257,24 +286,9 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="評価" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHe-xt-SBs" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
                                         <rect key="frame" x="8" y="186" width="65" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.52549019610000003" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作成日時" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akh-dq-mwA" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="148" width="65" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.52549019610000003" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="HZt-Rx-a38"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -345,14 +359,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-us-4hy" customClass="CommonTextField" customModule="PhotosReview" customModuleProvider="target">
-                                        <rect key="frame" x="81" y="186" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="Pok-qS-6va"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVb-Ad-NrH">
                                         <rect key="frame" x="8" y="1086" width="304" height="56"/>
                                         <color key="backgroundColor" red="0.92117809510000004" green="0.078424601129999993" blue="0.15713864769999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -404,28 +410,70 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K48-Tt-ZCy" customClass="CosmosView" customModule="Cosmos">
+                                        <rect key="frame" x="81" y="189" width="153" height="24"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                                <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作成日時" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akh-dq-mwA" customClass="ReviewLabel" customModule="PhotosReview" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="148" width="65" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.52549019610000003" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.75126201920000002" green="0.52182384150000005" blue="0.33952845450000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Akh-dq-mwA" firstAttribute="top" secondItem="rlx-UL-3ca" secondAttribute="top" id="6ax-qe-zEP"/>
                                     <constraint firstItem="e6e-aH-lIE" firstAttribute="top" secondItem="j96-aV-mh5" secondAttribute="top" id="9vw-HK-CHJ"/>
                                     <constraint firstItem="GUO-rv-iAv" firstAttribute="trailing" secondItem="E4y-rJ-kcr" secondAttribute="trailing" id="AOe-By-hZw"/>
-                                    <constraint firstItem="RYk-us-4hy" firstAttribute="top" secondItem="rlx-UL-3ca" secondAttribute="bottom" constant="8" symbolic="YES" id="BJv-aZ-00E"/>
+                                    <constraint firstItem="Akh-dq-mwA" firstAttribute="bottom" secondItem="rlx-UL-3ca" secondAttribute="bottom" id="GEd-Eq-R5G"/>
                                     <constraint firstItem="eBc-Ep-Ru0" firstAttribute="leading" secondItem="cGa-1A-ZS9" secondAttribute="leadingMargin" id="GFz-13-5X6"/>
                                     <constraint firstItem="GUO-rv-iAv" firstAttribute="leading" secondItem="RVh-Ol-aso" secondAttribute="leading" id="GdB-ti-5UB"/>
                                     <constraint firstItem="rlx-UL-3ca" firstAttribute="top" secondItem="j96-aV-mh5" secondAttribute="bottom" constant="8" symbolic="YES" id="GpG-4u-Ov5"/>
                                     <constraint firstAttribute="bottom" secondItem="uVb-Ad-NrH" secondAttribute="bottom" constant="58" id="J1c-af-Qrj"/>
                                     <constraint firstItem="aHe-xt-SBs" firstAttribute="trailing" secondItem="oBl-cX-kOE" secondAttribute="trailing" id="JIn-8r-7Mc"/>
+                                    <constraint firstAttribute="trailing" secondItem="K48-Tt-ZCy" secondAttribute="trailing" constant="86" id="Kmf-iu-KTX"/>
                                     <constraint firstItem="E4y-rJ-kcr" firstAttribute="leading" secondItem="uVb-Ad-NrH" secondAttribute="leading" id="LfL-Dr-nYe"/>
                                     <constraint firstItem="j96-aV-mh5" firstAttribute="trailing" secondItem="GUO-rv-iAv" secondAttribute="trailing" id="MQW-lo-QF9"/>
                                     <constraint firstItem="e6e-aH-lIE" firstAttribute="leading" secondItem="Akh-dq-mwA" secondAttribute="leading" id="MWH-xA-mTG"/>
+                                    <constraint firstItem="aHe-xt-SBs" firstAttribute="centerY" secondItem="K48-Tt-ZCy" secondAttribute="centerY" id="Mes-i8-je2"/>
                                     <constraint firstItem="YZu-gX-XuW" firstAttribute="trailing" secondItem="j96-aV-mh5" secondAttribute="trailing" id="Mf0-7A-QLr"/>
-                                    <constraint firstItem="GUO-rv-iAv" firstAttribute="top" secondItem="RYk-us-4hy" secondAttribute="bottom" constant="46" id="NXj-7b-xda"/>
                                     <constraint firstItem="YZu-gX-XuW" firstAttribute="leading" secondItem="j96-aV-mh5" secondAttribute="leading" id="O8f-8e-W1H"/>
                                     <constraint firstItem="aHe-xt-SBs" firstAttribute="leading" secondItem="oBl-cX-kOE" secondAttribute="leading" id="PKx-H9-yfi"/>
                                     <constraint firstItem="E4y-rJ-kcr" firstAttribute="top" secondItem="RVh-Ol-aso" secondAttribute="bottom" constant="8" symbolic="YES" id="PjW-w2-vpF"/>
-                                    <constraint firstItem="aHe-xt-SBs" firstAttribute="bottom" secondItem="RYk-us-4hy" secondAttribute="bottom" id="QbA-n9-JVN"/>
                                     <constraint firstItem="rlx-UL-3ca" firstAttribute="leading" secondItem="Akh-dq-mwA" secondAttribute="trailing" constant="8" symbolic="YES" id="R4B-tu-5su"/>
+                                    <constraint firstItem="K48-Tt-ZCy" firstAttribute="top" secondItem="rlx-UL-3ca" secondAttribute="bottom" constant="11" id="RiV-E4-UiO"/>
                                     <constraint firstItem="Akh-dq-mwA" firstAttribute="top" secondItem="e6e-aH-lIE" secondAttribute="bottom" constant="8" symbolic="YES" id="S7Z-2F-VAw"/>
                                     <constraint firstItem="RVh-Ol-aso" firstAttribute="leading" secondItem="E4y-rJ-kcr" secondAttribute="leading" id="UZ5-rQ-SHw"/>
                                     <constraint firstItem="oBl-cX-kOE" firstAttribute="leading" secondItem="GUO-rv-iAv" secondAttribute="leading" id="Umo-wM-4pV"/>
@@ -439,16 +487,16 @@
                                     <constraint firstItem="eBc-Ep-Ru0" firstAttribute="top" secondItem="YZu-gX-XuW" secondAttribute="top" id="ezt-GS-CQ6"/>
                                     <constraint firstItem="j96-aV-mh5" firstAttribute="leading" secondItem="rlx-UL-3ca" secondAttribute="leading" id="fNb-oH-AIB"/>
                                     <constraint firstItem="eBc-Ep-Ru0" firstAttribute="top" secondItem="cGa-1A-ZS9" secondAttribute="top" constant="72" id="hdU-Mq-P31"/>
-                                    <constraint firstItem="aHe-xt-SBs" firstAttribute="top" secondItem="RYk-us-4hy" secondAttribute="top" id="iDP-lX-jPN"/>
-                                    <constraint firstItem="RYk-us-4hy" firstAttribute="leading" secondItem="aHe-xt-SBs" secondAttribute="trailing" constant="8" symbolic="YES" id="qEK-kU-Egi"/>
+                                    <constraint firstItem="K48-Tt-ZCy" firstAttribute="leading" secondItem="aHe-xt-SBs" secondAttribute="trailing" constant="8" symbolic="YES" id="hjQ-Sa-4ml"/>
+                                    <constraint firstItem="GUO-rv-iAv" firstAttribute="top" secondItem="K48-Tt-ZCy" secondAttribute="bottom" constant="49" id="qu7-Kk-LTe"/>
                                     <constraint firstItem="oBl-cX-kOE" firstAttribute="top" secondItem="aHe-xt-SBs" secondAttribute="bottom" constant="8" symbolic="YES" id="rqS-G1-Q9W"/>
-                                    <constraint firstItem="rlx-UL-3ca" firstAttribute="leading" secondItem="RYk-us-4hy" secondAttribute="leading" id="s32-Fv-SCu"/>
                                     <constraint firstAttribute="trailing" secondItem="rlx-UL-3ca" secondAttribute="trailing" constant="44" id="twk-CD-qnQ"/>
                                     <constraint firstItem="aHe-xt-SBs" firstAttribute="top" secondItem="Akh-dq-mwA" secondAttribute="bottom" constant="8" symbolic="YES" id="uUM-D8-eB6"/>
                                     <constraint firstItem="GUO-rv-iAv" firstAttribute="top" secondItem="oBl-cX-kOE" secondAttribute="bottom" constant="8" symbolic="YES" id="uYl-6T-ape"/>
                                     <constraint firstItem="YZu-gX-XuW" firstAttribute="trailing" secondItem="cGa-1A-ZS9" secondAttribute="trailingMargin" id="wr7-mF-hu1"/>
                                     <constraint firstItem="E4y-rJ-kcr" firstAttribute="trailing" secondItem="uVb-Ad-NrH" secondAttribute="trailing" id="yVX-zf-6uD"/>
                                     <constraint firstItem="RVh-Ol-aso" firstAttribute="top" secondItem="GUO-rv-iAv" secondAttribute="bottom" constant="8" symbolic="YES" id="ygn-sY-Hpq"/>
+                                    <constraint firstItem="K48-Tt-ZCy" firstAttribute="leading" secondItem="rlx-UL-3ca" secondAttribute="leading" id="zl7-Tk-0vY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -467,7 +515,7 @@
                         <outlet property="categoryName" destination="j96-aV-mh5" id="1Ch-B8-hlp"/>
                         <outlet property="comment" destination="GUO-rv-iAv" id="5R5-im-pz6"/>
                         <outlet property="createDate" destination="rlx-UL-3ca" id="9eM-pc-Izs"/>
-                        <outlet property="estimation" destination="RYk-us-4hy" id="heR-sW-OwL"/>
+                        <outlet property="estimation" destination="K48-Tt-ZCy" id="3EG-44-T6b"/>
                         <outlet property="reviewEditScrollView" destination="8Nw-G4-fAU" id="8go-fZ-ncu"/>
                         <outlet property="reviewEditView" destination="cGa-1A-ZS9" id="RN5-bO-9uR"/>
                         <outlet property="reviewName" destination="YZu-gX-XuW" id="iu8-SA-vgz"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-
+import Cosmos
 
 
 class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
@@ -40,7 +40,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
     @IBOutlet weak var reviewName: UITextField!
     @IBOutlet weak var categoryName: UITextField!
     @IBOutlet weak var createDate: DatePickerTextField!
-    @IBOutlet weak var estimation: UITextField!
+    @IBOutlet weak var estimation: CosmosView!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var reviewEditScrollView: UIScrollView!
     @IBOutlet weak var reviewEditView: UIView!
@@ -79,7 +79,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         review.reviewNo = paraReviewNo!
         review.reviewName = self.reviewName.text
         review.categoryId = self.selectedCategoryId!
-        review.estimation = NSNumber(int: Int32(self.estimation.text!)!)
+        review.estimation = NSNumber(int: Int32(self.estimation.rating))
         if let photoData = originalImage {
             review.photoData = UIImagePNGRepresentation(photoData)
             review.photoOrientation = photoData.imageOrientation.hashValue
@@ -145,7 +145,7 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         
         /********* テキストフィールド *********/
         self.reviewName.text = paraReviewName!
-        self.estimation.text = paraEstimation!.stringValue
+        self.estimation.rating = paraEstimation!.doubleValue
         self.comment.text = paraComment!
         
         comment.layer.borderWidth = 1
@@ -154,11 +154,9 @@ class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFie
         
         // textField の情報を受け取るための delegate を設定
         self.reviewName.delegate = self
-        self.estimation.delegate = self
         
         // 「改行」を「完了」に変更
         self.reviewName.returnKeyType = UIReturnKeyType.Done
-        self.estimation.returnKeyType = UIReturnKeyType.Done
         
         // キーボードの上に表示するバーのインスタンス作成（ボタンを追加するためのViewを生成します。）
         let keyBar = UIView(frame: CGRectMake(0, 0, 320, 40))

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import AVFoundation
+import Cosmos
 
 class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UITextViewDelegate,UIGestureRecognizerDelegate {
     
@@ -29,7 +30,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
     /*************** コントロール ***************/
     @IBOutlet weak var reviewScrollView: UIScrollView!
     @IBOutlet weak var reviewName: UITextField! // レビュー名
-    @IBOutlet weak var estimation: UITextField! // 評価
+    @IBOutlet weak var estimation: CosmosView! // 評価
     @IBOutlet weak var CategoryName: CategoryButton! // カテゴリ名
     @IBOutlet weak var selectedPhoto: UIImageView! // 写真
     
@@ -85,7 +86,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         // レビュー情報
         review.reviewName = self.reviewName.text
         review.categoryId = self.categoryID
-        review.estimation = NSNumber(int: Int32(self.estimation.text!)!)
+        review.estimation = NSNumber(int: Int32(self.estimation.rating))
         if let photoData = originalImage {
             review.photoData = UIImagePNGRepresentation(photoData)
             review.photoOrientation = photoData.imageOrientation.hashValue
@@ -103,6 +104,13 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         
         // OKを選択
         let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action:UIAlertAction!) -> Void in
+            self.reviewName.text = ""
+            self.categoryID = 0
+            self.CategoryName.setTitle("カテゴリ", forState: .Normal)
+            self.estimation.rating = 0
+            self.selectedPhoto.image = UIImage(named: "Noimage.gif")
+            self.originalImage = nil
+            self.comments.text = ""
             return
         }
         // アクションを追加
@@ -158,11 +166,9 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         // キーボードの設定
         // textField の情報を受け取るための delegate を設定
         self.reviewName.delegate = self
-        self.estimation.delegate = self
         
         // 「改行」を「完了」に変更
         self.reviewName.returnKeyType = UIReturnKeyType.Done
-        self.estimation.returnKeyType = UIReturnKeyType.Done
         
         // キーボードの上に表示するバーのインスタンス作成（ボタンを追加するためのViewを生成します。）
         let keyBar = UIView(frame: CGRectMake(0, 0, 320, 40))
@@ -182,9 +188,7 @@ class ReviewController: UIViewController,UIImagePickerControllerDelegate,UITextF
         //ViewをTextFieldに設定する
         self.comments.inputAccessoryView = keyBar
         self.comments.delegate = self
-        
-        //myTextFieldを追加する
-        //self.view.addSubview(comments)
+
     }
     
     override func didReceiveMemoryWarning() {
