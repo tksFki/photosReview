@@ -6,6 +6,8 @@
 //  Copyright © 2016年 privateTakashi. All rights reserved.
 //
 
+// リテラルをソースに書かない。
+
 import UIKit
 
 enum PickerIdentifier {

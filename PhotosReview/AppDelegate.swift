@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         if defaults.boolForKey("firstStart") {
             
-            print("2回目以降")
+            //print("2回目以降")
             
         } else {
             
-            print("初回起動")
+            //print("初回起動")
             
             defaults.setBool(true, forKey: "firstStart")
             defaults.setObject(0, forKey: "maxCategoryId")

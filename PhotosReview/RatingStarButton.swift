@@ -22,6 +22,4 @@ class RatingStarButton: UIButton {
         self.tintColor = UIColor.yellowColor()
     }
 
-    
-
 }

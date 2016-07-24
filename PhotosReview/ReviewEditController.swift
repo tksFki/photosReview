@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 import Cosmos
 
-
 class ReviewEditController: UIViewController, PopUpPickerViewDelegate, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     
     var paraReviewNo:NSNumber?

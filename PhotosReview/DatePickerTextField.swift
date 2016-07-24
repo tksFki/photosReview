@@ -10,13 +10,6 @@ import UIKit
 
 class DatePickerTextField: CommonTextField {
     
-    /*
-     // Only override drawRect: if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func drawRect(rect: CGRect) {
-     // Drawing code
-     }
-     */
     let dts = DateToString()
     
     let datePickerView = UIDatePicker()
@@ -74,7 +67,5 @@ class DatePickerTextField: CommonTextField {
     func setTempDate(date:NSDate) {
         selectedDate = date
     }
-    
-    
-    
+
 }

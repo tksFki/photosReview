@@ -22,7 +22,5 @@ class CommonLabel: UILabel {
         layer.borderColor = UIColor.yellowColor().CGColor  /* 枠線の色 */
         layer.backgroundColor = UIColor.orangeColor().CGColor /* 背景の色 */
     }
-    
 
-    
 }

@@ -20,6 +20,8 @@ class ModalCategoryController: UIViewController,UICollectionViewDataSource, UICo
     var categoryTemplate:String = ""
     var categories:[ICategory] = [ICategory]()
     
+    @IBOutlet weak var categoryColletionView: UICollectionView!
+    
     // ボタンをタップした時に、現在のボタンの選択状態のON/OFFを切り替える（見た目のON/OFF表示を変えるための処理）
     @IBAction func categorySelectTouchesDown(sender: CategorySelectButton) {
         sender.selected = !sender.keepingButtonSelected
@@ -54,9 +56,7 @@ class ModalCategoryController: UIViewController,UICollectionViewDataSource, UICo
     @IBAction func categorySelectTouchesUpOutside(sender: CategorySelectButton) {
         sender.selected = sender.keepingButtonSelected
     }
-    
-    @IBOutlet weak var categoryColletionView: UICollectionView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
